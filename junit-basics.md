@@ -1,3 +1,9 @@
+---
+layout: page
+title: Junit Basics
+permalink: /junit-basics/
+---
+
 ##Application Development Tutorial
 
 ###JUnit Basics
