@@ -13,8 +13,9 @@ JUnit is a simple framework to write repeatable tests. You may go to http://juni
 
 In this tutorial we will learn how to create a simple test class that is used to test the methods of a Java class.
 
-> **Prerequisite:**
-Having a good understanding of Java programming is required to do this tutorial..
+>**Prerequisite:**
+>Having a good understanding of Java programming is required to do this tutorial.
+>Test
 
 ####Copy Sample Codes from Git repository
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
