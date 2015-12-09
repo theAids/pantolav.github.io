@@ -1,8 +1,10 @@
 ---
 layout: page
 title: Junit Basics
-permalink: /junit-basics/
+permalink: "/junit-basics/"
+published: true
 ---
+
 
 ##Application Development Tutorial
 
@@ -342,4 +344,3 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 
 ####End of Tutorial
-
