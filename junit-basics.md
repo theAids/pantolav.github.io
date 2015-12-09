@@ -29,7 +29,6 @@ Having a good understanding of Java programming is required to do this tutorial.
  ```bash
     >git clone https://hub.jazz.net/git/pantolav/junit-basics
     >cd junit-basics
-    
  ```
  The `junit-basics` directory has two subdirectories: `src` and `build`.
  
