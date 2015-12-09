@@ -20,8 +20,8 @@ Having a good understanding of Java programming is required to do this tutorial.
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
 
  ```java
-    mkdir junittemp
-    cd junittemp
+    >mkdir junittemp
+    >cd junittemp
  ```
 
 1. Clone the git repository `https://hub.jazz.net/git/pantolav/junit-basics` and go to the created `junit-basics` directory.
