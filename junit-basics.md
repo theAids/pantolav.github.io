@@ -19,7 +19,7 @@ Having a good understanding of Java programming is required to do this tutorial.
 ####Copy Sample Codes from Git repository
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
 
- ```java
+ ```bash
     >mkdir junittemp
     >cd junittemp
  ```
