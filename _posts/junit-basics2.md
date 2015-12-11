@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title: Junit Basics
 permalink: "/junit-basics2/"
 published: true
