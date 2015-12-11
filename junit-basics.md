@@ -1,10 +1,8 @@
 ---
 layout: post
 title: Junit Basics
-permalink: "/junit-basics/"
-published: true
+permalink: /junit-basics2/
 ---
-
 
 ##Application Development Tutorial
 
@@ -14,22 +12,23 @@ JUnit is a simple framework to write repeatable tests. You may go to http://juni
 In this tutorial we will learn how to create a simple test class that is used to test the methods of a Java class.
 
 >**Prerequisite:**
+
 >Having a good understanding of Java programming is required to do this tutorial.
->Test
+
 
 ####Copy Sample Codes from Git repository
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
-
  ```bash
     >mkdir junittemp
     >cd junittemp
+    
  ```
 
 1. Clone the git repository `https://hub.jazz.net/git/pantolav/junit-basics` and go to the created `junit-basics` directory.
-
  ```bash
     >git clone https://hub.jazz.net/git/pantolav/junit-basics
     >cd junit-basics
+    
  ```
  The `junit-basics` directory has two subdirectories: `src` and `build`.
  
@@ -343,3 +342,4 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 
 ####End of Tutorial
+
