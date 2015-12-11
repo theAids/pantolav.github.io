@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Junit Basics
-permalink: /junit-basics2/
+permalink: /junit-basics/
 ---
 
 ##Application Development Tutorialx
