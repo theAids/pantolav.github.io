@@ -54,6 +54,8 @@ baseurl: "http://pong-pantola.github.io"
 #
 
 markdown: rdiscount
+
+markdown: redcarpet
 highlighter: pygments
 permalink: /:title/
 
