@@ -18,6 +18,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 ####Copy Sample Codes from Git repository
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
+ 
  ```text
     >mkdir junittemp
     >cd junittemp
