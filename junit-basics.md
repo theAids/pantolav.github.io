@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: page
 title: Junit Basics
 permalink: /junit-basics/
 ---
