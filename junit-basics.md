@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: posts
 title: Junit Basics
 permalink: /junit-basics/
 ---
