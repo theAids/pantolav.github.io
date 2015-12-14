@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: default
 title: Junit Basics
 permalink: /junit-basics/
 ---
@@ -23,7 +23,7 @@ In this tutorial we will learn how to create a simple test class that is used to
     >mkdir junittemp
     >cd junittemp
  ```
-
+ 
 1. Clone the git repository `https://hub.jazz.net/git/pantolav/junit-basics` and go to the created `junit-basics` directory.
 
  ```text
