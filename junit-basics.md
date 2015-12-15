@@ -47,7 +47,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 ####Download the JUnit libraries
 1. Go to https://github.com/junit-team/junit/wiki/Download-and-Install.
  
- >Just in case the URL is broken.  You may go to http://junit.org/ and find the download link.
+	>Just in case the URL is broken.  You may go to http://junit.org/ and find the download link.
  
 2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
 
