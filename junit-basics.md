@@ -18,18 +18,17 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 ####Copy Sample Codes from Git repositoryIII
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
-		
-	```text
-	>mkdir junittemp
-	>cd junittemp
+	
+	```text		
+	> mkdir junittemp
+	> cd junittemp
 	```
-		
 1. Clone the git repository `https://hub.jazz.net/git/pantolav/junit-basics` and go to the created `junit-basics` directory.
 
- ```text
-    >git clone https://hub.jazz.net/git/pantolav/junit-basics
-    >cd junit-basics
- ```
+	```text
+	> git clone https://hub.jazz.net/git/pantolav/junit-basics
+	> cd junit-basics
+	```
  
  The `junit-basics` directory has two subdirectories: `src` and `build`.
  
