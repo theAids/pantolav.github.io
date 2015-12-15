@@ -110,7 +110,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 1. The sample code above may be used by other Java classes to create an application. An example of this is `Calculator.java`.
 
-	>`src/main/java/net/tutorial/Calculator.java`:
+	**Source code** of	`src/main/java/net/tutorial/Calculator.java`:
  
 	```java
 	package net.tutorial;
@@ -162,7 +162,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 1. Let's examine the code `MyTest.java` which will serve as the test class to test the methods of `Math.java`.
 
-	>`src/main/test/net/tutorial/MyTest.java`:
+	**Source code** of	`src/main/test/net/tutorial/MyTest.java`:
 
 	```java
 	package net.tutorial;
@@ -284,7 +284,7 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 1. Let's now see how the test class `MyTest.java` is executed.   `TestRunner.java` is an application that runs the test methods found in `MyTest.java`.
 
-	>`src/test/java/net/tutorial/TestRunner.java`:
+	**Source code** of	`src/test/java/net/tutorial/TestRunner.java`:
  
 	```java
 	package net.tutorial;
