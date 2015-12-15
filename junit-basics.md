@@ -144,7 +144,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 1. Run the `Calculator` application.
 
 	```text
-	>java -classpath build/classes/main net/tutorial/Calculator
+	> java -classpath build/classes/main net/tutorial/Calculator
 	```
 
 	**Output:**
