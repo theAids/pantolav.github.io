@@ -58,7 +58,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 1. Let's examine the sample class `Math.java` which we will test later with JUnit.
  
- >`src/main/java/net/tutorial/Math.java`:
+	>`src/main/java/net/tutorial/Math.java`:
  
  ```java
     package net.tutorial;
