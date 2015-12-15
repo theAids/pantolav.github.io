@@ -16,14 +16,14 @@ In this tutorial we will learn how to create a simple test class that is used to
 >Having a good understanding of Java programming is required to do this tutorial.
 
 
-####Copy Sample Codes from Git repositoryeee
+####Copy Sample Codes from Git repositoryfff
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
-    
+	
  ```text
     >mkdir junittemp
     >cd junittemp
  ```
-    
+	
 1. Clone the git repository `https://hub.jazz.net/git/pantolav/junit-basics` and go to the created `junit-basics` directory.
 
  ```text
