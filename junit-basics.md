@@ -25,10 +25,10 @@ In this tutorial we will learn how to create a simple test class that is used to
 	> cd junittemp
 	```
 
-1. Clone the git repository `https://hub.jazz.net/git/pantolav/junit-basics` and go to the created `junit-basics` directory.
+1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
 
 	```text
-	> git clone https://hub.jazz.net/git/pantolav/junit-basics
+	> git clone https://github.com/pong-pantola/junit-basics.git
 	> cd junit-basics
 	```
  
