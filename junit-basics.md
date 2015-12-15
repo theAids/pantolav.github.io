@@ -16,6 +16,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 >Having a good understanding of Java programming is required to do this tutorial.
 
 <br>
+
 ####Copy Sample Codes from Git repository
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
 
@@ -23,8 +24,6 @@ In this tutorial we will learn how to create a simple test class that is used to
 	> mkdir junittemp
 	> cd junittemp
 	```
-
-	THIS IS JUST FOR TESTINGYYY
 
 1. Clone the git repository `https://hub.jazz.net/git/pantolav/junit-basics` and go to the created `junit-basics` directory.
 
@@ -56,6 +55,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
 
 <br>
+
 ####Examine the Java class to be tested
 
 
@@ -97,256 +97,264 @@ In this tutorial we will learn how to create a simple test class that is used to
 	  }
 	}
 	```
-
  
- `Math.java` contains the methods we want to test: `add`, `sub`, and `multiply`.  
+	`Math.java` contains the methods we want to test: `add`, `sub`, and `multiply`.  
  
- The `add` method is intentionally made incorrect by using `return a-b;` instead of `return a+b;` to demonstrate errors that may be detected by JUnit.
+	The `add` method is intentionally made incorrect by using `return a-b;` instead of `return a+b;` to demonstrate errors that may be detected by JUnit.
 
- The `multiply` method contains the line `delay();` to force the `multiply` method to execute for more than 3 secs.  This is useful when we demonstrate the concept of timeout in JUnit.
+	The `multiply` method contains the line `delay();` to force the `multiply` method to execute for more than 3 secs.  This is useful when we demonstrate the concept of timeout in JUnit.
 
- The `sub` method is included to serve as a control.  Since the implementation of `sub` is correct, JUnit should not report any error involving `sub`.
- <br>
+	The `sub` method is included to serve as a control.  Since the implementation of `sub` is correct, JUnit should not report any error involving `sub`.
  
+	<br>
+
 1. The sample code above may be used by other Java classes to create an application. An example of this is `Calculator.java`.
 
- >`src/main/java/net/tutorial/Calculator.java`:
+	>`src/main/java/net/tutorial/Calculator.java`:
  
- ```java
-    package net.tutorial;
-    
-    public class Calculator{
-    
-      public static void main (String args[]){
-        Math m = new Math();
-    	
-    	System.out.println("5 + 9 = " + m.add(5, 3));
-    	
-    	System.out.println("8 - 2 = " + m.sub(8, 2));	
-    	
-    	System.out.println("4 x 7 = " + m.multiply(4, 7));
-      }
-    }
- ```
+	```java
+	package net.tutorial;
+	
+	public class Calculator{
+	
+	  public static void main (String args[]){
+	    Math m = new Math();
+		
+		System.out.println("5 + 9 = " + m.add(5, 3));
+		
+		System.out.println("8 - 2 = " + m.sub(8, 2));	
+		
+		System.out.println("4 x 7 = " + m.multiply(4, 7));
+	  }
+	}
+	```
 
- `Calculator.java` represents a sample application that uses the `Math.java` class we discussed above.  
- <br>
+	`Calculator.java` represents a sample application that uses the `Math.java` class we discussed above.  
+
+	<br>
  
 1. Compile `Math.java` and `Calculator.java`.
- > Make sure that you are in the `junit-basics` directory before issuing the command below.
+
+	> Make sure that you are in the `junit-basics` directory before issuing the command below.
  
- ```bash
-    >javac -d build/classes/main src/main/java/net/tutorial/*.java
- ```
+	```text
+	> javac -d build/classes/main src/main/java/net/tutorial/*.java
+	```
 
 1. Run the `Calculator` application.
- ```bash
-    >java -classpath build/classes/main net/tutorial/Calculator
- ```
-  **Output:**
- ```bash    
-    5 + 9 = -4
-    8 - 2 = 6
-    4 x 7 = 28
- ```
 
- As expected, the output `5 + 9 = -4` is wrong.  In addition, it took approximately 3 secs. before the line `4 x 7 = 28` appeared.
+	```text
+	>java -classpath build/classes/main net/tutorial/Calculator
+	```
+
+	**Output:**
+
+	```text
+	5 + 9 = -4
+	8 - 2 = 6
+	4 x 7 = 28
+	```
+
+	As expected, the output `5 + 9 = -4` is wrong.  In addition, it took approximately 3 secs. before the line `4 x 7 = 28` appeared.
  
-
+<br>
 ####Test the Java class
 
 1. Let's examine the code `MyTest.java` which will serve as the test class to test the methods of `Math.java`.
 
- >`src/main/test/net/tutorial/MyTest.java`:
+	>`src/main/test/net/tutorial/MyTest.java`:
 
- ```java
+	```java
+	package net.tutorial;
+	
+	import static org.junit.Assert.assertEquals;
+	import org.junit.Before;
+	import org.junit.Test;
+	
+	public class MyTest{
+	  private Math m;
+	  
+	  @Before
+	  public void initializeMath(){
+	    m = new Math();
+	  }
+	  
+	  @Test(timeout=1000)
+	  public void addShouldReturnSum() {
+	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	  }
+	  
+	  @Test(timeout=1000)
+	  public void subShouldReturnDifference() {
+	    assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
+	  }  
+	  
+	  @Test(timeout=1000)
+	  public void multiplyShouldReturnProduct() {
+	    assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
+	  }
+	} 
+	```
 
-    package net.tutorial;
-    
-    import static org.junit.Assert.assertEquals;
-    import org.junit.Before;
-    import org.junit.Test;
-    
-    public class MyTest{
-      private Math m;
-      
-      @Before
-      public void initializeMath(){
-        m = new Math();
-      }
-      
-      @Test(timeout=1000)
-      public void addShouldReturnSum() {
-        assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-      }
-      
-      @Test(timeout=1000)
-      public void subShouldReturnDifference() {
-        assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
-      }  
-      
-      @Test(timeout=1000)
-      public void multiplyShouldReturnProduct() {
-        assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
-      }
-    } 
+	Let's look at some code segments in `MyTest.java` that are not typically found in a Java code.
 
- ```
- Let's look at some code segments in `MyTest.java` that are not typically found in a Java code.
+	First of all `MyTest.java` contains a static import: 
 
- First of all `MyTest.java` contains a static import: 
+	```java
+	import static org.junit.Assert.assertEquals;
+	```
 
- ```java
-    import static org.junit.Assert.assertEquals;
- ```
-
- Static import allows us to access static items (e.g., static methods) in a class without specifying the name of the class.  As an example, JUnit has a class `Assert` that has a static method `assertEquals`.  If a non-static import (i.e., the typical way of importing a class) is used:
+	Static import allows us to access static items (e.g., static methods) in a class without specifying the name of the class.  As an example, JUnit has a class `Assert` that has a static method `assertEquals`.  If a non-static import (i.e., the typical way of importing a class) is used:
  
- ```java
-    import org.junit.Assert;
- ```
+	```java
+	import org.junit.Assert;
+	```
 
- we need to specify the `Assert` class when calling the `assertEquals` method:
+	we need to specify the `Assert` class when calling the `assertEquals` method:
 
- ```java
-        Assert.assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
- ```
+	```java
+	    Assert.assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	```
 
- Since `MyTest.java` utilizes static import, we may omit the class `Assert`:
+	Since `MyTest.java` utilizes static import, we may omit the class `Assert`:
 
- ```java
-        assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
- ```
- This makes the code shorter especially if we plan to use the `assertEquals` method several times.
+	```java
+	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	```
 
- Aside from a non-static import, `MyTest.java` utilizes several JUnit annotations : 
+	This makes the code shorter especially if we plan to use the `assertEquals` method several times.
 
- ```java
-      @Test(timeout=1000)
-    
-      @Before
- ```
+	Aside from a non-static import, `MyTest.java` utilizes several JUnit annotations : 
 
- Before we discuss `@Test(timeout=1000)` let's discuss `@Test` first.  Placing the annotation `@Test` before a method specifies that a method is used as a test method.  Therefore, `MyTest.java` has three test methods: `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`.
+	```java
+	  @Test(timeout=1000)
+	   
+	  @Before
+	```
 
- `@Test(timeout=1000)` has the same effect as `@Test` but performs an additional test by monitoring the execution time of a test method.  If a test method executes beyond a specified timeout then it will produce an error.  The timeout is in msec.  This means `@Test(timeout=1000)` will wait for 1000 msecs. or 1 sec. for a test method to complete.  If after 1 sec. a test method has not finished executing,  a timeout error is reported.  
+	Before we discuss `@Test(timeout=1000)` let's discuss `@Test` first.  Placing the annotation `@Test` before a method specifies that a method is used as a test method.  Therefore, `MyTest.java` has three test methods: `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`.
 
- In `MyTest.java`, the three methods of`Math.java` (i.e., `add`, `sub`, and `multiply`) are tested with a timeout of 1 sec.  Recall that we intentionally placed a 3 secs. delay in the `multiply` method.  We expect a timeout error reported when we run the test later.
+	`@Test(timeout=1000)` has the same effect as `@Test` but performs an additional test by monitoring the execution time of a test method.  If a test method executes beyond a specified timeout then it will produce an error.  The timeout is in msec.  This means `@Test(timeout=1000)` will wait for 1000 msecs. or 1 sec. for a test method to complete.  If after 1 sec. a test method has not finished executing,  a timeout error is reported.  
 
- `@Before` indicates that a method needs to be executed before each test method is executed.  In `MyTest.java` we use `@Before` in the following:
+	In `MyTest.java`, the three methods of`Math.java` (i.e., `add`, `sub`, and `multiply`) are tested with a timeout of 1 sec.  Recall that we intentionally placed a 3 secs. delay in the `multiply` method.  We expect a timeout error reported when we run the test later.
 
- ```java
-      @Before
-      public void initializeMath(){
-        m = new Math();
-      }
- ```
+	`@Before` indicates that a method needs to be executed before each test method is executed.  In `MyTest.java` we use `@Before` in the following:
 
- Given this, the `initializeMath` method gets executed before each of the three test methods get executed.  In `MyTest.java`, we may opt to omit the `@Before` annotation as well as the `initializeMath` method.  However, we need to insert the instantiation of `m` in each test method.  An example is shown below:
+	```java
+	  @Before
+	  public void initializeMath(){
+	    m = new Math();
+	  }
+	```
 
- ```java
+	 Given this, the `initializeMath` method gets executed before each of the three test methods get executed.  In `MyTest.java`, we may opt to omit the `@Before` annotation as well as the `initializeMath` method.  However, we need to insert the instantiation of `m` in each test method.  An example is shown below:
 
-      @Test(timeout=1000)
-      public void addShouldReturnSum() {
-        m = new Math();
-        assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-      }
-      
-      @Test(timeout=1000)
-      public void subShouldReturnDifference() {
-        m = new Math();      
-        assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
-      }  
-      
-      @Test(timeout=1000)
-      public void multiplyShouldReturnProduct() {
-        m = new Math();      
-        assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
-      }
-    } 
+	```java
+	    @Test(timeout=1000)
+	    public void addShouldReturnSum() {
+	      m = new Math();
+	      assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	    }
+	    
+	    @Test(timeout=1000)
+	    public void subShouldReturnDifference() {
+	      m = new Math();      
+	      assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
+	    }  
+	    
+	    @Test(timeout=1000)
+	    public void multiplyShouldReturnProduct() {
+	      m = new Math();      
+	      assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
+	    }
+	  } 
+	```
 
- ```
+	There are other JUnit annotations aside from `@Test`, `@Test(timeout=1000)`, and `@Before`.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for a discussion of other JUnit annotations.
 
- There are other JUnit annotations aside from `@Test`, `@Test(timeout=1000)`, and `@Before`.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for a discussion of other JUnit annotations.
+	It can be observed that the names of the test methods in `MyTest.java` (i.e., `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`) are relatively long.  This is essential to make the report generated by JUnit more intuitive.  When a test method encounters an error, the name of the test method is included in the report.  Having very descriptive method names allows developers to debug the codes faster.
 
- It can be observed that the names of the test methods in `MyTest.java` (i.e., `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`) are relatively long.  This is essential to make the report generated by JUnit more intuitive.  When a test method encounters an error, the name of the test method is included in the report.  Having very descriptive method names allows developers to debug the codes faster.
+	The last thing that is worth examining in `MyTest.java` is the `assertEquals` method.  The `assertEquals` method accepts the following parameters: `message`, `expected`, and `actual`.
 
- The last thing that is worth examining in `MyTest.java` is the `assertEquals` method.  The `assertEquals` method accepts the following parameters: `message`, `expected`, and `actual`.
+	If `expected` is not equal to `actual`, the `assertEquals` method throws an `AssertException` that contains a message that is based on the `message` parameter.
 
- If `expected` is not equal to `actual`, the `assertEquals` method throws an `AssertException` that contains a message that is based on the `message` parameter.
+	Aside from `assertEquals`, there are other methods that can be used for testing.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for additional methods that can be used for testing.
 
- Aside from `assertEquals`, there are other methods that can be used for testing.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for additional methods that can be used for testing.
-
- <br>
+	<br>
  
 1. Let's now see how the test class `MyTest.java` is executed.   `TestRunner.java` is an application that runs the test methods found in `MyTest.java`.
 
- >`src/test/java/net/tutorial/TestRunner.java`:
+	>`src/test/java/net/tutorial/TestRunner.java`:
  
- ```java
-    package net.tutorial;
-    
-    import org.junit.runner.JUnitCore;
-    import org.junit.runner.Result;
-    import org.junit.runner.notification.Failure;
-    
-    public class TestRunner{
-      public static void main(String args[]){
-        Result result = JUnitCore.runClasses(MyTest.class);
-    	int errorCtr = 0;
-        for (Failure failure : result.getFailures()) {
-    	  errorCtr++;
-    	  System.out.println("Error #:"+ errorCtr);
-          System.out.println(failure.toString());
-    	  System.out.println();
-        }
-    	
-    	if (errorCtr == 0)
-    	  System.out.println("Congratulations!  There are no errors.");
-      }
-    } 
+	```java
+	package net.tutorial;
+	
+	import org.junit.runner.JUnitCore;
+	import org.junit.runner.Result;
+	import org.junit.runner.notification.Failure;
+	
+	public class TestRunner{
+	  public static void main(String args[]){
+	    Result result = JUnitCore.runClasses(MyTest.class);
+		int errorCtr = 0;
+	    for (Failure failure : result.getFailures()) {
+		  errorCtr++;
+		  System.out.println("Error #:"+ errorCtr);
+	      System.out.println(failure.toString());
+		  System.out.println();
+	    }
+		
+		if (errorCtr == 0)
+		  System.out.println("Congratulations!  There are no errors.");
+	  }
+	}
+	```
 
- ```
- Notice that `TestRunner.java` never explicitly called the test methods `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct` found in `MyTest.java`.
+	Notice that `TestRunner.java` never explicitly called the test methods `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct` found in `MyTest.java`.
 
- Instead, it simply calls the `runClasses` method in `JUnitCore`:
+	Instead, it simply calls the `runClasses` method in `JUnitCore`:
  
- ```java
-        Result result = JUnitCore.runClasses(MyTest.class); 
- ``` 
+	```java
+	      Result result = JUnitCore.runClasses(MyTest.class); 
+	``` 
 
- The `runClasses` method has a parameter `MyTest.class`.  It is able to identify the test methods to execute in `MyTest.java` because of the `@Test` annotations.  The result of all test methods (i.e., succeeded or failed) are saved in `result` which is an instance of `Result`.
+	The `runClasses` method has a parameter `MyTest.class`.  It is able to identify the test methods to execute in `MyTest.java` because of the `@Test` annotations.  The result of all test methods (i.e., succeeded or failed) are saved in `result` which is an instance of `Result`.
 
- `Result` has a `getFailures` method which returns a `List` of `Failure`.
+	`Result` has a `getFailures` method which returns a `List` of `Failure`.
 
- <br>
+	<br>
 
 1. Compile `MyTest.java` and `TestRunner.java`.
- > Make sure that you are in the `junit-basics` directory before issuing the command below.
+
+	> Make sure that you are in the `junit-basics` directory before issuing the command below.
    
- ```bash
-    >javac -classpath build/libs/*;build/classes/main -d build/classes/test src/test/java/net/tutorial/*.java
- ```
- Notice that the classpath includes `build/libs/*`.  Recall that we downloaded and saved the two JUnit `jar` files in this directory.
+	```text
+	> javac -classpath build/libs/*;build/classes/main -d build/classes/test src/test/java/net/tutorial/*.java
+	```
+
+	Notice that the classpath includes `build/libs/*`.  Recall that we downloaded and saved the two JUnit `jar` files in this directory.
+ 
  
 1. Run the `TestRunner` application.
- ```bash
-    >java -classpath build/libs/*;build/classes/main;build/classes/test net/tutorial/TestRunner
- ``` 
-  **Output:**
- ```bash  
-    Error #:1
-    multiplyShouldReturnProduct(net.tutorial.MyTest): test timed out after 1000 milliseconds
-    
-    Error #:2
-    addShouldReturnSum(net.tutorial.MyTest): 3 + 7 should be 10 expected:<10> but was:<-4>
 
- ```
+	```text
+	> java -classpath build/libs/*;build/classes/main;build/classes/test net/tutorial/TestRunner
+	```
+	
+	**Output:**
+
+	```text  
+	Error #:1
+	multiplyShouldReturnProduct(net.tutorial.MyTest): test timed out after 1000 milliseconds
+	    
+	Error #:2
+	addShouldReturnSum(net.tutorial.MyTest): 3 + 7 should be 10 expected:<10> but was:<-4>
+	```
  
- As expected, the `multiplyShouldReturnProduct` test method resulted to an error since the `multiply` method of `Math.java` has a call to the `delay` method which produces a 3 sec. delay.  This is way longer than the 1 sec. timeout that is indicated in the annotation in the test method (i.e., `@Test(timeout=1000)`).
+	As expected, the `multiplyShouldReturnProduct` test method resulted to an error since the `multiply` method of `Math.java` has a call to the `delay` method which produces a 3 sec. delay.  This is way longer than the 1 sec. timeout that is indicated in the annotation in the test method (i.e., `@Test(timeout=1000)`).
 
- In addition, the `addShouldReturnSum` test method also failed since we intentionally made the `sum` method of `Math.java` incorrect.  Recall that we used `return a-b;` instead of `return a+b;` in the `sum` method of `Math.java`.
+	In addition, the `addShouldReturnSum` test method also failed since we intentionally made the `sum` method of `Math.java` incorrect.  Recall that we used `return a-b;` instead of `return a+b;` in the `sum` method of `Math.java`.
  
-
+<br>
 ####End of Tutorial
 
