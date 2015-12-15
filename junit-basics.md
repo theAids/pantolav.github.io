@@ -15,7 +15,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 >Having a good understanding of Java programming is required to do this tutorial.
 
-
+<br>
 ####Copy Sample Codes from Git repository
 1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
 	
@@ -44,6 +44,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
  `build/libs` is used to contain the JUnit libraries (i.e, `.jar` files) that you will download later.
 
+<br>
 ####Download the JUnit libraries
 1. Go to https://github.com/junit-team/junit/wiki/Download-and-Install.
  
