@@ -7,7 +7,7 @@ permalink: /junit-basics/
 ##Application Development Tutorial
 
 ###JUnit Basics
-JUnit is a simple framework to write repeatable tests. You may go to http://junit.org/ for additional information regarding JUnit.
+JUnit is a simple framework to write repeatable tests. You may go to [http://junit.org/](http://junit.org/) for additional information regarding JUnit.
 
 In this tutorial we will learn how to create a simple test class that is used to test the methods of a Java class.
 
@@ -50,7 +50,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 ####Download the JUnit libraries
 1. Go to https://github.com/junit-team/junit/wiki/Download-and-Install.
  
-	>Just in case the URL is broken.  You may go to http://junit.org/ and find the download link.
+	>Just in case the URL is broken.  You may go to [http://junit.org/](http://junit.org/) and find the download link.
  
 2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
 
