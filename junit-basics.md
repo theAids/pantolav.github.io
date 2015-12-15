@@ -48,7 +48,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 <br>
 ####Download the JUnit libraries
-1. Go to https://github.com/junit-team/junit/wiki/Download-and-Install.
+1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
  
 	>Just in case the URL is broken.  You may go to [http://junit.org/](http://junit.org/) and find the download link.
  
