@@ -3,7 +3,7 @@ layout: post
 title: Junit Basics
 permalink: /junit-basics/
 ---
-
+http://logging.apache.org/log4j
 ##Application Development Tutorial
 
 ###JUnit Basics
