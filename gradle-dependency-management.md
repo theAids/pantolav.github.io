@@ -1,9 +1,15 @@
 ---
 layout: post
 title: Junit Basics
-permalink: /junit-basics/
+permalink: /gradle-dependency-management/
 ---
 http://logging.apache.org/log4j
+
+> javac -classpath build/libs/* -d build/classes/main src/main/java/net/tutorial/*.java
+> java -classpath build/libs/*;build/classes/main net/tutorial/Calculator
+
+> java -classpath build/libs/*;build/classes/main -Dlog4j.configurationFile=file:build/resources/main/log4j.properties net/tutorial/Calculator 
+
 ##Application Development Tutorial
 
 ###JUnit Basics
