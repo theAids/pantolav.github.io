@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Junit Basics
-permalink: /gradle-dependency-management/
+permalink: /junit-basics/
 ---
 
 ##Application Development Tutorial
