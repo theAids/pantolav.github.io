@@ -3,12 +3,6 @@ layout: post
 title: Junit Basics
 permalink: /gradle-dependency-management/
 ---
-http://logging.apache.org/log4j
-
-> javac -classpath build/libs/* -d build/classes/main src/main/java/net/tutorial/*.java
-> java -classpath build/libs/*;build/classes/main net/tutorial/Calculator
-
-> java -classpath build/libs/*;build/classes/main -Dlog4j.configurationFile=file:build/resources/main/log4j.properties net/tutorial/Calculator 
 
 ##Application Development Tutorial
 
@@ -141,11 +135,16 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 1. Compile `Math.java` and `Calculator.java`.
 
-	> Make sure that you are in the `junit-basics` directory before issuing the command below.
- 
 	```text
 	> javac -d build/classes/main src/main/java/net/tutorial/*.java
 	```
+	
+	> Make sure that you are in the `junit-basics` directory before issuing the command above.
+	
+	>It is worth noting that the subdirectory `build/classes/main` already exists prior to compilation.  This is essential since the `-d build/classes/main` option in the command above means that the subdirectory `build/classes/main` will be used as the base directory of the `.class` files that will be created during compilation.  If the subdirectory does not exist, the command above will produce an error.
+
+	<br>
+	
 
 1. Run the `Calculator` application.
 
