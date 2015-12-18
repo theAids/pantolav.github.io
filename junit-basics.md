@@ -72,17 +72,16 @@ In this tutorial we will learn how to create a simple test class that is used to
 	                   |----log4j.properties
 	``` 
 
-	`src` has two subdirectories: `main` and `test`. 
+	`src` has a subdirectory `main`. 
 
-	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which we will be tested later using JUnit.  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
+	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which contains methods performing mathematical functions (i.e., add, sub, mulitiply).  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
 
-	`src/test` contains the Java class `src/test/java/net/tutorial/MyTest.java` which is the test class that will be used to test `Math.java`.  In addition, it contains the `src/test/java/net/tutorial/TestRunner.java` which is a Java application that will run the test. 
  
-	`build` has two subdirectories: `classes` and `libs`. 
+	`build` has three subdirectories: `classes`, `libs`, and `resources`. 
 
 	`build/classes` is used to hold the the `.class` files that will be created later when we compile our `.java` files.
 
-	`build/libs` is used to contain the JUnit libraries (i.e, `.jar` files) that you will download later.
+	`build/libs` is used to contain the libraries (i.e, `.jar` files) that you will download later.  These libraries are needed to compile the Java classes later.
 
 <br>
 ####Download the JUnit libraries
