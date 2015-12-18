@@ -41,7 +41,12 @@ In this tutorial we will learn how to create a simple test class that is used to
 	```
  
 	The `manual-dependency-resolution` directory has two subdirectories: `src` and `build`.
- 
+
+	```text
+	manual-dependency-resolution
+
+	``` 
+
 	`src` has two subdirectories: `main` and `test`. 
 
 	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which we will be tested later using JUnit.  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
