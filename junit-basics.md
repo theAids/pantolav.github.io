@@ -46,20 +46,30 @@ In this tutorial we will learn how to create a simple test class that is used to
 	manual-dependency-resolution
 	 |
 	 |----src
-	       |
-	       |----main
-	             |
-	             |----java
-	                   |
-	                   |----net
-	                         |
-	                         |----tutorial
-	                               |
-	                               |----Math.java
-	                               |
-	                               |----Calculator.java
-	       
+	 |     |
+	 |     |----main
+	 |           |
+	 |           |----java
+	 |                 |
+	 |                 |----net
+	 |                       |
+	 |                       |----tutorial
+	 |                             |
+	 |                             |----Math.java
+	 |                             |
+	 |                             |----Calculator.java
+	 |     
 	 |----build
+	       |
+	       |----classes
+	       |
+	       |----libs
+	       |
+	       |----resources
+	             |
+	             |----main
+	                   |
+	                   |----log4j.properties
 	``` 
 
 	`src` has two subdirectories: `main` and `test`. 
