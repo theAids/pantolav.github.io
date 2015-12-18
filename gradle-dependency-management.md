@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Junit Basics
+title: Gradle Dependency Management
 permalink: /gradle-dependency-management/
 ---
 http://logging.apache.org/log4j
