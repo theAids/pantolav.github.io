@@ -1,12 +1,18 @@
 ---
 layout: post
 title: Junit Basics
-permalink: /junit-basics/
+permalink: /gradle-dependency-management/
 ---
+http://logging.apache.org/log4j
+
+> javac -classpath build/libs/* -d build/classes/main src/main/java/net/tutorial/*.java
+> java -classpath build/libs/*;build/classes/main net/tutorial/Calculator
+
+> java -classpath build/libs/*;build/classes/main -Dlog4j.configurationFile=file:build/resources/main/log4j.properties net/tutorial/Calculator 
 
 ##Application Development Tutorial
 
-###JUnit Basics
+###Gradle Dependency Management
 JUnit is a simple framework to write repeatable tests. You may go to [http://junit.org/](http://junit.org/) for additional information regarding JUnit.
 
 In this tutorial we will learn how to create a simple test class that is used to test the methods of a Java class.
@@ -17,22 +23,24 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 <br>
 
-####Copy Sample Codes from Git repository
-1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
+####Resolving Dependency without Gradle 
+> In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, we will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
+
+1. Open a terminal window and create the directory `gradletemp` in the root directory.  Go to the created directory.
 
 	```text		
-	> mkdir junittemp
-	> cd junittemp
+	> mkdir gradletemp
+	> cd gradletemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
+1. Clone the git repository `https://github.com/pong-pantola/manual-dependency-resolution.git` and go to the created `manual-dependency-resolution` directory.
 
 	```text
-	> git clone https://github.com/pong-pantola/junit-basics.git
-	> cd junit-basics
+	> git clone https://github.com/pong-pantola/manual-dependency-resoltuion.git
+	> cd manual-dependency-resolution
 	```
  
-	The `junit-basics` directory has two subdirectories: `src` and `build`.
+	The `manual-dependency-resolution` directory has two subdirectories: `src` and `build`.
  
 	`src` has two subdirectories: `main` and `test`. 
 
@@ -135,16 +143,11 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 1. Compile `Math.java` and `Calculator.java`.
 
+	> Make sure that you are in the `junit-basics` directory before issuing the command below.
+ 
 	```text
 	> javac -d build/classes/main src/main/java/net/tutorial/*.java
 	```
-	
-	> Make sure that you are in the `junit-basics` directory before issuing the command above.
-	
-	>It is worth noting that the subdirectory `build/classes/main` already exists prior to compilation.  This is essential since the `-d build/classes/main` option in the command above means that the subdirectory `build/classes/main` will be used as the base directory of the `.class` files that will be created during compilation.  If the subdirectory does not exist, the command above will produce an error.
-
-	<br>
-	
 
 1. Run the `Calculator` application.
 
