@@ -24,7 +24,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 <br>
 
 ####Resolving Dependency without Gradle 
-> In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, we will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
+> In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
 
 1. Open a terminal window and create the directory `gradletemp` in the root directory.  Go to the created directory.
 
@@ -66,24 +66,17 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 	`build` has three subdirectories: `classes`, `libs`, and `resources`. 
 
-	`build/classes` is used to hold the the `.class` files that will be created later when we compile our `.java` files.
+	`build/classes` is used to hold the the `.class` files that will be created later when you compile your `.java` files.
 
-	`build/libs` is used to contain the libraries (i.e, `.jar` files) that you will download later.  These libraries are needed to compile the Java classes later.
-
-<br>
-####Download the JUnit libraries
-1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
- 
-	>Just in case the URL is broken.  You may go to [http://junit.org/](http://junit.org/) and find the download link.
- 
-2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
+	`build/libs` is used for the libraries (i.e, `.jar` files) that you will download later.  These libraries are needed to compile the Java classes later.
 
 <br>
 
-####Examine the Java class to be tested
+
+####Examine the Java classes
 
 
-1. Let's examine the sample class `Math.java` which we will test later with JUnit.
+1. Let's examine the class `Math.java`.
  
 	**Source code** of	`src/main/java/net/tutorial/Math.java`:
  
@@ -122,7 +115,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 	}
 	```
  
-	`Math.java` contains the methods we want to test: `add`, `sub`, and `multiply`.  
+	`Math.java` contains the methods we want to test: `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [Junit Basics Tutorial](/junit-basics).  You may skip the discussion below regarding `Math.java` if you have done the [Junit Basics Tutorial](/junit-basics).
  
 	The `add` method is intentionally made incorrect by using `return a-b;` instead of `return a+b;` to demonstrate errors that may be detected by JUnit.
 
@@ -182,6 +175,17 @@ In this tutorial we will learn how to create a simple test class that is used to
 	As expected, the output `5 + 9 = -4` is wrong.  In addition, it took approximately 3 secs. before the line `4 x 7 = 28` appeared.
  
 <br>
+
+####Download the JUnit libraries
+1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
+ 
+	>Just in case the URL is broken.  You may go to [http://junit.org/](http://junit.org/) and find the download link.
+ 
+2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
+
+<br>
+
+
 ####Test the Java class
 
 1. Let's examine the code `MyTest.java` which will serve as the test class to test the methods of `Math.java`.
