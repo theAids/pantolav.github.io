@@ -24,7 +24,6 @@ In this tutorial we will learn how to create a simple test class that is used to
 <br>
 
 
-> In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
 
 ####Copy Sample Codes from Git repository
 
@@ -167,7 +166,14 @@ In this tutorial we will learn how to create a simple test class that is used to
 	  location: class Calculator
 	```
 
-	As expected, a compile-time error is encountered due to the dependency to the Log4j library.  
+	As expected, a compile-time error is encountered due to the dependency to the Log4j library.   You will solve this problem by resolving the Log4j library dependency.  
+
+	<br>
+	
+####Manually Resolve the Library Dependency Problem
+
+> In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
+
 
 1. Run the `Calculator` application.
 
