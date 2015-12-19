@@ -1,18 +1,12 @@
 ---
 layout: post
-title: Gradle Dependency Management
-permalink: /gradle-dependency-management/
+title: Junit Basics
+permalink: /junit-basics/
 ---
-http://logging.apache.org/log4j
-
-> javac -classpath build/libs/* -d build/classes/main src/main/java/net/tutorial/*.java
-> java -classpath build/libs/*;build/classes/main net/tutorial/Calculator
-
-> java -classpath build/libs/*;build/classes/main -Dlog4j.configurationFile=file:build/resources/main/log4j.properties net/tutorial/Calculator 
 
 ##Application Development Tutorial
 
-###Gradle Dependency Management
+###JUnit Basics
 JUnit is a simple framework to write repeatable tests. You may go to [http://junit.org/](http://junit.org/) for additional information regarding JUnit.
 
 In this tutorial we will learn how to create a simple test class that is used to test the methods of a Java class.
@@ -23,82 +17,61 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 <br>
 
-####Resolving Dependency without Gradle 
-> In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, we will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
-
-1. Open a terminal window and create the directory `gradletemp` in the root directory.  Go to the created directory.
+####Copy Sample Codes from Git repository
+1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
 
 	```text		
-	> mkdir gradletemp
-	> cd gradletemp
+	> mkdir junittemp
+	> cd junittemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/manual-dependency-resolution.git` and go to the created `manual-dependency-resolution` directory.
+1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
 
 	```text
-	> git clone https://github.com/pong-pantola/manual-dependency-resoltuion.git
-	> cd manual-dependency-resolution
+	> git clone https://github.com/pong-pantola/junit-basics.git
+	> cd junit-basics
 	```
  
-	The `manual-dependency-resolution` directory has two subdirectories: `src` and `build`.
+	The `junit-basics` directory has two subdirectories: `src` and `build`.
 
 	```text
-	manual-dependency-resolution
+	junit-basics
 	|
-	|----src/main/java/net/tutorial
-	|                      |
-	|                      |----Math.java
-	|                      |----Calculator.java
-	|     
+	|----src
+	|    |
+	|    |----main/java/net/tutorial
+	|    |                  |
+	|    |                  |----Math.java
+	|    |                  |----Calculator.java
+	|    |
+	     |----test/java/net/tutorial
+	                        |
+	                        |----MyTest.java
+	                        |----TestRunner.java
+			                        
+				                        
+	     
 	|----build
 	     |
 	     |----classes
+	     |    |
+	     |    |----main
+	     |    |----test
+	     |    
 	     |----libs
-	     |----resources/main
-	                    |
-	                    |----log4j.properties
 	``` 
-
-	```text
-	manual-dependency-resolution
-	 |
-	 |----src
-	 |     |
-	 |     |----main
-	 |           |
-	 |           |----java
-	 |                 |
-	 |                 |----net
-	 |                       |
-	 |                       |----tutorial
-	 |                             |
-	 |                             |----Math.java
-	 |                             |
-	 |                             |----Calculator.java
-	 |     
-	 |----build
-	       |
-	       |----classes
-	       |
-	       |----libs
-	       |
-	       |----resources
-	             |
-	             |----main
-	                   |
-	                   |----log4j.properties
-	``` 
-
-	`src` has a subdirectory `main`. 
-
-	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which contains methods performing mathematical functions (i.e., add, sub, mulitiply).  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
-
  
-	`build` has three subdirectories: `classes`, `libs`, and `resources`. 
+	`src` has two subdirectories: `main` and `test`. 
+
+	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which we will be tested later using JUnit.  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
+
+	`src/test` contains the Java class `src/test/java/net/tutorial/MyTest.java` which is the test class that will be used to test `Math.java`.  In addition, it contains the `src/test/java/net/tutorial/TestRunner.java` which is a Java application that will run the test. 
+ 
+	`build` has two subdirectories: `classes` and `libs`. 
 
 	`build/classes` is used to hold the the `.class` files that will be created later when we compile our `.java` files.
 
-	`build/libs` is used to contain the libraries (i.e, `.jar` files) that you will download later.  These libraries are needed to compile the Java classes later.
+	`build/libs` is used to contain the JUnit libraries (i.e, `.jar` files) that you will download later.
 
 <br>
 ####Download the JUnit libraries
@@ -189,11 +162,16 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 1. Compile `Math.java` and `Calculator.java`.
 
-	> Make sure that you are in the `junit-basics` directory before issuing the command below.
- 
 	```text
 	> javac -d build/classes/main src/main/java/net/tutorial/*.java
 	```
+	
+	> Make sure that you are in the `junit-basics` directory before issuing the command above.
+	
+	>It is worth noting that the subdirectory `build/classes/main` already exists prior to compilation.  This is essential since the `-d build/classes/main` option in the command above means that the subdirectory `build/classes/main` will be used as the base directory of the `.class` files that will be created during compilation.  If the subdirectory does not exist, the command above will produce an error.
+
+	<br>
+	
 
 1. Run the `Calculator` application.
 
