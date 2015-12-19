@@ -225,6 +225,17 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 <br>
 
+####Resolve the Library Dependency Problem using Gradle's Dependency Management
+
+> One of the features of Gradle is dependency management.  By just specifying the libraries needed in a Gradle build script file (`build.gradle`), dependency resolution becomes faster.
+
+1. To undo the files created during the manual dependency resolution, delete the entire `build` subdirectory.
+
+	>In Gradle, the `build subdirectory and its subdirectories (e.g., `classes`) need not exist for compilation to work.
+
+2. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
+
+
 ####Download the JUnit libraries
 1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
  
