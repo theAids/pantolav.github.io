@@ -35,11 +35,11 @@ In this tutorial we will learn how to create a simple test class that is used to
 	The `junit-basics` directory has two subdirectories: `src` and `build`.
 
 	```text
-	junit-basics
+	junit-basics/
 	|
-	|----src
+	|----src/
 	|    |
-	|    |----main/java/net/tutorial
+	|    |----main/java/net/tutorial/
 	|    |                  |
 	|    |                  |----Math.java
 	|    |                  |----Calculator.java
@@ -49,14 +49,14 @@ In this tutorial we will learn how to create a simple test class that is used to
 	|                       |----MyTest.java
 	|                       |----TestRunner.java
 	|
-	|----build
+	|----build/
 	     |
-	     |----classes
+	     |----classes/
 	     |    |
-	     |    |----main
-	     |    |----test
+	     |    |----main/
+	     |    |----test/
 	     |    
-	     |----libs
+	     |----libs/
 	``` 
  
 	`src` has two subdirectories: `main` and `test`. 
