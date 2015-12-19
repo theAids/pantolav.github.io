@@ -235,6 +235,24 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 2. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
 
+3. Place the following in `build.gradle`:
+
+	```text
+	apply plugin: 'java'
+	```
+
+	The line `apply plugin: 'java'` adds Java compilation along with testing and bundling capabilities in the Gradle project.
+
+3. Specify the library repository to be used in `build.gradle:
+
+	```text
+	apply plugin: 'java'
+
+	repositories {
+	    mavenCentral()
+	}
+	```
+
 
 ####Download the JUnit libraries
 1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
