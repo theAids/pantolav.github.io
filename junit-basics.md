@@ -174,11 +174,41 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 > In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
 
+1. Go to [Apache Log4j](http://logging.apache.org/log4j).
+
+1. Go to [http://logging.apache.org/log4j/2.x/download.html]
+ 
+	>Just in case the URL is broken.  You may go to [Apache Log4j](http://logging.apache.org/log4j) and find the download link.
+ 
+1. Download the latest version of Apache Log4j library (i.e., apache-log4j-x.x-bin.zip or apache-log4j-x.x-bin.tar.gz) in a temporary directory.
+
+1. Extract the contents of the zip (or gz) file.  You will see several Log4j `.jar` files.  Copy all the `.jar` files in the subdirectory `build/libs`.
+
+	>Note that for the compilation to work, you don't need to copy all the `.jar` files.  Only one to three `.jar` files are needed.  However, since it may take sometime to identify which `.jar` files are needed, it is quicker just to copy all the files.  This is one problem with manually resolving dependencies.  You need to identify the necessary `.jar` files.
+
+	<br>
+
+1. Compile again `Math.java` and `Calculator.java`.
+
+	> Note that the command below includes the `-classpath build/libs/*` option.  This is needed so that the compilation will use the `.jar` files that you copied earlier.
+ 
+	```text
+	> javac -classpath build/libs/* -d build/classes/main src/main/java/net/tutorial/*.java
+	```
+
+	The compilation is successful.  The library dependency is manually resolved.  
+
+	>Take note that in manual library dependency resolution you need to know:
+	> - where to download the library
+	> - which `.jar` files are needed
+		
 
 1. Run the `Calculator` application.
 
+	> Note that the command below includes the `-Dlog4j.configurationFile=file:src//main/resources/log4j.properties` option.  This is needed so that Log4j knows the location of its `.properties` file.
+
 	```text
-	> java -classpath build/classes/main net/tutorial/Calculator
+	> java -classpath build/libs/*;build/classes/main -Dlog4j.configurationFile=file:src//main/resources/log4j.properties net/tutorial/Calculator
 	```
 
 	**Output:**
@@ -189,7 +219,9 @@ In this tutorial we will learn how to create a simple test class that is used to
 	4 x 7 = 28
 	```
 
-	As expected, the output `5 + 9 = -4` is wrong.  In addition, it took approximately 3 secs. before the line `4 x 7 = 28` appeared.
+	As mentioned earlier the method `sum` has a logical error (i.e., sum should be 14 and not -4).  In addition, the method `multiply` has a delay that is why you have observed that there is a 3 secs. delay before `4 x 7 = 28` appeared.  The logical error and the delay are not important in this tutorial.  These will be useful in [Gradle's Test Task Tutorial](/gradle-test-task).
+
+	At this point, what is important to note is the compilation (and execution) became successful due to the manual dependency resolution.
  
 <br>
 
