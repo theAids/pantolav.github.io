@@ -44,6 +44,23 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	```text
 	manual-dependency-resolution
+	|
+	|----src/main/java/net/tutorial
+	|                      |
+	|                      |----Math.java
+	|                      |----Calculator.java
+	|     
+	|----build
+	     |
+	     |----classes
+	     |----libs
+	     |----resources/main
+	                    |
+	                    |----log4j.properties
+	``` 
+
+	```text
+	manual-dependency-resolution
 	 |
 	 |----src
 	 |     |
