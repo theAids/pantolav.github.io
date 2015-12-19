@@ -43,50 +43,20 @@ In this tutorial we will learn how to create a simple test class that is used to
 	The `manual-dependency-resolution` directory has two subdirectories: `src` and `build`.
 
 	```text
-	manual-dependency-resolution
+	manual-dependency-resolution/
 	|
-	|----src/main/java/net/tutorial
+	|----src/main/java/net/tutorial/
 	|                      |
 	|                      |----Math.java
 	|                      |----Calculator.java
 	|     
-	|----build
+	|----build/
 	     |
-	     |----classes
-	     |----libs
-	     |----resources/main
+	     |----classes/
+	     |----libs/
+	     |----resources/main/
 	                    |
 	                    |----log4j.properties
-	``` 
-
-	```text
-	manual-dependency-resolution
-	 |
-	 |----src
-	 |     |
-	 |     |----main
-	 |           |
-	 |           |----java
-	 |                 |
-	 |                 |----net
-	 |                       |
-	 |                       |----tutorial
-	 |                             |
-	 |                             |----Math.java
-	 |                             |
-	 |                             |----Calculator.java
-	 |     
-	 |----build
-	       |
-	       |----classes
-	       |
-	       |----libs
-	       |
-	       |----resources
-	             |
-	             |----main
-	                   |
-	                   |----log4j.properties
 	``` 
 
 	`src` has a subdirectory `main`. 
