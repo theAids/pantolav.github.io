@@ -33,36 +33,40 @@ In this tutorial we will learn how to create a simple test class that is used to
 	> cd gradletemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/manual-dependency-resolution.git` and go to the created `manual-dependency-resolution` directory.
+1. Clone the git repository `https://github.com/pong-pantola/gradle-dependency-management.git` and go to the created `gradle-dependency-management` directory.
 
 	```text
-	> git clone https://github.com/pong-pantola/manual-dependency-resoltuion.git
-	> cd manual-dependency-resolution
+	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
+	> cd gradle-dependency-management
 	```
  
-	The `manual-dependency-resolution` directory has two subdirectories: `src` and `build`.
+	The `gradle-dependency-management` directory has two subdirectories: `src` and `build`.
 
 	```text
-	manual-dependency-resolution/
+	manual-dependency-management/
 	|
-	|----src/main/java/net/tutorial/
-	|                      |
-	|                      |----Math.java
-	|                      |----Calculator.java
-	|     
+	|----src/main/
+	|        |
+	|        |----java/net/tutorial/
+	|        |    |
+	|        |    |----Math.java
+	|        |    |----Calculator.java
+	|        |
+	|        |----resources/
+	|             |
+	|             |----log4j.properties        
+	|
 	|----build/
 	     |
 	     |----classes/
 	     |----libs/
-	     |----resources/main/
-	                    |
-	                    |----log4j.properties
 	``` 
 
 	`src` has a subdirectory `main`. 
 
 	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which contains methods performing mathematical functions (i.e., add, sub, mulitiply).  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
 
+	`src/main` also has a subdirectory `resources`.  Any resource (e.g., configuration or properties file) needed by the Java classes can be placed here.  For this tutorial, the subdirectory contains the log4j.properties file.  It is not essential in this tutorial to know the purpose of this file aside from it is used by one of the Java classes.
  
 	`build` has three subdirectories: `classes`, `libs`, and `resources`. 
 
@@ -127,13 +131,13 @@ In this tutorial we will learn how to create a simple test class that is used to
 		LOGGER.info("Calculation completed.");
 	```
 
-	Log4j is a Java-based logging library.  For this tutorial, you don't need to know the details regarding this library.  The three Log4j-related lines above are included in `Calculator.java` just to demonstrate dependency resolution.  When `Calculator.java` is compiled later, you will encounter an error due to Log4j library dependency.  You will resolve this dependency using the manual approach as well as using Gradle's dependency management.
+	Log4j is a Java-based logging library.  For this tutorial, you don't need to know the details regarding this library.  The three Log4j-related lines above are included in `Calculator.java` just to demonstrate dependency resolution.  When `Calculator.java` is compiled later, you will encounter an error due to Log4j library dependency.  You will resolve this dependency using the manual approach as well as Gradle's dependency management.
 
 	<br>
  
 1. Compile `Math.java` and `Calculator.java`.
 
-	> Make sure that you are in the `junit-basics` directory before issuing the command below.
+	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command below.
  
 	```text
 	> javac -d build/classes/main src/main/java/net/tutorial/*.java
