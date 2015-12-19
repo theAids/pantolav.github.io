@@ -23,8 +23,11 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 <br>
 
-####Resolving Dependency without Gradle 
+
 > In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
+
+####Copy Sample Codes from Git repository
+
 
 1. Open a terminal window and create the directory `gradletemp` in the root directory.  Go to the created directory.
 
@@ -133,15 +136,38 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	Log4j is a Java-based logging library.  For this tutorial, you don't need to know the details regarding this library.  The three Log4j-related lines above are included in `Calculator.java` just to demonstrate dependency resolution.  When `Calculator.java` is compiled later, you will encounter an error due to Log4j library dependency.  You will resolve this dependency using the manual approach as well as Gradle's dependency management.
 
+	>It was mentioned earlier that the `src/main` directory has a subdirectory `resources` that contains the file `log4j.properties`.  This file is needed by Log4j.  However, in this tutorial it is not important to examine the contents of the file.  	
+
 	<br>
  
-1. Compile `Math.java` and `Calculator.java`.
+1. Try to compile `Math.java` and `Calculator.java`.
 
 	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command below.
  
 	```text
 	> javac -d build/classes/main src/main/java/net/tutorial/*.java
 	```
+
+
+	**Output:**
+
+	```text
+	src\main\java\net\tutorial\Calculator.java:3: error: package org.apache.log4j does not exist
+	import org.apache.log4j.Logger;
+	                       ^
+	src\main\java\net\tutorial\Calculator.java:7: error: cannot find symbol
+	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
+	                       ^
+	  symbol:   class Logger
+	  location: class Calculator
+	src\main\java\net\tutorial\Calculator.java:7: error: cannot find symbol
+	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
+	                                       ^
+	  symbol:   variable Logger
+	  location: class Calculator
+	```
+
+	As expected, a compile-time error is encountered.
 
 1. Run the `Calculator` application.
 
