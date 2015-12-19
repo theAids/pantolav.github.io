@@ -167,7 +167,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 	  location: class Calculator
 	```
 
-	As expected, a compile-time error is encountered due to the 
+	As expected, a compile-time error is encountered due to the dependency to the Log4j library.  
 
 1. Run the `Calculator` application.
 
