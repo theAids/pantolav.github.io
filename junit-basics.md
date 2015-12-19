@@ -44,13 +44,11 @@ In this tutorial we will learn how to create a simple test class that is used to
 	|    |                  |----Math.java
 	|    |                  |----Calculator.java
 	|    |
-	     |----test/java/net/tutorial
-	                        |
-	                        |----MyTest.java
-	                        |----TestRunner.java
-			                        
-				                        
-	     
+	|    |----test/java/net/tutorial
+	|                       |
+	|                       |----MyTest.java
+	|                       |----TestRunner.java
+	|
 	|----build
 	     |
 	     |----classes
