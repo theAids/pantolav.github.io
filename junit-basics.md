@@ -76,77 +76,58 @@ In this tutorial we will learn how to create a simple test class that is used to
 ####Examine the Java classes
 
 
-1. Let's examine the class `Math.java`.
+1. `Math.java`  contains the methods `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics). 
  
-	**Source code** of	`src/main/java/net/tutorial/Math.java`:
+	Since the focus of this tutorial is on Gradle's dependency management, you don't need to analyze at this point the contents of `Math.java`.  This class was discussed in the [JUnit Basics Tutorial](/junit-basics) and will be revisited in [Gradle's Test Task Tutorial](/gradle-test-task).
  
-	```java
-	package net.tutorial;
-	
-	public class Math{
-	
-	  //will be used in the multiply method to simulate that
-	  //the multiply method is taking too long to execute
-	  private void delay(){
-		try{
-	      Thread.sleep(3000);//3000 msec. or 3 sec. delay
-	    } catch(InterruptedException ex) {
-	      Thread.currentThread().interrupt();
-	    }
-	  }
-	
-	  public int add(int a, int b){
-	    //a-b is used instead of a+b to simulate
-	    //a possible error in the source code
-	    return a-b;
-	  }
-	
-	  public int sub(int a, int b){
-	    return a-b;
-	  }
-	
-	  public int multiply(int a, int b){
-		//added delay to simulate that this method is 
-	    //taking too long to execute	
-		delay();
-	
-	    return a*b;
-	  }
-	}
-	```
- 
-	`Math.java` contains the methods we want to test: `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [Junit Basics Tutorial](/junit-basics).  You may skip the discussion below regarding `Math.java` if you have done the [Junit Basics Tutorial](/junit-basics).
- 
-	The `add` method is intentionally made incorrect by using `return a-b;` instead of `return a+b;` to demonstrate errors that may be detected by JUnit.
+	 >Note that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`).  This error will be discussed further in the [Gradle's Test Task Tutorial](/gradle-test-task).  No need to fix this error at this point.
 
-	The `multiply` method contains the line `delay();` to force the `multiply` method to execute for more than 3 secs.  This is useful when we demonstrate the concept of timeout in JUnit.
-
-	The `sub` method is included to serve as a control.  Since the implementation of `sub` is correct, JUnit should not report any error involving `sub`.
- 
+	>In addition, a delay is inserted in the method `multiply`.  This will also be discussed in the [Gradle's Test Task Tutorial](/gradle-test-task).
+	
 	<br>
 
-1. The sample code above may be used by other Java classes to create an application. An example of this is `Calculator.java`.
+1. `Calculator.java` is a Java application that uses `Math.java`.
 
 	**Source code** of	`src/main/java/net/tutorial/Calculator.java`:
  
 	```java
 	package net.tutorial;
 	
+	import org.apache.log4j.Logger;
+	
 	public class Calculator{
+		
+	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
 	
 	  public static void main (String args[]){
 	    Math m = new Math();
 		
-		System.out.println("5 + 9 = " + m.add(5, 3));
+		System.out.println("5 + 9 = " + m.add(5, 9));
 		
 		System.out.println("8 - 2 = " + m.sub(8, 2));	
 		
 		System.out.println("4 x 7 = " + m.multiply(4, 7));
+		
+		LOGGER.info("Calculation completed.");
 	  }
 	}
 	```
 
-	`Calculator.java` represents a sample application that uses the `Math.java` class we discussed above.  
+	`Calculator.java` is very similar to the one discussed in [JUnit Basics Tutorial](/junit-basics).  However, in this tutorials these three extra lines are included:
+
+	```java
+	import org.apache.log4j.Logger;
+	```
+
+
+	```java
+	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
+	```
+	```java
+		LOGGER.info("Calculation completed.");
+	```
+
+	Log4j is a Java-based logging library.  For this tutorial, you don't need to know the details regarding this library.  The three Log4j-related lines above are included in `Calculator.java` just to demonstrate dependency resolution.  When `Calculator.java` is compiled later, you will encounter an error due to Log4j library dependency.  You will resolve this dependency using the manual approach as well as using Gradle's dependency management.
 
 	<br>
  
