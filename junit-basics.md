@@ -234,7 +234,7 @@ In this tutorial you will learn how to create a simple test class that is used t
 	import static org.junit.Assert.assertEquals;
 	```
 
-	Static import allows us to access static items (e.g., static methods) in a class without specifying the name of the class.  As an example, JUnit has a class `Assert` that has a static method `assertEquals`.  If a non-static import (i.e., the typical way of importing a class) is used:
+	Static import allows you to access static items (e.g., static methods) in a class without specifying the name of the class.  As an example, JUnit has a class `Assert` that has a static method `assertEquals`.  If a non-static import (i.e., the typical way of importing a class) is used:
  
 	```java
 	import org.junit.Assert;
