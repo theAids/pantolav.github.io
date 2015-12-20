@@ -245,7 +245,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	At this point, Gradle's dependency management is not yet utilized in `build.gradle`.  Let's try to compile the `.java` files using Gradle and see what errors will be produced.
 
-1. To compile the `.java` files using Gradle, use the `assemble` task of Gradle:
+1. To compile the `.java` files using Gradle's `assemble` task:
 
 	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command below.
  
@@ -287,6 +287,9 @@ In this tutorial we will learn how to create a simple test class that is used to
 	Total time: 4.751 secs
 	```
 
+	As expected compilation error due to Log4j dependency is encountered.  Let's fix this problem by utlizing the dependency management of Gradle in `build.gradle`.
+
+	<br>
 
 1. Specify the library repository to be used in `build.gradle` by updating the file to the following:
 
@@ -350,10 +353,8 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	<br>
 
-1. Package the application into a `.jar` file by performing an `assemble` task using the command below.
+1. Compile again the `.java` files using Gradle's `assemble` task.
 
-	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command.
- 
 	```text
 	> gradle assemble
 	```
@@ -372,6 +373,8 @@ In this tutorial we will learn how to create a simple test class that is used to
 	Total time: 8.029 secs
 	```
 
+	Since dependency management of Gradle is already specified in `build.gradle`, the compilation error encountered earlier is resolved.
+	
 	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
 
 	```text
@@ -413,7 +416,29 @@ In this tutorial we will learn how to create a simple test class that is used to
 	```text
 	no main manifest attribute, in gradle-dependency-management.jar
 	```
+	The `no main manifest attribute` error is encountered because you did not specify the entry point of your Java application.  The entry point is your `.class` file that contains the `main` method.  In this tutorial, the entry point is the `Calculator` class.
 
+	<br>
+
+1. Specify the entry point of your application in `build.gradle` by updating the file to the following:
+
+	```text
+	apply plugin: 'java'
+	
+	repositories {
+	    mavenCentral()
+	}
+	
+	dependencies {
+	    compile 'log4j:log4j:1.2.17'
+	}
+
+	jar {
+	    manifest {
+	        attributes 'Main-Class': 'net.tutorial.Calculator'
+	    }
+	}
+	```
 
 ####Download the JUnit libraries
 1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
