@@ -416,6 +416,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 	```text
 	no main manifest attribute, in gradle-dependency-management.jar
 	```
+	
 	The `no main manifest attribute` error is encountered because you did not specify the entry point of your Java application.  The entry point is your `.class` file that contains the `main` method.  In this tutorial, the entry point is the `Calculator` class.
 
 	<br>
@@ -438,6 +439,20 @@ In this tutorial we will learn how to create a simple test class that is used to
 	        attributes 'Main-Class': 'net.tutorial.Calculator'
 	    }
 	}
+	```
+
+1. Try to run again the `.jar` file.
+
+	> Make sure that you are in the `build/libs` directory before issuing the command below.
+	
+	```text
+	> java -jar gradle-dependency-management.jar
+	```
+
+	**Output:**
+
+	```text
+	no main manifest attribute, in gradle-dependency-management.jar
 	```
 
 ####Download the JUnit libraries
