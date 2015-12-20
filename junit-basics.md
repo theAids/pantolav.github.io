@@ -70,7 +70,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	`src/main` also has a subdirectory `resources`.  Any resource (e.g., configuration or properties file) needed by the Java classes can be placed here.  For this tutorial, the subdirectory contains the log4j.properties file.  It is not essential in this tutorial to know the purpose of this file aside from it is used by one of the Java classes.
  
-	`build` has three subdirectories: `classes`, `libs`, and `resources`. 
+	`build` has two subdirectories: `classes` and `libs`. 
 
 	`build/classes` is used to hold the the `.class` files that will be created later when you compile your `.java` files.
 
