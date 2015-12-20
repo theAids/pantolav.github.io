@@ -197,8 +197,10 @@ In this tutorial we will learn how to create a simple test class that is used to
 	The compilation is successful.  The library dependency is manually resolved.  
 
 	>Take note that in manual library dependency resolution you need to know:
-	> - where to download the library
-	> - which `.jar` files are needed
+
+	> a. where to download the library
+
+	> b. which `.jar` files are needed
 		
 
 1. Run the `Calculator` application.
@@ -217,7 +219,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 	4 x 7 = 28
 	```
 
-	As mentioned earlier the method `sum` has a logical error (i.e., sum should be 14 and not -4).  In addition, the method `multiply` has a delay that is why you have observed that there is a 3 secs. delay before `4 x 7 = 28` appeared.  The logical error and the delay are not important in this tutorial.  These will be useful in [Gradle's Test Task Tutorial](/gradle-test-task).
+	As mentioned earlier the method `sum` has a logical error (i.e., sum should be 14 and not -4).  In addition, the method `multiply` has a delay that is why you have observed a 3 secs. delay before `4 x 7 = 28` appeared.  The logical error and the delay are not important in this tutorial.  These will be useful in [Gradle's Test Task Tutorial](/gradle-test-task).
 
 	At this point, what is important to note is the compilation (and execution) became successful due to the manual dependency resolution.
  
