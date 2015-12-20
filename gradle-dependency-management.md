@@ -174,7 +174,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 > In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
 
-1. Go to [http://logging.apache.org/log4j/2.x/download.html]([http://logging.apache.org/log4j/2.x/download.html])
+1. Go to [http://logging.apache.org/log4j/2.x/download.html]([http://logging.apache.org/log4j/2.x/download.html]).
  
 	>Just in case the URL is broken,  you may go to [Apache Log4j](http://logging.apache.org/log4j) and find the download link.
  
@@ -231,7 +231,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 1. To undo the files created during the manual dependency resolution, delete the entire `build` subdirectory.
 
-	>In Gradle, the `build subdirectory and its subdirectories (e.g., `classes`) need not exist for compilation to work.
+	>In Gradle, the `build` subdirectory and its subdirectories (e.g., `classes`) need not exist for compilation to work.
 
 2. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
 
@@ -243,7 +243,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	The line `apply plugin: 'java'` adds Java compilation along with testing and bundling capabilities in the Gradle project.
 
-3. Specify the library repository to be used in `build.gradle:
+3. Specify the library repository to be used in `build.gradle` by updating the file to the following:
 
 	```text
 	apply plugin: 'java'
@@ -252,6 +252,54 @@ In this tutorial we will learn how to create a simple test class that is used to
 	    mavenCentral()
 	}
 	```
+
+	Repositories are dependency containers.  It has a collection of libraries that your code may need.  You may specify zero or more repositories in a `build.gradle` file.
+
+	In this tutorial, you need one repository to resolve the dependency problem caused by the use of the Log4j library.
+
+	Repositories can be local (e.g., a local directory in your hard drive) or remote (e.g., Maven or Ivy repository).  This tutorial does not cover the details on how to use local repositories as well as the difference between Maven and Ivy repositories.  You may check [Gradle's website](https://docs.gradle.org/current/userguide/artifact_dependencies_tutorial.html). for additional information on repositores.
+
+	In `build.gradle`, you added the following lines earlier:
+
+	```text
+	repositories {
+	    mavenCentral()
+	}
+	```
+
+	This means that you will be using Maven's central repository to get the necessary library.
+
+4. Specify the needed library in `build.gradle` by updating the file to the following:
+
+	```text
+	apply plugin: 'java'
+	
+	repositories {
+	    mavenCentral()
+	}
+	
+	dependencies {
+	    compile 'log4j:log4j:1.2.17'
+	}
+	```
+
+	The entry `compile 'log4j:log4j:1.2.17'` means that the indicated library (`'log4j:log4j:1.2.17'`) is needed during compilation. 
+
+	`'log4j:log4j:1.2.17'` uses the following format: `'group:name:version'`.
+
+	To know the group, name, and version of the library you may go to [Maven Central Repository](http://search.maven.org/) and search for the library you need.  
+
+	As an example, you may go to the [Maven Central Repository](http://search.maven.org/).  In the search box, type `log4j`.  The search result will be a table with its first 3 columns labeled as: `GroupId`, `ArtifiactId`, and `Latest Version`, which is basically the `group`, `name`, and `version` mentioned in the format above.
+
+	You may choose the most appropriate row in the search result.  For this tutorial, the row that was selected is the one with the following values:
+
+	GroupId | ArtifactId | Latest Vesion
+	-|-|-
+	log4j | log4j | 1.2.17
+
+	This is the reason why in `build.gradle` the dependency is specified as `compile 'log4j:log4j:1.2.17'`.
+
+	>Note that when you try this tutorial the available library in Maven has changed.  Adjust the entry in `build.gradle` if necessary.
 
 
 ####Download the JUnit libraries
