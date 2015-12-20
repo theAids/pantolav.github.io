@@ -50,9 +50,9 @@ In this tutorial we will learn how to create a simple test class that is used to
 	|----src/main/
 	|        |
 	|        |----java/net/tutorial/
-	|        |    |
-	|        |    |----Math.java
-	|        |    |----Calculator.java
+	|        |             |
+	|        |             |----Math.java
+	|        |             |----Calculator.java
 	|        |
 	|        |----resources/
 	|             |
@@ -323,7 +323,23 @@ In this tutorial we will learn how to create a simple test class that is used to
 	Total time: 8.029 secs
 	```
 
+	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`
+	The `gradle-dependency-management` directory has two subdirectories: `src` and `build`.
 
+	```text
+	manual-dependency-management/
+	|
+	|----build/
+	     |
+	     |----classes/main
+	                 |
+	                 |----java/net/tutorial/
+	                              |
+	                              |----Math.class
+	                              |----Calculator.class
+	     |----libs/
+	``` 
+xxx
 
 
 ####Download the JUnit libraries
