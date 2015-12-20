@@ -178,7 +178,7 @@ In this tutorial we will learn how to create a simple test class that is used to
  
 	>Just in case the URL is broken,  you may go to [Apache Log4j](http://logging.apache.org/log4j) and find the download link.
  
-1. Download the latest version of Apache Log4j library (i.e., apache-log4j-x.x-bin.zip or apache-log4j-x.x-bin.tar.gz) in a temporary directory.
+1. Download the latest version of Apache Log4j library (i.e., apache-log4j-x.x-bin.zip OR apache-log4j-x.x-bin.tar.gz) in a temporary directory.
 
 1. Extract the contents of the zip (or gz) file.  You will see several Log4j `.jar` files.  Copy all the `.jar` files in the subdirectory `build/libs`.
 
