@@ -174,8 +174,6 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 > In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
 
-1. Go to [Apache Log4j](http://logging.apache.org/log4j).
-
 1. Go to [http://logging.apache.org/log4j/2.x/download.html]
  
 	>Just in case the URL is broken.  You may go to [Apache Log4j](http://logging.apache.org/log4j) and find the download link.
