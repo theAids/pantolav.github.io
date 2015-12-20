@@ -269,6 +269,8 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	This means that you will be using Maven's central repository to get the necessary library.
 
+	<br>
+
 1. Specify the needed library in `build.gradle` by updating the file to the following:
 
 	```text
@@ -301,7 +303,9 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	>Note that when you try this tutorial the available library in Maven may  have changed.  Adjust the entry in `build.gradle` if necessary (e.g., version higher than `1.2.17` may be available already).
 
-1. Package the application into a `.jar` file by issuing the gradle command below.
+	<br>
+
+1. Package the application into a `.jar` file by performing an `assemble` task using the command below.
 
 	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command.
  
@@ -323,8 +327,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 	Total time: 8.029 secs
 	```
 
-	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`
-	The `gradle-dependency-management` directory has two subdirectories: `src` and `build`.
+	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
 
 	```text
 	manual-dependency-management/
@@ -332,14 +335,39 @@ In this tutorial we will learn how to create a simple test class that is used to
 	|----build/
 	     |
 	     |----classes/main
-	                 |
-	                 |----java/net/tutorial/
-	                              |
-	                              |----Math.class
-	                              |----Calculator.class
+	     |           |
+	     |           |----java/net/tutorial/
+	     |                        |
+	     |                        |----Math.class
+	     |                        |----Calculator.class
+	     |
 	     |----libs/
+	     |    |
+	     |    |----gradle-dependency-management.jar
+	     |
+	     |----resources/main/
+	                    |
+	                    |----log4j.properties
 	``` 
-xxx
+
+	Notice that the `Math.class` and `Calculator.class` were created after the `assemble` task.  
+
+	More importantly, the `assemble` task generated the `gradle-dependency-management.jar` under the `libs` subdirectory.  This `.jar` file will be executed later.  In addition, the log4j.properties file is copied inside a subdirectory of `build`.  This is needed since the application uses the Log4j library.
+
+	<br>
+	
+1. Go to the `build/libs` subdirectory and run the `.jar` file.
+
+	```text
+	> cd build/libs
+	> java -jar gradle-dependency-management.jar
+	```
+
+	**Output:**
+
+	```text
+	no main manifest attribute, in gradle-dependency-management.jar
+	```
 
 
 ####Download the JUnit libraries
