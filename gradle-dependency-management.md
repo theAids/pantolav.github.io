@@ -229,13 +229,13 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 > One of the features of Gradle is dependency management.  By just specifying the libraries needed in a Gradle build script file (`build.gradle`), dependency resolution becomes faster.
 
-1. To undo the files created during the manual dependency resolution, delete the entire `build` subdirectory.
+1. To undo the files created during the manual dependency resolution (e.g., the `.jar` files you copied earlier), delete the entire `build` subdirectory.
 
 	>In Gradle, the `build` subdirectory and its subdirectories (e.g., `classes`) need not exist for compilation to work.
 
-2. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
+1. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
 
-3. Place the following in `build.gradle`:
+1. Place the following in `build.gradle`:
 
 	```text
 	apply plugin: 'java'
@@ -269,7 +269,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	This means that you will be using Maven's central repository to get the necessary library.
 
-4. Specify the needed library in `build.gradle` by updating the file to the following:
+1. Specify the needed library in `build.gradle` by updating the file to the following:
 
 	```text
 	apply plugin: 'java'
@@ -299,7 +299,31 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	This is the reason why in `build.gradle` the dependency is specified as `compile 'log4j:log4j:1.2.17'`.
 
-	>Note that when you try this tutorial the available library in Maven has changed.  Adjust the entry in `build.gradle` if necessary.
+	>Note that when you try this tutorial the available library in Maven may  have changed.  Adjust the entry in `build.gradle` if necessary (e.g., version higher than `1.2.17` may be available already).
+
+1. Package the application into a `.jar` file by issuing the gradle command below.
+
+	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command.
+ 
+	```text
+	> gradle assemble
+	```
+
+	**Output:**
+
+	```text
+	:compileJava
+	:processResources
+	:classes
+	:jar
+	:assemble
+	
+	BUILD SUCCESSFUL
+	
+	Total time: 8.029 secs
+	```
+
+
 
 
 ####Download the JUnit libraries
