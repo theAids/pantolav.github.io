@@ -176,7 +176,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 1. Go to [http://logging.apache.org/log4j/2.x/download.html]([http://logging.apache.org/log4j/2.x/download.html])
  
-	>Just in case the URL is broken.  You may go to [Apache Log4j](http://logging.apache.org/log4j) and find the download link.
+	>Just in case the URL is broken,  you may go to [Apache Log4j](http://logging.apache.org/log4j) and find the download link.
  
 1. Download the latest version of Apache Log4j library (i.e., apache-log4j-x.x-bin.zip or apache-log4j-x.x-bin.tar.gz) in a temporary directory.
 
