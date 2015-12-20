@@ -235,7 +235,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 1. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
 
-1. Place the following in `build.gradle`:
+1. Place the following line in `build.gradle`:
 
 	```text
 	apply plugin: 'java'
@@ -243,7 +243,52 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	The line `apply plugin: 'java'` adds Java compilation along with testing and bundling capabilities in the Gradle project.
 
-3. Specify the library repository to be used in `build.gradle` by updating the file to the following:
+	At this point, Gradle's dependency management is not yet utilized in `build.gradle`.  Let's try to compile the `.java` files using Gradle and see what errors will be produced.
+
+1. To compile the `.java` files using Gradle, use the `assemble` task of Gradle:
+
+	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command below.
+ 
+	```text
+	> gradle assemble
+	```
+
+	**Output:**
+
+	```text
+	:compileJava
+	/gradle-dependency-management/src/main/java/net/tutorial/Calculator.java:3: error: package org.apache.log4j does not exist
+	import org.apache.log4j.Logger;
+			       ^
+	/gradle-dependency-management/src/main/java/net/tutorial/Calculator.java:7: error: cannot find symbol
+	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
+			       ^
+	  symbol:   class Logger
+	  location: class Calculator
+	/gradle-dependency-management/src/main/java/net/tutorial/Calculator.java:7: error: cannot find symbol
+	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
+					       ^
+	  symbol:   variable Logger
+	  location: class Calculator
+	3 errors
+	:compileJava FAILED
+
+	FAILURE: Build failed with an exception.
+
+	* What went wrong:
+	Execution failed for task ':compileJava'.
+	> Compilation failed; see the compiler error output for details.
+
+	* Try:
+	Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
+
+	BUILD FAILED
+
+	Total time: 4.751 secs
+	```
+
+
+1. Specify the library repository to be used in `build.gradle` by updating the file to the following:
 
 	```text
 	apply plugin: 'java'
