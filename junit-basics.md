@@ -404,11 +404,10 @@ In this tutorial we will learn how to create a simple test class that is used to
 
 	<br>
 	
-1. Go to the `build/libs` subdirectory and run the `.jar` file.
+1. Run the `.jar` file.
 
 	```text
-	> cd build/libs
-	> java -jar gradle-dependency-management.jar
+	> java -jar build/libs/gradle-dependency-management.jar
 	```
 
 	**Output:**
