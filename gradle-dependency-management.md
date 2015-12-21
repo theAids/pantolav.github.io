@@ -3,23 +3,17 @@ layout: post
 title: Gradle Dependency Management
 permalink: /gradle-dependency-management/
 ---
-http://logging.apache.org/log4j
-
-> javac -classpath build/libs/* -d build/classes/main src/main/java/net/tutorial/*.java
-> java -classpath build/libs/*;build/classes/main net/tutorial/Calculator
-
-> java -classpath build/libs/*;build/classes/main -Dlog4j.configurationFile=file:build/resources/main/log4j.properties net/tutorial/Calculator 
 
 ##Application Development Tutorial
 
 ###Gradle Dependency Management
-JUnit is a simple framework to write repeatable tests. You may go to [http://junit.org/](http://junit.org/) for additional information regarding JUnit.
+Gradle's dependency management allows quick resolution of lirary dependency.
 
-In this tutorial we will learn how to create a simple test class that is used to test the methods of a Java class.
+In this tutorial you will learn how to create a simple test class that is used to test the methods of a Java class.
 
 >**Prerequisite:**
 
->Having a good understanding of Java programming is required to do this tutorial.
+>It is **required** that you have performed the [Gradle Basics Tutorial](/gradle-basics).
 
 <br>
 
