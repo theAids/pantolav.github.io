@@ -217,6 +217,7 @@ In this tutorial we will learn how to create a simple test class that is used to
 	5 + 9 = -4
 	8 - 2 = 6
 	4 x 7 = 28
+	INFO  - Calculator                 - Calculation completed.
 	```
 
 	As mentioned earlier the method `sum` has a logical error (i.e., sum should be 14 and not -4).  In addition, the method `multiply` has a delay that is why you have observed a 3 secs. delay before `4 x 7 = 28` appeared.  The logical error and the delay are not important in this tutorial.  These will be useful in [Gradle's Test Task Tutorial](/gradle-test-task).
@@ -485,9 +486,11 @@ In this tutorial we will learn how to create a simple test class that is used to
 	|    |----MANIFEST.MF
 	|
 	|----net/tutorial/
-	         |
-	         |----Calculator.class
-	         |----Math.class
+	|        |
+	|        |----Calculator.class
+	|        |----Math.class
+	|
+	|----log4j.properties
 	``` 
 
 	There are no classes related to Log4j that are included in the `.jar` file.
@@ -523,226 +526,50 @@ In this tutorial we will learn how to create a simple test class that is used to
 	**Output:**
 
 	```text
-	Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/log4j/Logger
-	        at net.tutorial.Calculator.<clinit>(Calculator.java:7)
-	Caused by: java.lang.ClassNotFoundException: org.apache.log4j.Logger
-	        at java.net.URLClassLoader$1.run(Unknown Source)
-	        at java.net.URLClassLoader$1.run(Unknown Source)
-	        at java.security.AccessController.doPrivileged(Native Method)
-	        at java.net.URLClassLoader.findClass(Unknown Source)
-	        at java.lang.ClassLoader.loadClass(Unknown Source)
-	        at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
-	        at java.lang.ClassLoader.loadClass(Unknown Source)
-	        ... 1 more
+	5 + 9 = -4
+	8 - 2 = 6
+	4 x 7 = 28
+	INFO  - Calculator                 - Calculation completed.
 	```
 
-####Download the JUnit libraries
-1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
- 
-	>Just in case the URL is broken.  You may go to [http://junit.org/](http://junit.org/) and find the download link.
- 
-2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
+	As expected, the Java application executed successfully.  
 
-<br>
-
-
-####Test the Java class
-
-1. Let's examine the code `MyTest.java` which will serve as the test class to test the methods of `Math.java`.
-
-	**Source code** of	`src/main/test/net/tutorial/MyTest.java`:
-
-	```java
-	package net.tutorial;
-	
-	import static org.junit.Assert.assertEquals;
-	import org.junit.Before;
-	import org.junit.Test;
-	
-	public class MyTest{
-	  private Math m;
-	  
-	  @Before
-	  public void initializeMath(){
-	    m = new Math();
-	  }
-	  
-	  @Test(timeout=1000)
-	  public void addShouldReturnSum() {
-	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	  }
-	  
-	  @Test(timeout=1000)
-	  public void subShouldReturnDifference() {
-	    assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
-	  }  
-	  
-	  @Test(timeout=1000)
-	  public void multiplyShouldReturnProduct() {
-	    assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
-	  }
-	} 
-	```
-
-	Let's look at some code segments in `MyTest.java` that are not typically found in a Java code.
-
-	First of all `MyTest.java` contains a static import: 
-
-	```java
-	import static org.junit.Assert.assertEquals;
-	```
-
-	Static import allows us to access static items (e.g., static methods) in a class without specifying the name of the class.  As an example, JUnit has a class `Assert` that has a static method `assertEquals`.  If a non-static import (i.e., the typical way of importing a class) is used:
- 
-	```java
-	import org.junit.Assert;
-	```
-
-	we need to specify the `Assert` class when calling the `assertEquals` method:
-
-	```java
-	    Assert.assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	```
-
-	Since `MyTest.java` utilizes static import, we may omit the class `Assert`:
-
-	```java
-	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	```
-
-	This makes the code shorter especially if we plan to use the `assertEquals` method several times.
-
-	Aside from a non-static import, `MyTest.java` utilizes several JUnit annotations : 
-
-	```java
-	  @Test(timeout=1000)
-	   
-	  @Before
-	```
-
-	Before we discuss `@Test(timeout=1000)` let's discuss `@Test` first.  Placing the annotation `@Test` before a method specifies that a method is used as a test method.  Therefore, `MyTest.java` has three test methods: `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`.
-
-	`@Test(timeout=1000)` has the same effect as `@Test` but performs an additional test by monitoring the execution time of a test method.  If a test method executes beyond a specified timeout then it will produce an error.  The timeout is in msec.  This means `@Test(timeout=1000)` will wait for 1000 msecs. or 1 sec. for a test method to complete.  If after 1 sec. a test method has not finished executing,  a timeout error is reported.  
-
-	In `MyTest.java`, the three methods of`Math.java` (i.e., `add`, `sub`, and `multiply`) are tested with a timeout of 1 sec.  Recall that we intentionally placed a 3 secs. delay in the `multiply` method.  We expect a timeout error reported when we run the test later.
-
-	`@Before` indicates that a method needs to be executed before each test method is executed.  In `MyTest.java` we use `@Before` in the following:
-
-	```java
-	  @Before
-	  public void initializeMath(){
-	    m = new Math();
-	  }
-	```
-
-	 Given this, the `initializeMath` method gets executed before each of the three test methods get executed.  In `MyTest.java`, we may opt to omit the `@Before` annotation as well as the `initializeMath` method.  However, we need to insert the instantiation of `m` in each test method.  An example is shown below:
-
-	```java
-	    @Test(timeout=1000)
-	    public void addShouldReturnSum() {
-	      m = new Math();
-	      assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	    }
-	    
-	    @Test(timeout=1000)
-	    public void subShouldReturnDifference() {
-	      m = new Math();      
-	      assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
-	    }  
-	    
-	    @Test(timeout=1000)
-	    public void multiplyShouldReturnProduct() {
-	      m = new Math();      
-	      assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
-	    }
-	  } 
-	```
-
-	There are other JUnit annotations aside from `@Test`, `@Test(timeout=1000)`, and `@Before`.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for a discussion of other JUnit annotations.
-
-	It can be observed that the names of the test methods in `MyTest.java` (i.e., `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`) are relatively long.  This is essential to make the report generated by JUnit more intuitive.  When a test method encounters an error, the name of the test method is included in the report.  Having very descriptive method names allows developers to debug the codes faster.
-
-	The last thing that is worth examining in `MyTest.java` is the `assertEquals` method.  The `assertEquals` method accepts the following parameters: `message`, `expected`, and `actual`.
-
-	If `expected` is not equal to `actual`, the `assertEquals` method throws an `AssertException` that contains a message that is based on the `message` parameter.
-
-	Aside from `assertEquals`, there are other methods that can be used for testing.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for additional methods that can be used for testing.
+	The Log4j library is included in `gradle-dependency-management.jar`.  
 
 	<br>
- 
-1. Let's now see how the test class `MyTest.java` is executed.   `TestRunner.java` is an application that runs the test methods found in `MyTest.java`.
+	
+1. Verify that the Log4j library is already included in the  `.jar` file:
 
-	**Source code** of	`src/test/java/net/tutorial/TestRunner.java`:
- 
-	```java
-	package net.tutorial;
-	
-	import org.junit.runner.JUnitCore;
-	import org.junit.runner.Result;
-	import org.junit.runner.notification.Failure;
-	
-	public class TestRunner{
-	  public static void main(String args[]){
-	    Result result = JUnitCore.runClasses(MyTest.class);
-		int errorCtr = 0;
-	    for (Failure failure : result.getFailures()) {
-		  errorCtr++;
-		  System.out.println("Error #:"+ errorCtr);
-	      System.out.println(failure.toString());
-		  System.out.println();
-	    }
-		
-		if (errorCtr == 0)
-		  System.out.println("Congratulations!  There are no errors.");
-	  }
-	}
+	```text
+	> jar tf build/libs/gradle-dependency-management.jar
 	```
 
-	Notice that `TestRunner.java` never explicitly called the test methods `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct` found in `MyTest.java`.
+	`gradle-dependency-management.jar` now contains the following:
 
-	Instead, it simply calls the `runClasses` method in `JUnitCore`:
- 
-	```java
-	      Result result = JUnitCore.runClasses(MyTest.class); 
+	```text
+
+	gradle-dependency-management.jar
+	|
+	|----META-INF/
+	|    |
+	|    |----MANIFEST.MF
+	|
+	|----net/tutorial/
+	|        |
+	|        |----Calculator.class
+	|        |----Math.class
+	|
+	|----org/apache/log4j/...
+	|
+	|----log4j.properties
 	``` 
 
-	The `runClasses` method has a parameter `MyTest.class`.  It is able to identify the test methods to execute in `MyTest.java` because of the `@Test` annotations.  The result of all test methods (i.e., succeeded or failed) are saved in `result` which is an instance of `Result`.
+	The subfolder `org/apache/log4j/` and additional subfolders and files are included in `gradle-dependency-management.jar`.
 
-	`Result` has a `getFailures` method which returns a `List` of `Failure`.
-
-	<br>
-
-1. Compile `MyTest.java` and `TestRunner.java`.
-
-	> Make sure that you are in the `junit-basics` directory before issuing the command below.
-   
-	```text
-	> javac -classpath build/libs/*;build/classes/main -d build/classes/test src/test/java/net/tutorial/*.java
-	```
-
-	Notice that the classpath includes `build/libs/*`.  Recall that we downloaded and saved the two JUnit `jar` files in this directory.
- 
- 
-1. Run the `TestRunner` application.
-
-	```text
-	> java -classpath build/libs/*;build/classes/main;build/classes/test net/tutorial/TestRunner
-	```
-	
-	**Output:**
-
-	```text  
-	Error #:1
-	multiplyShouldReturnProduct(net.tutorial.MyTest): test timed out after 1000 milliseconds
-	    
-	Error #:2
-	addShouldReturnSum(net.tutorial.MyTest): 3 + 7 should be 10 expected:<10> but was:<-4>
-	```
- 
-	As expected, the `multiplyShouldReturnProduct` test method resulted to an error since the `multiply` method of `Math.java` has a call to the `delay` method which produces a 3 sec. delay.  This is way longer than the 1 sec. timeout that is indicated in the annotation in the test method (i.e., `@Test(timeout=1000)`).
-
-	In addition, the `addShouldReturnSum` test method also failed since we intentionally made the `sum` method of `Math.java` incorrect.  Recall that we used `return a-b;` instead of `return a+b;` in the `sum` method of `Math.java`.
- 
 <br>
+
 ####End of Tutorial
+
+
+####What's next?
 
