@@ -440,9 +440,83 @@ In this tutorial we will learn how to create a simple test class that is used to
 	}
 	```
 
-1. Try to run again the `.jar` file.
+1. Reassemble and try to run again the `.jar` file.
 
 	```text
+	> gradle assemble
+	> java -jar build/libs/gradle-dependency-management.jar
+	```
+
+	**Output:**
+
+	```text
+	Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/log4j/Logger
+	        at net.tutorial.Calculator.<clinit>(Calculator.java:7)
+	Caused by: java.lang.ClassNotFoundException: org.apache.log4j.Logger
+	        at java.net.URLClassLoader$1.run(Unknown Source)
+	        at java.net.URLClassLoader$1.run(Unknown Source)
+	        at java.security.AccessController.doPrivileged(Native Method)
+	        at java.net.URLClassLoader.findClass(Unknown Source)
+	        at java.lang.ClassLoader.loadClass(Unknown Source)
+	        at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	        at java.lang.ClassLoader.loadClass(Unknown Source)
+	        ... 1 more
+	```
+
+	The error states that `org.apache.log4j.Logger` is not found.  This is due to the Log4j library is not included in `gradle-dependency-management.jar`.  
+
+	<br>
+	
+1. Inspect the contents of the `.jar` file to verify that the Log4j library is not included:
+
+	```text
+	> jar tf build/libs/gradle-dependency-management.jar
+	```
+
+	>If you have an archiving software like `7Zip`, you may use this instead to inspect the contents of the `.jar` file.
+
+	`gradle-dependency-management.jar` contains the following:
+
+	```text
+	gradle-dependency-management.jar
+	|
+	|----META-INF/
+	|    |
+	|    |----MANIFEST.MF
+	|
+	|----net/tutorial/
+	         |
+	         |----Calculator.class
+	         |----Math.class
+	``` 
+
+	There are no classes related to Log4j that are included in the `.jar` file.
+
+1. Specify that Log4j library should be included in the `.jar` file by updating the `build.gradle` file to the following:
+
+	```text
+	apply plugin: 'java'
+	
+	repositories {
+	    mavenCentral()
+	}
+	
+	dependencies {
+	    compile 'log4j:log4j:1.2.17'
+	}
+
+	jar {
+	    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	    manifest {
+	        attributes 'Main-Class': 'net.tutorial.Calculator'
+	    }
+	}
+	```
+
+1. Reassemble and try to run again the `.jar` file.
+
+	```text
+	> gradle assemble
 	> java -jar build/libs/gradle-dependency-management.jar
 	```
 
