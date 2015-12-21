@@ -449,7 +449,17 @@ In this tutorial we will learn how to create a simple test class that is used to
 	**Output:**
 
 	```text
-	no main manifest attribute, in gradle-dependency-management.jar
+	Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/log4j/Logger
+	        at net.tutorial.Calculator.<clinit>(Calculator.java:7)
+	Caused by: java.lang.ClassNotFoundException: org.apache.log4j.Logger
+	        at java.net.URLClassLoader$1.run(Unknown Source)
+	        at java.net.URLClassLoader$1.run(Unknown Source)
+	        at java.security.AccessController.doPrivileged(Native Method)
+	        at java.net.URLClassLoader.findClass(Unknown Source)
+	        at java.lang.ClassLoader.loadClass(Unknown Source)
+	        at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
+	        at java.lang.ClassLoader.loadClass(Unknown Source)
+	        ... 1 more
 	```
 
 ####Download the JUnit libraries
