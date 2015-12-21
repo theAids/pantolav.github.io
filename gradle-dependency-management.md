@@ -9,7 +9,7 @@ permalink: /gradle-dependency-management/
 ###Gradle Dependency Management
 Gradle's dependency management allows quick resolution of lirary dependency.
 
-In this tutorial you will learn how to create a simple test class that is used to test the methods of a Java class.
+In this tutorial you will learn how to resolve library dependency using Gradle's dependency management.  In order to appreciate this feature of Gradle, you will first resolve the dependency problem using the manual approach.
 
 >**Prerequisite:**
 
