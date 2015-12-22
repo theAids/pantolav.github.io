@@ -29,38 +29,44 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	> cd gradletemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/gradle-dependency-management.git` and go to the created `gradle-dependency-management` directory.
+1. Clone the git repository `https://github.com/pong-pantola/gradle-unit-testing.git` and go to the created `gradle-unit-testing` directory.
 
 	```text
 	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
-	> cd gradle-dependency-management
+	> cd gradle-unit-testing
 	```
  
-	The `gradle-dependency-management` directory has two subdirectories: `src` and `build`.
+	The `gradle-unit-testing` directory has a subdirectory `src`.
 
 	```text
 	manual-dependency-management/
 	|
-	|----src/main/
-	|        |
-	|        |----java/net/tutorial/
-	|        |             |
-	|        |             |----Math.java
-	|        |             |----Calculator.java
-	|        |
-	|        |----resources/
-	|             |
-	|             |----log4j.properties        
+	|----build.gradle
 	|
-	|----build/
+	|----src/
 	     |
-	     |----classes/
-	     |----libs/
+	     |----main/
+	     |    |
+	     |    |----java/net/tutorial/
+	     |    |             |
+	     |    |             |----Math.java
+	     |    |             |----Calculator.java
+	     |    |
+	     |    |----resources/
+	     |         |
+	     |         |----log4j.properties        
+	     |
+	     |----test/
+	     |    |
+	     |    |----java/net/tutorial/
+	                        |
+	                        |----MyTest.java
+	                        |----TestRunner.java	
 	``` 
 
-	`src` has a subdirectory `main`. 
+	`src` has subdirectories `main` and `test`. 
 
-	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which contains methods performing mathematical functions (i.e., add, sub, mulitiply).  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
+	`src/main` contains exactly the same . 
 
 	`src/main` also has a subdirectory `resources`.  Any resource (e.g., configuration or properties file) needed by the Java classes can be placed here.  For this tutorial, the subdirectory contains the log4j.properties file.  It is not essential in this tutorial to know the purpose of this file aside from it is used by one of the Java classes.
  
