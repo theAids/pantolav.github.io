@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Gradle Dependency Management
-permalink: /gradle-dependency-management/
+permalink: /gradle-unit-testing/
 ---
 
 ##Application Development Tutorial
 
-###Gradle Dependency Management
+###Gradle Unit Testing
 Gradle's dependency management allows quick resolution of library dependency.
 
 In this tutorial you will learn how to resolve library dependency using Gradle's dependency management.  In order to appreciate this feature of Gradle, you will first resolve the dependency problem using the manual approach.
