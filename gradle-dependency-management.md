@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Gradle Dependency Management
+title: Gradle's Unit Testing
 permalink: /gradle-unit-testing/
 ---
 
