@@ -283,7 +283,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	 
 	dependencies {
 	    compile 'log4j:log4j:1.2.17'
-	    testCompile 'junit:junit:4.11'
+	    testCompile 'junit:junit:4.12'
 	}
 	
 	jar {
@@ -299,7 +299,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	```text
 	dependencies {
 	    compile 'log4j:log4j:1.2.17'
-	    testCompile 'junit:junit:4.11'
+	    testCompile 'junit:junit:4.12'
 		}
 	```
 	
@@ -307,20 +307,18 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 
 	```text
 	dependencies {
-	    compile 'log4j:log4j:1.2.17', 'junit:junit:4.11'
+	    compile 'log4j:log4j:1.2.17', 'junit:junit:4.12'
 		}
 	```
-	If the latter approach is used (i.e., `compile 'log4j:log4j:1.2.17', 'junit:junit:4.11'`), the JUnit library becomes available to `Math.java` and `Calculator.java` (i.e., files in the subdirectory `src/main`).  Since JUnit is not used by `Math.java` and `Calculator.java`, the `testCompile 'junit:junit:4.11'` is better.
+	If the latter approach is used (i.e., `compile 'log4j:log4j:1.2.17', 'junit:junit:4.12'`), the JUnit library becomes available to `Math.java` and `Calculator.java` (i.e., files in the subdirectory `src/main`).  Since JUnit is not used by `Math.java` and `Calculator.java`, the `testCompile 'junit:junit:4.12'` is better.
 
-	In this tutorial, we used `'junit:junit:4.11'`.  In [Gradle's Dependency Management Tutorial](/gradle-dependency-management), it was discusssed that the dependency entry uses the following format: `'group:name:version'`.
+	In this tutorial, we used `'junit:junit:4.12'`.  In [Gradle's Dependency Management Tutorial](/gradle-dependency-management), it was discusssed that the dependency entry uses the following format: `'group:name:version'`.
 
-	To know  `'junit:junit:4.11'` was derived, you may go to the [Maven Central Repository](http://search.maven.org/).  In the search box, type `junit`.  The search result will be a table with its first 3 columns labeled as: `GroupId`, `ArtifiactId`, and `Latest Version`, which is basically the `group`, `name`, and `version` mentioned in the format above.
-
-	You may choose the most appropriate row in the search result.  For this tutorial, the row that was selected is the one with the following values:
+	To know how `'junit:junit:4.12'` was derived, you may go to the [Maven Central Repository](http://search.maven.org/).  In the search box, type `junit`.  For this tutorial, the row that was selected is the one with the following values:
 
 	GroupId | ArtifactId | Latest Vesion
 	-|-|-
-	log4j | log4j | 1.2.17
+	junit | junit | 4.12
 
 1. Run the `.jar` file.
 
