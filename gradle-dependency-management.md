@@ -440,9 +440,9 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 
 	More importantly, the `assemble` task generated the `gradle-dependency-management.jar` under the `libs` subdirectory.  This `.jar` file will be executed later.  In addition, the log4j.properties file is copied inside a subdirectory of `build`.  This is needed since the application uses the Log4j library.
 
-	>Instead of using the `assemble` task (i.e., `gradle assemble`) you may use the `classes` task (i.e., by issuing the command `gradle classes`) to compile the `.java` files.  
+	>Instead of using the `assemble` task (i.e., by issuing the command `gradle assemble`) you may use the `classes` task (i.e., by issuing the command `gradle classes`) to compile the `.java` followed by the `jar` task (i.e., by issuing the command `gradle jar`) .
 
-	>`assemble` and `classes` tasks are the same except that `classes` task does not produce a `.jar` file.  Since you will be running the `.jar` file in the next step, it is more appropriate to use `assemble ` task.
+	>In other words, `assemble` task = `classes` task + `jar` task.
 
 	<br>
 	
