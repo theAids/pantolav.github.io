@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Gradle Dependency Management
-permalink: /gradle-unit-testing/
+permalink: /gradle-dependency-management/
 ---
 
 ##Application Development Tutorial
 
-###Gradle's Unit Testing
+###Gradle's Dependency Management
 Gradle's dependency management allows quick resolution of library dependency.
 
 In this tutorial you will learn how to resolve library dependency using Gradle's dependency management.  In order to appreciate this feature of Gradle, you will first resolve the dependency problem using the manual approach.
@@ -29,17 +29,17 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	> cd gradletemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/gradle-unit-testing.git` and go to the created `gradle-unit-testing` directory.
+1. Clone the git repository `https://github.com/pong-pantola/gradle-dependency-management.git` and go to the created `gradle-dependency-management` directory.
 
 	```text
 	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
-	> cd gradle-unit-testing
+	> cd gradle-dependency-management
 	```
  
-	The `gradle-unit-testing` directory has a subdirectory `src`.
+	The `gradle-dependency-management` directory has a subdirectory `src`.
 
 	```text
-	manual-dependency-management/
+	gradle-dependency-management/
 	|
 	|----build.gradle
 	|
@@ -214,7 +214,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 
 	>In Gradle, the `build` subdirectory and its subdirectories (e.g., `classes`) need not exist for compilation to work.
 
-1. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
+1. In the `gradle-dependency-management` directory, create a text file with a filename `build.gradle`.
 
 1. Place the following line in `build.gradle`:
 
@@ -359,7 +359,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
 
 	```text
-	manual-dependency-management/
+	gradle-dependency-management/
 	|
 	|----build/
 	     |
