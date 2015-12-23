@@ -39,7 +39,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	The `gradle-unit-testing` directory has a subdirectory `src`.
 
 	```text
-	manual-dependency-management/
+	gradle-unit-testing/
 	|
 	|----build.gradle
 	|
