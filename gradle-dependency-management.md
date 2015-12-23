@@ -57,8 +57,8 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	     |         |----log4j.properties        
 	     |
 	     |----test/
-	     |    |
-	     |    |----java/net/tutorial/
+	          |
+	          |----java/net/tutorial/
 	                        |
 	                        |----MyTest.java
 	                        |----TestRunner.java	
@@ -185,11 +185,11 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	|----build/
 	     |
 	     |----classes/main
-	     |           |
-	     |           |----java/net/tutorial/
-	     |                        |
-	     |                        |----Math.class
-	     |                        |----Calculator.class
+	     |            |
+	     |            |----net/tutorial/
+	     |                     |
+	     |                     |----Math.class
+	     |                     |----Calculator.class
 	     |
 	     |----libs/
 	     |    |
@@ -211,7 +211,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 
 ####Compile classes under the Subdirectory `src/test`
 
-1. To compile the `.java` files under the subdirectory `src/test`, use the `testClasses' task
+1. To compile the `.java` files under the subdirectory `src/test`, use the `testClasses' task.
 
 	>Make sure that you are in the gradle-unit-testing directory before issuing the command below.
 
@@ -319,6 +319,58 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	GroupId | ArtifactId | Latest Vesion
 	-|-|-
 	junit | junit | 4.12
+
+	<br>
+
+1. Compile again the `.java` files under the subdirectory `src/test`, use the `testClasses' task.
+
+	```text
+	> gradle testClasses
+	```
+
+	**Output:**
+	
+	```text
+	:compileJava UP-TO-DATE
+	:processResources UP-TO-DATE
+	:classes UP-TO-DATE
+	:compileTestJava
+	Download https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.pom
+	Download https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
+	:processTestResources UP-TO-DATE
+	:testClasses
+	
+	BUILD SUCCESSFUL
+	
+	Total time: 1 mins 38.426 secs
+	```
+	
+	As expected, the compilation error due to JUnit dependency is resolved.
+
+	The subdirectory `build/classes` now contains the subdirectory `test`:
+
+	```text
+	gradle-unit-testing/
+	|
+	|----build/classes/
+	           |
+	           |----main/ 
+	           |    |
+	           |    |----net/tutorial/
+	           |         |
+	           |         |----Math.class
+	           |         |----Calculator.class
+	           |
+	           |----test/ 
+	                |
+	                |----net/tutorial/
+	                     |
+	                     |----MyTest.class
+	                     |----TestRunner.class	     
+	``` 
+
+
+	<br>
 
 1. Run the `.jar` file.
 
