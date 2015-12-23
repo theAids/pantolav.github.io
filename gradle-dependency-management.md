@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Gradle Dependency Management
-permalink: /gradle-dependency-management/
+title: Gradle's Unit Testing
+permalink: /gradle-unit-testing/
 ---
 
 ##Application Development Tutorial
 
-###Gradle's Dependency Management
+###Gradle's Unit Testing
 Gradle's dependency management allows quick resolution of library dependency.
 
 In this tutorial you will learn how to resolve library dependency using Gradle's dependency management.  In order to appreciate this feature of Gradle, you will first resolve the dependency problem using the manual approach.
@@ -29,127 +29,76 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	> cd gradletemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/gradle-dependency-management.git` and go to the created `gradle-dependency-management` directory.
+1. Clone the git repository `https://github.com/pong-pantola/gradle-unit-testing.git` and go to the created `gradle-unit-testing` directory.
 
 	```text
 	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
-	> cd gradle-dependency-management
+	> cd gradle-unit-testing
 	```
  
-	The `gradle-dependency-management` directory has two subdirectories: `src` and `build`.
+	The `gradle-unit-testing` directory has a subdirectory `src`.
 
 	```text
-	gradle-dependency-management/
+	gradle-unit-testing/
 	|
-	|----src/main/
-	|        |
-	|        |----java/net/tutorial/
-	|        |             |
-	|        |             |----Math.java
-	|        |             |----Calculator.java
-	|        |
-	|        |----resources/
-	|             |
-	|             |----log4j.properties        
+	|----build.gradle
 	|
-	|----build/
+	|----src/
 	     |
-	     |----classes/
-	     |----libs/
+	     |----main/
+	     |    |
+	     |    |----java/net/tutorial/
+	     |    |             |
+	     |    |             |----Math.java
+	     |    |             |----Calculator.java
+	     |    |
+	     |    |----resources/
+	     |         |
+	     |         |----log4j.properties        
+	     |
+	     |----test/
+	          |
+	          |----java/net/tutorial/
+	                        |
+	                        |----MyTest.java
+	                        |----TestRunner.java	
 	``` 
 
-	`src` has a subdirectory `main`. 
+	`src` has subdirectories `main` and `test`. 
 
-	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which contains methods performing mathematical functions (i.e., add, sub, mulitiply).  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
+	`src/main` contains exactly the same files and subdirectories as the one in [Gradle's Dependency Management Tutorial](/gradle-dependency-management). 
 
-	`src/main` also has a subdirectory `resources`.  Any resource (e.g., configuration or properties file) needed by the Java classes can be placed here.  For this tutorial, the subdirectory contains the log4j.properties file.  It is not essential in this tutorial to know the purpose of this file aside from it is used by one of the Java classes.
+	`src/test` contains exactly the same files and subidrectories as the one in [JUnit Basics Tutorial](/junit-basics).
+
+	`gradle-unit-testing` has a Gradle build script `build.gradle`.  Its contents are those that were discussed in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  Specifically, it defines Maven as a repository as well as the Log4j library dependency.
  
-	`build` has two subdirectories: `classes` and `libs`. 
-
-	`build/classes` is used to hold the the `.class` files that will be created later when you compile your `.java` files.
-
-	`build/libs` is used for the libraries (i.e, `.jar` files) that you will download later.  These libraries are needed to compile the Java classes later.
+	In this tutorial, `build.gradle`will be updated to include entries related to unit testing.
 
 <br>
 
-
-####Examine the Java classes
-
-
-1. `Math.java`  contains the methods `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics). 
- 
-	Since the focus of this tutorial is on Gradle's dependency management, you don't need to analyze at this point the contents of `Math.java`.  This class was discussed in the [JUnit Basics Tutorial](/junit-basics) and will be revisited in [Gradle's Test Task Tutorial](/gradle-test-task).
- 
-	 >Note that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`).  This error will be discussed further in the [Gradle's Test Task Tutorial](/gradle-test-task).  No need to fix this error at this point.
-
-	>In addition, a delay is inserted in the method `multiply`.  This will also be discussed in the [Gradle's Test Task Tutorial](/gradle-test-task).
-	
-	<br>
-
-1. `Calculator.java` is a Java application that uses `Math.java`.
-
-	**Source code** of	`src/main/java/net/tutorial/Calculator.java`:
- 
-	```java
-	package net.tutorial;
-	
-	import org.apache.log4j.Logger;
-	
-	public class Calculator{
-		
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-	
-	  public static void main (String args[]){
-	    Math m = new Math();
-		
-		System.out.println("5 + 9 = " + m.add(5, 9));
-		
-		System.out.println("8 - 2 = " + m.sub(8, 2));	
-		
-		System.out.println("4 x 7 = " + m.multiply(4, 7));
-		
-		LOGGER.info("Calculation completed.");
-	  }
-	}
-	```
-
-	`Calculator.java` is very similar to the one discussed in [JUnit Basics Tutorial](/junit-basics).  However, in this tutorials these three extra lines are included:
-
-	```java
-	import org.apache.log4j.Logger;
-	```
-
-
-	```java
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-	```
-	```java
-		LOGGER.info("Calculation completed.");
-	```
-
-	Log4j is a Java-based logging library.  For this tutorial, you don't need to know the details regarding this library.  The three Log4j-related lines above are included in `Calculator.java` just to demonstrate dependency resolution.  When `Calculator.java` is compiled later, you will encounter an error due to Log4j library dependency.  You will resolve this dependency using the manual approach as well as Gradle's dependency management.
-
-	>It was mentioned earlier that the `src/main` directory has a subdirectory `resources` that contains the file `log4j.properties`.  This file is needed by Log4j.  However, in this tutorial it is not important to examine the contents of the file.  	
-
-	<br>
- 
 
 ####Review the Java classes and Build script
 
 
 1. `Math.java`  contains the methods `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics). 
  
-	 >Remember that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`). 
+	 Remember that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`). 
 
-	>In addition, a delay is inserted in the method `multiply` to demonstrate the timeout mechanism of JUnit.
+	In addition, a delay is inserted in the method `multiply` to demonstrate the timeout mechanism of JUnit.
 	
 	<br>
 
 1. `Calculator.java` is exactly the same file that was discussed in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).   It is a Java application that uses `Math.java`.  
 
+	Recall that `Caculator.java` uses the Log4j library:
+	
+	```test
+	import org.apache.log4j.Logger;
+	```
+
 1. `build.gradle` has the same content as the one you created in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).
 
-	Please review the text below for the current contents of `build.gradle`:
+	Please review the text below for the current content of `build.gradle`:
 
 	```text
 	apply plugin: 'java'
@@ -170,232 +119,47 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	}
 	```
 
-	Note that the contents are related to repositories and dependencies since the `build.gradle` file was used in the [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  
+	Note that the contents are related to repositories and dependencies related Log4j library since the `build.gradle` file was used in the [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  
 
-	In this tutorial, entries related to testing will be added to `build.gradle'.
+	In this tutorial, entries related to testing will be added to `build.gradle`.
 	
 	<br>
  
-1. Compile `Math.java` and `Calculator.java`.
+1. `MyTest.java` is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics).   It serve as the test class to test the methods of `Math.java`.
 
-	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command below.
- 
+	Remember that `MyTest.java` uses the JUnit library:
+
 	```text
-	> javac -d build/classes/main src/main/java/net/tutorial/*.java
+	import static org.junit.Assert.assertEquals;
+	import org.junit.Before;
+	import org.junit.Test;
+	```
+
+	You will observe later if the use of the JUnit libary has an effect in Gradle later.
+
+
+1. `TestRunner.java` is an application that runs the test methods found in `MyTest.java`.  
+
+	Like `MyTest.java`, `TestRunner.java` uses the JUnit library:
+
+	```text
+	import org.junit.runner.JUnitCore;
+	import org.junit.runner.Result;
+	import org.junit.runner.notification.Failure;
 	```
 
 
-	**Output:**
+1. Compile `.java` files using Gradle's `assemble` task.
 
-	```text
-	src\main\java\net\tutorial\Calculator.java:3: error: package org.apache.log4j does not exist
-	import org.apache.log4j.Logger;
-	                       ^
-	src\main\java\net\tutorial\Calculator.java:7: error: cannot find symbol
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-	                       ^
-	  symbol:   class Logger
-	  location: class Calculator
-	src\main\java\net\tutorial\Calculator.java:7: error: cannot find symbol
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-	                                       ^
-	  symbol:   variable Logger
-	  location: class Calculator
-	```
 
-	As expected, a compile-time error is encountered due to the dependency to the Log4j library.   You will solve this problem by resolving the Log4j library dependency.  
-
-	<br>
-	
-####Manually Resolve the Library Dependency Problem
-
-> In order to appreciate Gradle, let's try resolving library dependency without using Gradle.  After this, you will use Gradle's dependency management to see how dependency resolution becomes simple with the use of Gradle.
-
-1. Go to [http://logging.apache.org/log4j/2.x/download.html]([http://logging.apache.org/log4j/2.x/download.html]).
- 
-	>Just in case the URL is broken,  you may go to [Apache Log4j](http://logging.apache.org/log4j) and find the download link.
- 
-1. Download the latest version of Apache Log4j library (i.e., apache-log4j-x.x-bin.zip OR apache-log4j-x.x-bin.tar.gz) in a temporary directory.
-
-1. Extract the contents of the zip (or gz) file.  You will see several Log4j `.jar` files.  Copy all the `.jar` files in the subdirectory `build/libs`.
-
-	>Note that for the compilation to work, you don't need to copy all the `.jar` files.  Only one to three `.jar` files are needed.  However, since it may take sometime to identify which `.jar` files are needed, it is quicker just to copy all the files.  This is one problem with manually resolving dependencies.  You need to identify the necessary `.jar` files.
-
-	<br>
-
-1. Compile again `Math.java` and `Calculator.java`.
-
-	> Note that the command below includes the `-classpath build/libs/*` option.  This is needed so that the compilation will use the `.jar` files that you copied earlier.
- 
-	```text
-	> javac -classpath build/libs/* -d build/classes/main src/main/java/net/tutorial/*.java
-	```
-
-	The compilation is successful.  The library dependency is manually resolved.  
-
-	>Take note that in manual library dependency resolution you need to know:
-
-	> a. where to download the library
-
-	> b. which `.jar` files are needed
-		
-
-1. Run the `Calculator` application.
-
-	> Note that the command below includes the `-Dlog4j.configurationFile=file:src//main/resources/log4j.properties` option.  This is needed so that Log4j knows the location of its `.properties` file.
-
-	```text
-	> java -classpath build/libs/*;build/classes/main -Dlog4j.configurationFile=file:src//main/resources/log4j.properties net/tutorial/Calculator
-	```
-
-	**Output:**
-
-	```text
-	5 + 9 = -4
-	8 - 2 = 6
-	4 x 7 = 28
-	INFO  - Calculator                 - Calculation completed.
-	```
-
-	As mentioned earlier the method `sum` has a logical error (i.e., sum should be 14 and not -4).  In addition, the method `multiply` has a delay that is why you have observed a 3 secs. delay before `4 x 7 = 28` appeared.  The logical error and the delay are not important in this tutorial.  These will be useful in [Gradle's Test Task Tutorial](/gradle-test-task).
-
-	At this point, what is important to note is the compilation (and execution) became successful due to the manual dependency resolution.
- 
-<br>
-
-####Resolve the Library Dependency Problem using Gradle's Dependency Management
-
-> One of the features of Gradle is dependency management.  By just specifying the libraries needed in a Gradle build script file (`build.gradle`), dependency resolution becomes faster.
-
-1. To undo the files created during the manual dependency resolution (e.g., the `.jar` files you copied earlier), delete the entire `build` subdirectory.
-
-	>In Gradle, the `build` subdirectory and its subdirectories (e.g., `classes`) need not exist for compilation to work.
-
-1. In the `gradle-dependency-management` directory, create a text file with a filename `build.gradle`.
-
-1. Place the following line in `build.gradle`:
-
-	```text
-	apply plugin: 'java'
-	```
-
-	The line `apply plugin: 'java'` adds Java compilation along with testing and bundling capabilities in the Gradle project.
-
-	At this point, Gradle's dependency management is not yet utilized in `build.gradle`.  Let's try to compile the `.java` files using Gradle and see what errors will be produced.
-
-1. To compile the `.java` files using Gradle's `assemble` task:
-
-	> Make sure that you are in the `gradle-dependency-management` directory before issuing the command below.
- 
 	```text
 	> gradle assemble
 	```
 
-	**Output:**
+	>Recall that in the [Gradle's Dependency Management Tutorial](/gradle-dependency-management), it was mentioned that instead of `assemble` task, you may use the `classes` task (i.e., `gradle classes`) to compile the `.java` classes followed by the `jar` task (`gradle jar`)  to create the `.jar` file.
 
-	```text
-	:compileJava
-	/gradle-dependency-management/src/main/java/net/tutorial/Calculator.java:3: error: package org.apache.log4j does not exist
-	import org.apache.log4j.Logger;
-			       ^
-	/gradle-dependency-management/src/main/java/net/tutorial/Calculator.java:7: error: cannot find symbol
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-			       ^
-	  symbol:   class Logger
-	  location: class Calculator
-	/gradle-dependency-management/src/main/java/net/tutorial/Calculator.java:7: error: cannot find symbol
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-					       ^
-	  symbol:   variable Logger
-	  location: class Calculator
-	3 errors
-	:compileJava FAILED
+	>`assemble task` = `classes` task + `jar` task
 
-	FAILURE: Build failed with an exception.
-
-	* What went wrong:
-	Execution failed for task ':compileJava'.
-	> Compilation failed; see the compiler error output for details.
-
-	* Try:
-	Run with --stacktrace option to get the stack trace. Run with --info or --debug option to get more log output.
-
-	BUILD FAILED
-
-	Total time: 4.751 secs
-	```
-
-	As expected compilation error due to Log4j dependency is encountered.  Let's fix this problem by utlizing the dependency management of Gradle in `build.gradle`.
-
-	<br>
-
-1. Specify the library repository to be used in `build.gradle` by updating the file to the following:
-
-	```text
-	apply plugin: 'java'
-
-	repositories {
-	    mavenCentral()
-	}
-	```
-
-	Repositories are dependency containers.  It has a collection of libraries that your code may need.  You may specify zero or more repositories in a `build.gradle` file.
-
-	In this tutorial, you need one repository to resolve the dependency problem caused by the use of the Log4j library.
-
-	Repositories can be local (e.g., a local directory in your hard drive) or remote (e.g., Maven or Ivy repository).  This tutorial does not cover the details on how to use local repositories as well as the difference between Maven and Ivy repositories.  You may check [Gradle's website](https://docs.gradle.org/current/userguide/artifact_dependencies_tutorial.html). for additional information on repositores.
-
-	In `build.gradle`, you added the following lines earlier:
-
-	```text
-	repositories {
-	    mavenCentral()
-	}
-	```
-
-	This means that you will be using Maven's central repository to get the necessary library.
-
-	<br>
-
-1. Specify the needed library in `build.gradle` by updating the file to the following:
-
-	```text
-	apply plugin: 'java'
-	
-	repositories {
-	    mavenCentral()
-	}
-	
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	}
-	```
-
-	The entry `compile 'log4j:log4j:1.2.17'` means that the indicated library (`'log4j:log4j:1.2.17'`) is needed during compilation. 
-
-	`'log4j:log4j:1.2.17'` uses the following format: `'group:name:version'`.
-
-	To know the group, name, and version of the library you may go to [Maven Central Repository](http://search.maven.org/) and search for the library you need.  
-
-	As an example, you may go to the [Maven Central Repository](http://search.maven.org/).  In the search box, type `log4j`.  The search result will be a table with its first 3 columns labeled as: `GroupId`, `ArtifiactId`, and `Latest Version`, which is basically the `group`, `name`, and `version` mentioned in the format above.
-
-	You may choose the most appropriate row in the search result.  For this tutorial, the row that was selected is the one with the following values:
-
-	GroupId | ArtifactId | Latest Vesion
-	-|-|-
-	log4j | log4j | 1.2.17
-
-	This is the reason why in `build.gradle` the dependency is specified as `compile 'log4j:log4j:1.2.17'`.
-
-	>Note that when you try this tutorial the available library in Maven may  have changed.  Adjust the entry in `build.gradle` if necessary (e.g., version higher than `1.2.17` may be available already).
-
-	<br>
-
-1. Compile again the `.java` files using Gradle's `assemble` task.
-
-	```text
-	> gradle assemble
-	```
 
 	**Output:**
 
@@ -408,24 +172,24 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	
 	BUILD SUCCESSFUL
 	
-	Total time: 8.029 secs
+	Total time: 8.285 secs
 	```
 
-	Since dependency management of Gradle is already specified in `build.gradle`, the compilation error encountered earlier is resolved.
+	As expected, compilation is successful.
 	
-	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
+	The subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
 
 	```text
-	gradle-dependency-management/
+	gradle-unit-testing/
 	|
 	|----build/
 	     |
 	     |----classes/main
-	     |           |
-	     |           |----net/tutorial/
-	     |                    |
-	     |                    |----Math.class
-	     |                    |----Calculator.class
+	     |            |
+	     |            |----net/tutorial/
+	     |                     |
+	     |                     |----Math.class
+	     |                     |----Calculator.class
 	     |
 	     |----libs/
 	     |    |
@@ -438,14 +202,224 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 
 	Notice that the `Math.class` and `Calculator.class` were created after the `assemble` task.  
 
-	More importantly, the `assemble` task generated the `gradle-dependency-management.jar` under the `libs` subdirectory.  This `.jar` file will be executed later.  In addition, the log4j.properties file is copied inside a subdirectory of `build`.  This is needed since the application uses the Log4j library.
+	However the corresponding `.class` files of `MyTest.java` and `TestRunner.java` are not created.
 
-	>Instead of using the `assemble` task (i.e., by issuing the command `gradle assemble`) you may use the `classes` task (i.e., by issuing the command `gradle classes`) to compile the `.java` followed by the `jar` task (i.e., by issuing the command `gradle jar`) .
+	When the `assemble` task is used, only the files under the subdirectory `src/main` are considered.  Both `Math.java` and `Calculator.java` are under this subdirectory.
 
-	>In other words, `assemble` task = `classes` task + `jar` task.
+	However, `MyTest.java` and `TestRunner.java` are under the subdirectory `src/test`.  Therefore, these files are excluded from the `assemble` task.
+	<br>
+
+####Compile classes under the Subdirectory `src/test`
+
+1. To compile the `.java` files under the subdirectory `src/test`, use the `testClasses' task.
+
+	>Make sure that you are in the gradle-unit-testing directory before issuing the command below.
+
+	```text
+	> gradle testClasses
+	```
+
+	**Output:**
+
+	```text
+	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/MyTest.java:3: error: package org.junit does not exist
+	import static org.junit.Assert.assertEquals;
+	                       ^
+	
+	TUTORIAL NOTE: Other lines in this error message are omitted
+	
+	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/TestRunner.java:3: error: package org.junit.runner does not exist
+	import org.junit.runner.JUnitCore;
+	                       ^
+	
+	TUTORIAL NOTE: Other lines in this error message are omitted
+	
+	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/MyTest.java:10: error: cannot find symbol
+	  @Before
+	   ^
+	  symbol:   class Before
+	  location: class MyTest
+	
+	TUTORIAL NOTE: Other lines in this error message are omitted
+	
+	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/TestRunner.java:9: error: cannot find symbol
+	    Result result = JUnitCore.runClasses(MyTest.class);
+	    ^
+	  symbol:   class Result
+	  location: class TestRunner
+	
+	TUTORIAL NOTE: Other lines in this error message are omitted
+	
+	17 errors
+	:compileTestJava FAILED
+	
+	FAILURE: Build failed with an exception.
+	
+	* What went wrong:
+	Execution failed for task ':compileTestJava'.
+	> Compilation failed; see the compiler error output for details.
+	
+	* Try:
+	Run with --stacktrace option to get the stack trace. Run with --info or --debug
+	option to get more log output.
+	
+	BUILD FAILED
+	
+	Total time: 6.224 secs
+	```
+	
+	A compilation error due to JUnit dependency is encountered. Let's fix this problem by utlizing the dependency management you learned in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).
 
 	<br>
 	
+1. Specify the JUnit library in build.gradle by adding the `testCompile 'junit:junit:4.11'` line as shown below:
+
+	```
+	apply plugin: 'java'
+	
+	repositories {
+	    mavenCentral()
+	}
+	 
+	dependencies {
+	    compile 'log4j:log4j:1.2.17'
+	    testCompile 'junit:junit:4.12'
+	}
+	
+	jar {
+		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	    manifest {
+	        attributes 'Main-Class': 'net.tutorial.Calculator'
+	    }
+	}
+	```
+
+	Take note that the `dependencies` section of `build.gradle` is updated to the following:
+
+	```text
+	dependencies {
+	    compile 'log4j:log4j:1.2.17'
+	    testCompile 'junit:junit:4.12'
+		}
+	```
+	
+	and NOT to the following approach:
+
+	```text
+	dependencies {
+	    compile 'log4j:log4j:1.2.17', 'junit:junit:4.12'
+		}
+	```
+	If the latter approach is used (i.e., `compile 'log4j:log4j:1.2.17', 'junit:junit:4.12'`), the JUnit library becomes available to `Math.java` and `Calculator.java` (i.e., files in the subdirectory `src/main`).  Since JUnit is not used by `Math.java` and `Calculator.java`, the `testCompile 'junit:junit:4.12'` is better.
+
+	In this tutorial, we used `'junit:junit:4.12'`.  In [Gradle's Dependency Management Tutorial](/gradle-dependency-management), it was discusssed that the dependency entry uses the following format: `'group:name:version'`.
+
+	To know how `'junit:junit:4.12'` was derived, you may go to the [Maven Central Repository](http://search.maven.org/).  In the search box, type `junit`.  For this tutorial, the row that was selected is the one with the following values:
+
+	GroupId | ArtifactId | Latest Vesion
+	-|-|-
+	junit | junit | 4.12
+
+	<br>
+
+1. Compile again the `.java` files under the subdirectory `src/test`, use the `testClasses' task.
+
+	```text
+	> gradle testClasses
+	```
+
+	**Output:**
+	
+	```text
+	:compileJava UP-TO-DATE
+	:processResources UP-TO-DATE
+	:classes UP-TO-DATE
+	:compileTestJava
+	Download https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.pom
+	Download https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
+	:processTestResources UP-TO-DATE
+	:testClasses
+	
+	BUILD SUCCESSFUL
+	
+	Total time: 1 mins 38.426 secs
+	```
+	
+	As expected, the compilation error due to JUnit dependency is resolved.
+
+	The subdirectory `build/classes` now contains the subdirectory `test`:
+
+	```text
+	gradle-unit-testing/
+	|
+	|----build/classes/
+	           |
+	           |----main/ 
+	           |    |
+	           |    |----net/tutorial/
+	           |         |
+	           |         |----Math.class
+	           |         |----Calculator.class
+	           |
+	           |----test/ 
+	                |
+	                |----net/tutorial/
+	                     |
+	                     |----MyTest.class
+	                     |----TestRunner.class	     
+	``` 
+
+
+	<br>
+
+####Run the Test
+
+1. To run the test, use the `test' task.
+
+	>Make sure that you are in the gradle-unit-testing directory before issuing the command below.
+
+	```text
+	> gradle test
+	```
+
+	**Output:**
+	
+	```text
+	:compileJava UP-TO-DATE
+	:processResources UP-TO-DATE
+	:classes UP-TO-DATE
+	:compileTestJava UP-TO-DATE
+	:processTestResources UP-TO-DATE
+	:testClasses UP-TO-DATE
+	:test
+	
+	net.tutorial.MyTest > multiplyShouldReturnProduct FAILED
+	    org.junit.runners.model.TestTimedOutException at MyTest.java:27
+	
+	net.tutorial.MyTest > addShouldReturnSum FAILED
+	    java.lang.AssertionError at MyTest.java:17
+	
+	3 tests completed, 2 failed
+	:test FAILED
+	
+	FAILURE: Build failed with an exception.
+	
+	* What went wrong:
+	Execution failed for task ':test'.
+	> There were failing tests. See the report at: file:///D:/gradletemp/experiment/gradle-unit-testing/build/reports/tests/index.html
+	
+	* Try:
+	Run with --stacktrace option to get the stack trace. Run with --info o option to get more log output.
+	
+	BUILD FAILED
+	
+	Total time: 7.645 secs
+	```
+	
+	Since the 
+
+
+
 1. Run the `.jar` file.
 
 	```text
