@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Gradle Dependency Management
-permalink: /gradle-dependency-management/
+permalink: /gradle-unit-testing/
 ---
 
 ##Application Development Tutorial
 
-###Gradle's Dependency Management
+###Gradle's Unit Testing
 Gradle's dependency management allows quick resolution of library dependency.
 
 In this tutorial you will learn how to resolve library dependency using Gradle's dependency management.  In order to appreciate this feature of Gradle, you will first resolve the dependency problem using the manual approach.
@@ -29,110 +29,53 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	> cd gradletemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/gradle-dependency-management.git` and go to the created `gradle-dependency-management` directory.
+1. Clone the git repository `https://github.com/pong-pantola/gradle-unit-testing.git` and go to the created `gradle-unit-testing` directory.
 
 	```text
 	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
-	> cd gradle-dependency-management
+	> cd gradle-unit-testing
 	```
  
-	The `gradle-dependency-management` directory has two subdirectories: `src` and `build`.
+	The `gradle-unit-testing` directory has a subdirectory `src`.
 
 	```text
 	manual-dependency-management/
 	|
-	|----src/main/
-	|        |
-	|        |----java/net/tutorial/
-	|        |             |
-	|        |             |----Math.java
-	|        |             |----Calculator.java
-	|        |
-	|        |----resources/
-	|             |
-	|             |----log4j.properties        
+	|----build.gradle
 	|
-	|----build/
+	|----src/
 	     |
-	     |----classes/
-	     |----libs/
+	     |----main/
+	     |    |
+	     |    |----java/net/tutorial/
+	     |    |             |
+	     |    |             |----Math.java
+	     |    |             |----Calculator.java
+	     |    |
+	     |    |----resources/
+	     |         |
+	     |         |----log4j.properties        
+	     |
+	     |----test/
+	     |    |
+	     |    |----java/net/tutorial/
+	                        |
+	                        |----MyTest.java
+	                        |----TestRunner.java	
 	``` 
 
-	`src` has a subdirectory `main`. 
+	`src` has subdirectories `main` and `test`. 
 
-	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which contains methods performing mathematical functions (i.e., add, sub, mulitiply).  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
+	`src/main` contains exactly the same files and subdirectories as the one in [Gradle's Dependency Management Tutorial](/gradle-dependency-management). 
 
-	`src/main` also has a subdirectory `resources`.  Any resource (e.g., configuration or properties file) needed by the Java classes can be placed here.  For this tutorial, the subdirectory contains the log4j.properties file.  It is not essential in this tutorial to know the purpose of this file aside from it is used by one of the Java classes.
+	`src/test` contains exactly the same files and subidrectories as the one in [JUnit Basics Tutorial](/junit-basics).
+
+	`gradle-unit-testing` has a Gradle build script `build.gradle`.  Its contents are those that were discussed in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  Specifically, it defines Maven as a repository as well as the Log4j library dependency.
  
-	`build` has two subdirectories: `classes` and `libs`. 
-
-	`build/classes` is used to hold the the `.class` files that will be created later when you compile your `.java` files.
-
-	`build/libs` is used for the libraries (i.e, `.jar` files) that you will download later.  These libraries are needed to compile the Java classes later.
+	In this tutorial, `build.gradle`will be updated to include entries related to unit testing.
 
 <br>
 
-
-####Examine the Java classes
-
-
-1. `Math.java`  contains the methods `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics). 
- 
-	Since the focus of this tutorial is on Gradle's dependency management, you don't need to analyze at this point the contents of `Math.java`.  This class was discussed in the [JUnit Basics Tutorial](/junit-basics) and will be revisited in [Gradle's Test Task Tutorial](/gradle-test-task).
- 
-	 >Note that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`).  This error will be discussed further in the [Gradle's Test Task Tutorial](/gradle-test-task).  No need to fix this error at this point.
-
-	>In addition, a delay is inserted in the method `multiply`.  This will also be discussed in the [Gradle's Test Task Tutorial](/gradle-test-task).
-	
-	<br>
-
-1. `Calculator.java` is a Java application that uses `Math.java`.
-
-	**Source code** of	`src/main/java/net/tutorial/Calculator.java`:
- 
-	```java
-	package net.tutorial;
-	
-	import org.apache.log4j.Logger;
-	
-	public class Calculator{
-		
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-	
-	  public static void main (String args[]){
-	    Math m = new Math();
-		
-		System.out.println("5 + 9 = " + m.add(5, 9));
-		
-		System.out.println("8 - 2 = " + m.sub(8, 2));	
-		
-		System.out.println("4 x 7 = " + m.multiply(4, 7));
-		
-		LOGGER.info("Calculation completed.");
-	  }
-	}
-	```
-
-	`Calculator.java` is very similar to the one discussed in [JUnit Basics Tutorial](/junit-basics).  However, in this tutorials these three extra lines are included:
-
-	```java
-	import org.apache.log4j.Logger;
-	```
-
-
-	```java
-	  private static final Logger LOGGER = Logger.getLogger(Calculator.class);
-	```
-	```java
-		LOGGER.info("Calculation completed.");
-	```
-
-	Log4j is a Java-based logging library.  For this tutorial, you don't need to know the details regarding this library.  The three Log4j-related lines above are included in `Calculator.java` just to demonstrate dependency resolution.  When `Calculator.java` is compiled later, you will encounter an error due to Log4j library dependency.  You will resolve this dependency using the manual approach as well as Gradle's dependency management.
-
-	>It was mentioned earlier that the `src/main` directory has a subdirectory `resources` that contains the file `log4j.properties`.  This file is needed by Log4j.  However, in this tutorial it is not important to examine the contents of the file.  	
-
-	<br>
- 
 
 ####Review the Java classes and Build script
 
@@ -271,7 +214,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 
 	>In Gradle, the `build` subdirectory and its subdirectories (e.g., `classes`) need not exist for compilation to work.
 
-1. In the `gradle-dependency-management` directory, create a text file with a filename `build.gradle`.
+1. In the `manual-dependency-management` directory, create a text file with a filename `build.gradle`.
 
 1. Place the following line in `build.gradle`:
 
@@ -416,7 +359,7 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
 
 	```text
-	gradle-dependency-management/
+	manual-dependency-management/
 	|
 	|----build/
 	     |
