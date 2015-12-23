@@ -372,6 +372,54 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 
 	<br>
 
+####Run the Test
+
+1. To run the test, use the `test' task.
+
+	>Make sure that you are in the gradle-unit-testing directory before issuing the command below.
+
+	```text
+	> gradle test
+	```
+
+	**Output:**
+	
+	```text
+	:compileJava UP-TO-DATE
+	:processResources UP-TO-DATE
+	:classes UP-TO-DATE
+	:compileTestJava UP-TO-DATE
+	:processTestResources UP-TO-DATE
+	:testClasses UP-TO-DATE
+	:test
+	
+	net.tutorial.MyTest > multiplyShouldReturnProduct FAILED
+	    org.junit.runners.model.TestTimedOutException at MyTest.java:27
+	
+	net.tutorial.MyTest > addShouldReturnSum FAILED
+	    java.lang.AssertionError at MyTest.java:17
+	
+	3 tests completed, 2 failed
+	:test FAILED
+	
+	FAILURE: Build failed with an exception.
+	
+	* What went wrong:
+	Execution failed for task ':test'.
+	> There were failing tests. See the report at: file:///D:/gradletemp/experiment/gradle-unit-testing/build/reports/tests/index.html
+	
+	* Try:
+	Run with --stacktrace option to get the stack trace. Run with --info o option to get more log output.
+	
+	BUILD FAILED
+	
+	Total time: 7.645 secs
+	```
+	
+	Since the 
+
+
+
 1. Run the `.jar` file.
 
 	```text
