@@ -94,7 +94,7 @@ In this tutorial you will learn how to run a test class created using a JUnit li
 
 	Recall that `Caculator.java` uses the Log4j library:
 	
-	```test
+	```text
 	import org.apache.log4j.Logger;
 	```
 
