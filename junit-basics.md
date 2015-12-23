@@ -1,293 +1,180 @@
 ---
 layout: post
-title: Gradle's Unit Testing
-permalink: /gradle-unit-testing/
+title: Junit Basics
+permalink: /junit-basics/
 ---
 
 ##Application Development Tutorial
 
-###Gradle's Unit Testing
-Gradle's dependency management allows quick resolution of library dependency.
+###JUnit Basics
+JUnit is a simple framework to write repeatable tests. You may go to [http://junit.org/](http://junit.org/) for additional information regarding JUnit.
 
-In this tutorial you will learn how to resolve library dependency using Gradle's dependency management.  In order to appreciate this feature of Gradle, you will first resolve the dependency problem using the manual approach.
+In this tutorial you will learn how to create a simple test class that is used to test the methods of a Java class.
 
 >**Prerequisite:**
 
->It is **required** that you have performed the [Gradle Basics Tutorial](/gradle-basics).
+>Having a good understanding of Java programming is required to do this tutorial.
 
 <br>
-
-
 
 ####Copy Sample Codes from Git repository
-
-
-1. Open a terminal window and create the directory `gradletemp` in the root directory.  Go to the created directory.
+1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
 
 	```text		
-	> mkdir gradletemp
-	> cd gradletemp
+	> mkdir junittemp
+	> cd junittemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/gradle-unit-testing.git` and go to the created `gradle-unit-testing` directory.
+1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
 
 	```text
-	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
-	> cd gradle-unit-testing
+	> git clone https://github.com/pong-pantola/junit-basics.git
+	> cd junit-basics
 	```
  
-	The `gradle-unit-testing` directory has a subdirectory `src`.
+	The `junit-basics` directory has two subdirectories: `src` and `build`.
 
 	```text
-	gradle-unit-testing/
-	|
-	|----build.gradle
+	junit-basics/
 	|
 	|----src/
-	     |
-	     |----main/
-	     |    |
-	     |    |----java/net/tutorial/
-	     |    |             |
-	     |    |             |----Math.java
-	     |    |             |----Calculator.java
-	     |    |
-	     |    |----resources/
-	     |         |
-	     |         |----log4j.properties        
-	     |
-	     |----test/
-	     |    |
-	     |    |----java/net/tutorial/
-	                        |
-	                        |----MyTest.java
-	                        |----TestRunner.java	
-	``` 
-
-	`src` has subdirectories `main` and `test`. 
-
-	`src/main` contains exactly the same files and subdirectories as the one in [Gradle's Dependency Management Tutorial](/gradle-dependency-management). 
-
-	`src/test` contains exactly the same files and subidrectories as the one in [JUnit Basics Tutorial](/junit-basics).
-
-	`gradle-unit-testing` has a Gradle build script `build.gradle`.  Its contents are those that were discussed in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  Specifically, it defines Maven as a repository as well as the Log4j library dependency.
- 
-	In this tutorial, `build.gradle`will be updated to include entries related to unit testing.
-
-<br>
-
-
-####Review the Java classes and Build script
-
-
-1. `Math.java`  contains the methods `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics). 
- 
-	 >Remember that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`). 
-
-	>In addition, a delay is inserted in the method `multiply` to demonstrate the timeout mechanism of JUnit.
-	
-	<br>
-
-1. `Calculator.java` is exactly the same file that was discussed in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).   It is a Java application that uses `Math.java`.  
-
-1. `build.gradle` has the same content as the one you created in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).
-
-	Please review the text below for the current contents of `build.gradle`:
-
-	```text
-	apply plugin: 'java'
-	
-	repositories {
-	    mavenCentral()
-	}
-	 
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	}
-	
-	jar {
-		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	    manifest {
-	        attributes 'Main-Class': 'net.tutorial.Calculator'
-	    }
-	}
-	```
-
-	Note that the contents are related to repositories and dependencies related Log4j library since the `build.gradle` file was used in the [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  
-
-	In this tutorial, entries related to testing will be added to `build.gradle`.
-	
-	<br>
- 
-
-
-1. Compile `.java` files using Gradle's `assemble` task.
-
-	```text
-	> gradle assemble
-	```
-
-	**Output:**
-
-	```text
-	:compileJava
-	:processResources
-	:classes
-	:jar
-	:assemble
-	
-	BUILD SUCCESSFUL
-	
-	Total time: 8.029 secs
-	```
-
-	Since dependency management of Gradle is already specified in `build.gradle`, the compilation error encountered earlier is resolved.
-	
-	Notice that the subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
-
-	```text
-	manual-dependency-management/
+	|    |
+	|    |----main/java/net/tutorial/
+	|    |                  |
+	|    |                  |----Math.java
+	|    |                  |----Calculator.java
+	|    |
+	|    |----test/java/net/tutorial
+	|                       |
+	|                       |----MyTest.java
+	|                       |----TestRunner.java
 	|
 	|----build/
 	     |
-	     |----classes/main
-	     |           |
-	     |           |----java/net/tutorial/
-	     |                        |
-	     |                        |----Math.class
-	     |                        |----Calculator.class
-	     |
-	     |----libs/
+	     |----classes/
 	     |    |
-	     |    |----gradle-dependency-management.jar
-	     |
-	     |----resources/main/
-	                    |
-	                    |----log4j.properties
+	     |    |----main/
+	     |    |----test/
+	     |    
+	     |----libs/
 	``` 
+ 
+	`src` has two subdirectories: `main` and `test`. 
 
-	Notice that the `Math.class` and `Calculator.class` were created after the `assemble` task.  
+	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which you will test later using JUnit.  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
 
-	More importantly, the `assemble` task generated the `gradle-dependency-management.jar` under the `libs` subdirectory.  This `.jar` file will be executed later.  In addition, the log4j.properties file is copied inside a subdirectory of `build`.  This is needed since the application uses the Log4j library.
+	`src/test` contains the Java class `src/test/java/net/tutorial/MyTest.java` which is the test class that will be used to test `Math.java`.  In addition, it contains the `src/test/java/net/tutorial/TestRunner.java` which is a Java application that will run the test. 
+ 
+	`build` has two subdirectories: `classes` and `libs`. 
 
-	<br>
+	`build/classes` is used to hold the the `.class` files that will be created later when you compile your `.java` files.
+
+	`build/libs` is used for the JUnit libraries (i.e, `.jar` files) that you will download later.
+
+<br>
+####Download the JUnit libraries
+1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
+ 
+	>Just in case the URL is broken, you may go to [http://junit.org/](http://junit.org/) and find the download link.
+ 
+2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
+
+<br>
+
+####Examine the Java class to be tested
+
+
+1. Let's examine the sample class `Math.java` which you will test later with JUnit.
+ 
+	**Source code** of	`src/main/java/net/tutorial/Math.java`:
+ 
+	```java
+	package net.tutorial;
 	
-1. Run the `.jar` file.
-
-	```text
-	> java -jar build/libs/gradle-dependency-management.jar
-	```
-
-	**Output:**
-
-	```text
-	no main manifest attribute, in build/libs/gradle-dependency-management.jar
-	```
+	public class Math{
 	
-	The `no main manifest attribute` error is encountered because you did not specify the entry point of your Java application.  The entry point is your `.class` file that contains the `main` method.  In this tutorial, the entry point is the `Calculator` class.
-
-	<br>
-
-1. Specify the entry point of your application in `build.gradle` by updating the file to the following:
-
-	```text
-	apply plugin: 'java'
-	
-	repositories {
-	    mavenCentral()
-	}
-	
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	}
-
-	jar {
-	    manifest {
-	        attributes 'Main-Class': 'net.tutorial.Calculator'
+	  //will be used in the multiply method to simulate that
+	  //the multiply method is taking too long to execute
+	  private void delay(){
+		try{
+	      Thread.sleep(3000);//3000 msec. or 3 sec. delay
+	    } catch(InterruptedException ex) {
+	      Thread.currentThread().interrupt();
 	    }
+	  }
+	
+	  public int add(int a, int b){
+	    //a-b is used instead of a+b to simulate
+	    //a possible error in the source code
+	    return a-b;
+	  }
+	
+	  public int sub(int a, int b){
+	    return a-b;
+	  }
+	
+	  public int multiply(int a, int b){
+		//added delay to simulate that this method is 
+	    //taking too long to execute	
+		delay();
+	
+	    return a*b;
+	  }
+	}
+	```
+ 
+	`Math.java` contains the methods you want to test: `add`, `sub`, and `multiply`.  
+ 
+	The `add` method is intentionally made incorrect by using `return a-b;` instead of `return a+b;` to demonstrate errors that may be detected by JUnit.
+
+	The `multiply` method contains the line `delay();` to force the `multiply` method to execute for more than 3 secs.  This is useful when you demonstrate the concept of timeout in JUnit.
+
+	The `sub` method is included to serve as a control.  Since the implementation of `sub` is correct, JUnit should not report any error involving `sub`.
+ 
+	<br>
+
+1. `Math.java` may be used by other Java classes to create an application. An example of this is `Calculator.java`.
+
+	**Source code** of	`src/main/java/net/tutorial/Calculator.java`:
+ 
+	```java
+	package net.tutorial;
+	
+	public class Calculator{
+	
+	  public static void main (String args[]){
+	    Math m = new Math();
+		
+		System.out.println("5 + 9 = " + m.add(5, 3));
+		
+		System.out.println("8 - 2 = " + m.sub(8, 2));	
+		
+		System.out.println("4 x 7 = " + m.multiply(4, 7));
+	  }
 	}
 	```
 
-1. Reassemble and try to run again the `.jar` file.
+	`Calculator.java` represents a sample application that uses the `Math.java` class.  
+
+	<br>
+ 
+1. Compile `Math.java` and `Calculator.java`.
 
 	```text
-	> gradle assemble
-	> java -jar build/libs/gradle-dependency-management.jar
+	> javac -d build/classes/main src/main/java/net/tutorial/*.java
 	```
-
-	**Output:**
-
-	```text
-	Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/log4j/Logger
-	        at net.tutorial.Calculator.<clinit>(Calculator.java:7)
-	Caused by: java.lang.ClassNotFoundException: org.apache.log4j.Logger
-	        at java.net.URLClassLoader$1.run(Unknown Source)
-	        at java.net.URLClassLoader$1.run(Unknown Source)
-	        at java.security.AccessController.doPrivileged(Native Method)
-	        at java.net.URLClassLoader.findClass(Unknown Source)
-	        at java.lang.ClassLoader.loadClass(Unknown Source)
-	        at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
-	        at java.lang.ClassLoader.loadClass(Unknown Source)
-	        ... 1 more
-	```
-
-	The error states that `org.apache.log4j.Logger` is not found.  This is due to the Log4j library is not included in `gradle-dependency-management.jar`.  
+	
+	> Make sure that you are in the `junit-basics` directory before issuing the command above.
+	
+	>It is worth noting that the subdirectory `build/classes/main` already exists prior to compilation.  This is essential since the `-d build/classes/main` option in the command above means that the subdirectory `build/classes/main` will be used as the base directory of the `.class` files that will be created during compilation.  If the subdirectory does not exist, the command above will produce an error.
 
 	<br>
 	
-1. Inspect the contents of the `.jar` file to verify that the Log4j library is not included:
+
+1. Run the `Calculator` application.
 
 	```text
-	> jar tf build/libs/gradle-dependency-management.jar
-	```
-
-	>If you have an archiving software like `7Zip`, you may use this instead to inspect the contents of the `.jar` file.
-
-	`gradle-dependency-management.jar` contains the following:
-
-	```text
-	gradle-dependency-management.jar
-	|
-	|----META-INF/
-	|    |
-	|    |----MANIFEST.MF
-	|
-	|----net/tutorial/
-	|        |
-	|        |----Calculator.class
-	|        |----Math.class
-	|
-	|----log4j.properties
-	``` 
-
-	There are no classes related to Log4j that are included in the `.jar` file.
-
-1. Specify that Log4j library should be included in the `.jar` file by updating the `build.gradle` file to the following:
-
-	```text
-	apply plugin: 'java'
-	
-	repositories {
-	    mavenCentral()
-	}
-	
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	}
-
-	jar {
-	    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	    manifest {
-	        attributes 'Main-Class': 'net.tutorial.Calculator'
-	    }
-	}
-	```
-
-1. Reassemble and try to run again the `.jar` file.
-
-	```text
-	> gradle assemble
-	> java -jar build/libs/gradle-dependency-management.jar
+	> java -classpath build/classes/main net/tutorial/Calculator
 	```
 
 	**Output:**
@@ -296,47 +183,208 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	5 + 9 = -4
 	8 - 2 = 6
 	4 x 7 = 28
-	INFO  - Calculator                 - Calculation completed.
 	```
 
-	As expected, the Java application executed successfully.  
+	As expected, the output `5 + 9 = -4` is wrong.  In addition, it took approximately 3 secs. before the line `4 x 7 = 28` appeared.
+ 
+<br>
+####Test the Java class
 
-	The Log4j library is included in `gradle-dependency-management.jar`.  
+1. Let's examine the code `MyTest.java` which will serve as the test class to test the methods of `Math.java`.
+
+	**Source code** of	`src/main/test/net/tutorial/MyTest.java`:
+
+	```java
+	package net.tutorial;
+	
+	import static org.junit.Assert.assertEquals;
+	import org.junit.Before;
+	import org.junit.Test;
+	
+	public class MyTest{
+	  private Math m;
+	  
+	  @Before
+	  public void initializeMath(){
+	    m = new Math();
+	  }
+	  
+	  @Test(timeout=1000)
+	  public void addShouldReturnSum() {
+	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	  }
+	  
+	  @Test(timeout=1000)
+	  public void subShouldReturnDifference() {
+	    assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
+	  }  
+	  
+	  @Test(timeout=1000)
+	  public void multiplyShouldReturnProduct() {
+	    assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
+	  }
+	} 
+	```
+
+	Let's look at some code segments in `MyTest.java` that are not typically found in a Java code.
+
+	First of all `MyTest.java` contains a static import: 
+
+	```java
+	import static org.junit.Assert.assertEquals;
+	```
+
+	Static import allows you to access static items (e.g., static methods) in a class without specifying the name of the class.  As an example, JUnit has a class `Assert` that has a static method `assertEquals`.  If a non-static import (i.e., the typical way of importing a class) is used:
+ 
+	```java
+	import org.junit.Assert;
+	```
+
+	you need to specify the `Assert` class when calling the `assertEquals` method:
+
+	```java
+	    Assert.assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	```
+
+	Since `MyTest.java` utilizes static import, you may omit the class `Assert`:
+
+	```java
+	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	```
+
+	This makes the code shorter especially if you plan to use the `assertEquals` method several times.
+
+	Aside from a non-static import, `MyTest.java` utilizes several JUnit annotations : 
+
+	```java
+	  @Test(timeout=1000)
+	   
+	  @Before
+	```
+
+	Before we discuss `@Test(timeout=1000)` let's discuss `@Test` first.  Placing the annotation `@Test` before a method specifies that a method is used as a test method.  Therefore, `MyTest.java` has three test methods: `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`.
+
+	`@Test(timeout=1000)` has the same effect as `@Test` but performs an additional test by monitoring the execution time of a test method.  If a test method executes beyond a specified timeout then it will produce an error.  The timeout is in msec.  This means `@Test(timeout=1000)` will wait for 1000 msecs. or 1 sec. for a test method to complete.  If after 1 sec. a test method has not finished executing,  a timeout error is reported.  
+
+	In `MyTest.java`, the three methods of`Math.java` (i.e., `add`, `sub`, and `multiply`) are tested with a timeout of 1 sec.  Recall that we intentionally placed a 3 secs. delay in the `multiply` method.  We expect a timeout error reported when you run the test later.
+
+	`@Before` indicates that a method needs to be executed before each test method is executed.  In `MyTest.java` we use `@Before` in the following:
+
+	```java
+	  @Before
+	  public void initializeMath(){
+	    m = new Math();
+	  }
+	```
+
+	 Given this, the `initializeMath` method gets executed before each of the three test methods get executed.  In `MyTest.java`, you may opt to omit the `@Before` annotation as well as the `initializeMath` method.  However, you need to insert the instantiation of `m` in each test method.  An example is shown below:
+
+	```java
+	    @Test(timeout=1000)
+	    public void addShouldReturnSum() {
+	      m = new Math();
+	      assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
+	    }
+	    
+	    @Test(timeout=1000)
+	    public void subShouldReturnDifference() {
+	      m = new Math();      
+	      assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
+	    }  
+	    
+	    @Test(timeout=1000)
+	    public void multiplyShouldReturnProduct() {
+	      m = new Math();      
+	      assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
+	    }
+	  } 
+	```
+
+	There are other JUnit annotations aside from `@Test`, `@Test(timeout=1000)`, and `@Before`.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for a discussion of other JUnit annotations.
+
+	It can be observed that the names of the test methods in `MyTest.java` (i.e., `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`) are relatively long.  This is essential to make the report generated by JUnit more intuitive.  When a test method encounters an error, the name of the test method is included in the report.  Having very descriptive method names allows developers to debug the codes faster.
+
+	The last thing that is worth examining in `MyTest.java` is the `assertEquals` method.  The `assertEquals` method accepts the following parameters: `message`, `expected`, and `actual`.
+
+	If `expected` is not equal to `actual`, the `assertEquals` method throws an `AssertException` that contains a message that is based on the `message` parameter.
+
+	Aside from `assertEquals`, there are other methods that can be used for testing.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for additional methods that can be used for testing.
 
 	<br>
-	
-1. Verify that the Log4j library is already included in the  `.jar` file:
+ 
+1. Let's now see how the test class `MyTest.java` is executed.   `TestRunner.java` is an application that runs the test methods found in `MyTest.java`.
 
-	```text
-	> jar tf build/libs/gradle-dependency-management.jar
+	**Source code** of	`src/test/java/net/tutorial/TestRunner.java`:
+ 
+	```java
+	package net.tutorial;
+	
+	import org.junit.runner.JUnitCore;
+	import org.junit.runner.Result;
+	import org.junit.runner.notification.Failure;
+	
+	public class TestRunner{
+	  public static void main(String args[]){
+	    Result result = JUnitCore.runClasses(MyTest.class);
+		int errorCtr = 0;
+	    for (Failure failure : result.getFailures()) {
+		  errorCtr++;
+		  System.out.println("Error #:"+ errorCtr);
+	      System.out.println(failure.toString());
+		  System.out.println();
+	    }
+		
+		if (errorCtr == 0)
+		  System.out.println("Congratulations!  There are no errors.");
+	  }
+	}
 	```
 
-	`gradle-dependency-management.jar` now contains the following:
+	Notice that `TestRunner.java` never explicitly called the test methods `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct` found in `MyTest.java`.
 
-	```text
-
-	gradle-dependency-management.jar
-	|
-	|----META-INF/
-	|    |
-	|    |----MANIFEST.MF
-	|
-	|----net/tutorial/
-	|        |
-	|        |----Calculator.class
-	|        |----Math.class
-	|
-	|----org/apache/log4j/...
-	|
-	|----log4j.properties
+	Instead, it simply calls the `runClasses` method in `JUnitCore`:
+ 
+	```java
+	      Result result = JUnitCore.runClasses(MyTest.class); 
 	``` 
 
-	The subfolder `org/apache/log4j/` and additional subfolders and files are included in `gradle-dependency-management.jar`.
+	The `runClasses` method has a parameter `MyTest.class`.  It is able to identify the test methods to execute in `MyTest.java` because of the `@Test` annotations.  The result of all test methods (i.e., succeeded or failed) are saved in `result` which is an instance of `Result`.
 
+	`Result` has a `getFailures` method which returns a `List` of `Failure`.
+
+	<br>
+
+1. Compile `MyTest.java` and `TestRunner.java`.
+
+	> Make sure that you are in the `junit-basics` directory before issuing the command below.
+   
+	```text
+	> javac -classpath build/libs/*;build/classes/main -d build/classes/test src/test/java/net/tutorial/*.java
+	```
+
+	Notice that the classpath includes `build/libs/*`.  Recall that you downloaded and saved the two JUnit `jar` files in this directory.
+ 
+ 
+1. Run the `TestRunner` application.
+
+	```text
+	> java -classpath build/libs/*;build/classes/main;build/classes/test net/tutorial/TestRunner
+	```
+	
+	**Output:**
+
+	```text  
+	Error #:1
+	multiplyShouldReturnProduct(net.tutorial.MyTest): test timed out after 1000 milliseconds
+	    
+	Error #:2
+	addShouldReturnSum(net.tutorial.MyTest): 3 + 7 should be 10 expected:<10> but was:<-4>
+	```
+ 
+	As expected, the `multiplyShouldReturnProduct` test method resulted to an error since the `multiply` method of `Math.java` has a call to the `delay` method which produces a 3 sec. delay.  This is way longer than the 1 sec. timeout that is indicated in the annotation in the test method (i.e., `@Test(timeout=1000)`).
+
+	In addition, the `addShouldReturnSum` test method also failed since we intentionally made the `sum` method of `Math.java` incorrect.  Recall that we used `return a-b;` instead of `return a+b;` in the `sum` method of `Math.java`.
+ 
 <br>
-
 ####End of Tutorial
-
-
-####What's next?
 
