@@ -7,13 +7,15 @@ permalink: /gradle-unit-testing/
 ##Application Development Tutorial
 
 ###Gradle's Unit Testing
-Gradle's dependency management allows quick resolution of library dependency.
+Gradle's unit testing allows execution of test classes (e.g., those created using the JUnit library).
 
-In this tutorial you will learn how to resolve library dependency using Gradle's dependency management.  In order to appreciate this feature of Gradle, you will first resolve the dependency problem using the manual approach.
+In this tutorial you will learn how to run a test class created using a JUnit library in Gradle.
 
 >**Prerequisite:**
 
->It is **required** that you have performed the [Gradle Basics Tutorial](/gradle-basics).
+>It is **required** that you have performed the [JUnit Basics Tutorial](/junit-basics).
+
+>It is also **required** that you have performed the [Gradle Dependency Management Tutorial](/gradle-dependency-management).
 
 <br>
 
@@ -416,170 +418,59 @@ In this tutorial you will learn how to resolve library dependency using Gradle's
 	Total time: 7.645 secs
 	```
 	
-	Since the 
+	As expected, the `multiplyShouldReturnProduct` test method resulted to an error since the `multiply` method of `Math.java` has a call to the `delay` method which produces a 3 sec. delay.  This is way longer than the 1 sec. timeout that is indicated in the annotation in the test method (i.e., `@Test(timeout=1000)`).
 
-
-
-1. Run the `.jar` file.
-
-	```text
-	> java -jar build/libs/gradle-dependency-management.jar
-	```
-
-	**Output:**
-
-	```text
-	no main manifest attribute, in build/libs/gradle-dependency-management.jar
-	```
-	
-	The `no main manifest attribute` error is encountered because you did not specify the entry point of your Java application.  The entry point is your `.class` file that contains the `main` method.  In this tutorial, the entry point is the `Calculator` class.
-
-	<br>
-
-1. Specify the entry point of your application in `build.gradle` by updating the file to the following:
-
-	```text
-	apply plugin: 'java'
-	
-	repositories {
-	    mavenCentral()
-	}
-	
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	}
-
-	jar {
-	    manifest {
-	        attributes 'Main-Class': 'net.tutorial.Calculator'
-	    }
-	}
-	```
-
-1. Reassemble and try to run again the `.jar` file.
-
-	```text
-	> gradle assemble
-	> java -jar build/libs/gradle-dependency-management.jar
-	```
-
-	**Output:**
-
-	```text
-	Exception in thread "main" java.lang.NoClassDefFoundError: org/apache/log4j/Logger
-	        at net.tutorial.Calculator.<clinit>(Calculator.java:7)
-	Caused by: java.lang.ClassNotFoundException: org.apache.log4j.Logger
-	        at java.net.URLClassLoader$1.run(Unknown Source)
-	        at java.net.URLClassLoader$1.run(Unknown Source)
-	        at java.security.AccessController.doPrivileged(Native Method)
-	        at java.net.URLClassLoader.findClass(Unknown Source)
-	        at java.lang.ClassLoader.loadClass(Unknown Source)
-	        at sun.misc.Launcher$AppClassLoader.loadClass(Unknown Source)
-	        at java.lang.ClassLoader.loadClass(Unknown Source)
-	        ... 1 more
-	```
-
-	The error states that `org.apache.log4j.Logger` is not found.  This is due to the Log4j library is not included in `gradle-dependency-management.jar`.  
+	In addition, the `addShouldReturnSum` test method also failed since we intentionally made the `sum` method of `Math.java` incorrect.  Recall that we used `return a-b;` instead of `return a+b;` in the `sum` method of `Math.java`.
 
 	<br>
 	
-1. Inspect the contents of the `.jar` file to verify that the Log4j library is not included:
+1. Fix the error in `Math.java` by updating the `add` and `multiply` methods.
 
-	```text
-	> jar tf build/libs/gradle-dependency-management.jar
+	Change the `add` method by changing `a-b` to `a+b`:
+
+	```java
+	  public int add(int a, int b){
+	    return a+b;
+	  }
 	```
 
-	>If you have an archiving software like `7Zip`, you may use this instead to inspect the contents of the `.jar` file.
+	Change the `multiply` method by commenting out `delay()`:
 
-	`gradle-dependency-management.jar` contains the following:
-
-	```text
-	gradle-dependency-management.jar
-	|
-	|----META-INF/
-	|    |
-	|    |----MANIFEST.MF
-	|
-	|----net/tutorial/
-	|        |
-	|        |----Calculator.class
-	|        |----Math.class
-	|
-	|----log4j.properties
-	``` 
-
-	There are no classes related to Log4j that are included in the `.jar` file.
-
-1. Specify that Log4j library should be included in the `.jar` file by updating the `build.gradle` file to the following:
-
-	```text
-	apply plugin: 'java'
+	```java
+	  public int multiply(int a, int b){
+	    //added to simulate that this method is 
+	    //taking too long to execute	
+	    //delay();
 	
-	repositories {
-	    mavenCentral()
-	}
-	
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	}
-
-	jar {
-	    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	    manifest {
-	        attributes 'Main-Class': 'net.tutorial.Calculator'
-	    }
-	}
+	    return a*b;
+	  }
 	```
-
-1. Reassemble and try to run again the `.jar` file.
-
-	```text
-	> gradle assemble
-	> java -jar build/libs/gradle-dependency-management.jar
-	```
-
-	**Output:**
-
-	```text
-	5 + 9 = -4
-	8 - 2 = 6
-	4 x 7 = 28
-	INFO  - Calculator                 - Calculation completed.
-	```
-
-	As expected, the Java application executed successfully.  
-
-	The Log4j library is included in `gradle-dependency-management.jar`.  
 
 	<br>
 	
-1. Verify that the Log4j library is already included in the  `.jar` file:
+1. Run the test again.
 
 	```text
-	> jar tf build/libs/gradle-dependency-management.jar
+	> gradle test
 	```
 
-	`gradle-dependency-management.jar` now contains the following:
-
+	**Output:**
+		
 	```text
+	:compileJava
+	:processResources UP-TO-DATE
+	:classes
+	:compileTestJava
+	:processTestResources UP-TO-DATE
+	:testClasses
+	:test
+	
+	BUILD SUCCESSFUL
+	
+	Total time: 7.322 secs
+	```
 
-	gradle-dependency-management.jar
-	|
-	|----META-INF/
-	|    |
-	|    |----MANIFEST.MF
-	|
-	|----net/tutorial/
-	|        |
-	|        |----Calculator.class
-	|        |----Math.class
-	|
-	|----org/apache/log4j/...
-	|
-	|----log4j.properties
-	``` 
-
-	The subfolder `org/apache/log4j/` and additional subfolders and files are included in `gradle-dependency-management.jar`.
+	The errors are now fixed.
 
 <br>
 
