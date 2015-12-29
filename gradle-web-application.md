@@ -25,7 +25,9 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 >You are not required (but **recommended**) to do  the [Bluemix Basics Tutorial](/bluemix-basics).
 
->- **However**, ensure that you have a Bluemix account.  Your account should have the space `dev` under the region `US-South`.  The creation of the space `dev` is discussed in [Bluemix Basics Tutorial](/bluemix-basics).
+>- **However**, ensure that you have a Bluemix account.  
+>- Your account should have the space `dev` under the region `US-South`.  The creation of the space `dev` is discussed in [Bluemix Basics Tutorial](/bluemix-basics).
+>- Make sure that the `cf` tool is installed.  The installation of `cf` tool is discussed in [Bluemix Basics Tutorial](/bluemix-basics).
 
 
 
@@ -291,9 +293,15 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	4 x 7 = 28 
 	```
 
+	You have successfully launched the calculator application in Jetty.
+
 
 	<br>
-	
+
+####Launch the Web Application in Bluemix
+
+1. xxx
+
 1. Fix the error in `Math.java` by updating the `add` and `multiply` methods.
 
 	Change the `add` method by changing `a-b` to `a+b`:
