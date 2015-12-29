@@ -11,7 +11,7 @@ jetty tutorial:
 ###Creating a Web Application using Gradle
 Gradle has an available `war` plugin that allows you to package your Java web application into a `.war` file.
 
-In this tutorial you will learn how to package a Java application into `.war` file.  The application will be deployed twice: locally (through Jetty) and remotely (through [IBM Bluemix](https://ibm.biz/bluemixph)).
+In this tutorial you will learn how to create a `.war` file.  The `.war` file will be deployed twice: locally (through a Jetty web server) and remotely (through [IBM Bluemix](https://ibm.biz/bluemixph)).
 
 >**Prerequisite:**
 
@@ -57,7 +57,7 @@ In this tutorial you will learn how to package a Java application into `.war` fi
 	The `gradle-web-application` directory has a subdirectory `src`.
 
 	```text
-	gradle-unit-testing/
+	gradle-web-application/
 	|
 	|----build.gradle
 	|
