@@ -209,7 +209,7 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 	apply plugin: 'war'
 	
 	war {
-		archiveName 'webapp.war'
+		archiveName 'calcuapp.war'
 	}
 	
 	repositories {
