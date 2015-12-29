@@ -92,12 +92,12 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 <br>
 
-####Review the Java classes and Build script
+####Review some of Java classes and Build script
 
 
 1. As mentioned, `Math.java`  logical errors in [Gradle's Unit Testing Tutorial](/gradle-unit-testing) are already corrected.
 
-	**Source code** of	`src/main/javanet/tutorial/Math.java`:
+	**Source code** of	`src/main/java/net/tutorial/Math.java`:
  
 	```java
 	package net.tutorial;
@@ -117,10 +117,10 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	  public int add(int a, int b){
 	    return a+b;
 	  }
-	
+	  
 	  public int sub(int a, int b){
 	    return a-b;
-	  }
+	  }  
 	
 	  public int multiply(int a, int b){
 	    return a*b;
@@ -128,23 +128,14 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	}
 	```
  
-	 Remember that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`). 
-
-	In addition, a delay is inserted in the method `multiply` to demonstrate the timeout mechanism of JUnit.
+	 Remember that in the [Gradle's Unit Testing Tutorial](/gradle-unit-testing), the method `add` had a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`). 	In addition, a delay is inserted in the method `multiply` to demonstrate the timeout mechanism of JUnit.  These two issues are already resolved in this tutorial's version of `Math.java`. 
 	
 	<br>
 
-1. `Calculator.java` is exactly the same file that was discussed in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).   It is a Java application that uses `Math.java`.  
-
-	Recall that `Caculator.java` uses the Log4j library:
-	
-	```text
-	import org.apache.log4j.Logger;
-	```
-
-1. `build.gradle` has the same content as the one you created in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).
+1. `build.gradle` has the same content as the one you created in [Gradle's Unit Testing Tutorial](/gradle-unit-testing).
 
 	Please review the text below for the current content of `build.gradle`:
+
 
 	```text
 	apply plugin: 'java'
@@ -155,6 +146,7 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	 
 	dependencies {
 	    compile 'log4j:log4j:1.2.17'
+	    testCompile 'junit:junit:4.12'
 	}
 	
 	jar {
@@ -165,306 +157,140 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	}
 	```
 
-	Note that the contents are related to repositories and dependencies related Log4j library since the `build.gradle` file was used in the [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  
+	Note that the contents of the above script are the same as the contents of `build.gradle` file that you completed in [Gradle's Unit Testing Tutorial](/gradle-unit-testing).  
 
-	In this tutorial, entries related to testing will be added to `build.gradle`.
+	In this tutorial, entries related to web application (e.g., use of `.war` file) will be added to `build.gradle`.
 	
 	<br>
  
-1. `MyTest.java` is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics).   It serve as the test class to test the methods of `Math.java`.
+1. As mentioned, `calculator.jsp` is the `.jsp` version of `Calculator.java`.
 
-	Remember that `MyTest.java` uses the JUnit library:
-
-	```text
-	import static org.junit.Assert.assertEquals;
-	import org.junit.Before;
-	import org.junit.Test;
+	**Source code** of	`src/main/webapp/calculator.jsp`:
+ 
+	```java
+	<!DOCTYPE html>
+	<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+	<%@ page import="net.tutorial.Math" %>
+	<html>
+	<head>
+	    <title>Calculator</title>
+	</head>
+	<body>
+	<%
+	Math m = new Math();
+	%>
+	
+	<%="5 + 9 = " + m.add(5, 9)%>
+	<br>
+	<%="8 - 2 = " + m.sub(8, 2)%>
+	<br>
+	<%="4 x 7 = " + m.multiply(4, 7)%>
+	<br>
+	
+	</body>
+	</html>
 	```
 
-	You will observe later if the use of the JUnit libary has an effect in Gradle later.
-
-
-1. `TestRunner.java` is an application that runs the test methods found in `MyTest.java`.  
-
-	Like `MyTest.java`, `TestRunner.java` uses the JUnit library:
-
-	```text
-	import org.junit.runner.JUnitCore;
-	import org.junit.runner.Result;
-	import org.junit.runner.notification.Failure;
+	Note that similar to `Calculator.java`, `calculator.jsp` uses `Math.java`:
+	```java
+	<%@ page import="net.tutorial.Math" %>
 	```
 
+####Update Build script to support Web Application
+	
+1. Update `build.gradle` to include `.war` related entries:
 
-1. Compile `.java` files using Gradle's `assemble` task.
+	```text
+	apply plugin: 'java'
+	
+	apply plugin: 'war'
+	
+	war {
+		archiveName 'webapp.war'
+	}
+	
+	repositories {
+	    mavenCentral()
+	}
+	 
+	dependencies {
+	    compile 'log4j:log4j:1.2.17'
+	    testCompile 'junit:junit:4.12'
+	}
+	
+	jar {
+		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+	    manifest {
+	        attributes 'Main-Class': 'net.tutorial.Calculator'
+	    }
+	}
+	```
 
+	Take note that the following were added in the script above:
+
+	```text
+	apply plugin: 'war'
+	
+	war {
+		archiveName 'calcuapp.war'
+	}
+	```
+	
+	The `apply plugin: 'war'` entry will provide capability to Gradle to create a `war` file.
+
+	The entry containing `archiveName 'calcuapp.war'` is added so that when the `.war` file is created, its name is `calcuapp.war`.  If you omit this entry, the name of the `.war` file is the name of the directory containing the project.  As an example, if `archiveName 'calcuapp.war'` is omitted, the `.war` file will be named `gradle-web-application.war`.
+
+	<br>
+
+1. Assemble the Gradle project.
 
 	```text
 	> gradle assemble
 	```
 
-	>Recall that in the [Gradle's Dependency Management Tutorial](/gradle-dependency-management), it was mentioned that instead of `assemble` task, you may use the `classes` task (i.e., `gradle classes`) to compile the `.java` classes followed by the `jar` task (`gradle jar`)  to create the `.jar` file.
-
-	>`assemble task` = `classes` task + `jar` task
-
-
 	**Output:**
-
+		
 	```text
 	:compileJava
 	:processResources
 	:classes
-	:jar
+	:war
 	:assemble
 	
 	BUILD SUCCESSFUL
 	
-	Total time: 8.285 secs
-	```
-
-	As expected, compilation is successful.
-	
-	The subdirectory `build` is automatically created.  Below are some of the subdirectories and files that are inside `build`.
-
-	```text
-	gradle-unit-testing/
-	|
-	|----build/
-	     |
-	     |----classes/main
-	     |            |
-	     |            |----net/tutorial/
-	     |                     |
-	     |                     |----Math.class
-	     |                     |----Calculator.class
-	     |
-	     |----libs/
-	     |    |
-	     |    |----gradle-dependency-management.jar
-	     |
-	     |----resources/main/
-	                    |
-	                    |----log4j.properties
-	``` 
-
-	Notice that the `Math.class` and `Calculator.class` were created after the `assemble` task.  
-
-	However the corresponding `.class` files of `MyTest.java` and `TestRunner.java` are not created.
-
-	When the `assemble` task is used, only the files under the subdirectory `src/main` are considered.  Both `Math.java` and `Calculator.java` are under this subdirectory.
-
-	However, `MyTest.java` and `TestRunner.java` are under the subdirectory `src/test`.  Therefore, these files are excluded from the `assemble` task.
-	<br>
-
-####Compile classes under the Subdirectory `src/test`
-
-1. To compile the `.java` files under the subdirectory `src/test`, use the `testClasses' task.
-
-	>Make sure that you are in the gradle-unit-testing directory before issuing the command below.
-
-	```text
-	> gradle testClasses
-	```
-
-	**Output:**
-
-	```text
-	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/MyTest.java:3: error: package org.junit does not exist
-	import static org.junit.Assert.assertEquals;
-	                       ^
-	
-	TUTORIAL NOTE: Other lines in this error message are omitted
-	
-	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/TestRunner.java:3: error: package org.junit.runner does not exist
-	import org.junit.runner.JUnitCore;
-	                       ^
-	
-	TUTORIAL NOTE: Other lines in this error message are omitted
-	
-	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/MyTest.java:10: error: cannot find symbol
-	  @Before
-	   ^
-	  symbol:   class Before
-	  location: class MyTest
-	
-	TUTORIAL NOTE: Other lines in this error message are omitted
-	
-	/gradletemp/experiment/gradle-unit-testing/src/test/java/net/tutorial/TestRunner.java:9: error: cannot find symbol
-	    Result result = JUnitCore.runClasses(MyTest.class);
-	    ^
-	  symbol:   class Result
-	  location: class TestRunner
-	
-	TUTORIAL NOTE: Other lines in this error message are omitted
-	
-	17 errors
-	:compileTestJava FAILED
-	
-	FAILURE: Build failed with an exception.
-	
-	* What went wrong:
-	Execution failed for task ':compileTestJava'.
-	> Compilation failed; see the compiler error output for details.
-	
-	* Try:
-	Run with --stacktrace option to get the stack trace. Run with --info or --debug
-	option to get more log output.
-	
-	BUILD FAILED
-	
-	Total time: 6.224 secs
+	Total time: 9.289 secs
 	```
 	
-	A compilation error due to JUnit dependency is encountered. Let's fix this problem by utlizing the dependency management you learned in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).
-
-	<br>
-	
-1. Specify the JUnit library in build.gradle by adding the `testCompile 'junit:junit:4.11'` line as shown below:
-
-	```
-	apply plugin: 'java'
-	
-	repositories {
-	    mavenCentral()
-	}
-	 
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	    testCompile 'junit:junit:4.12'
-	}
-	
-	jar {
-		from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
-	    manifest {
-	        attributes 'Main-Class': 'net.tutorial.Calculator'
-	    }
-	}
-	```
-
-	Take note that the `dependencies` section of `build.gradle` is updated to the following:
-
-	```text
-	dependencies {
-	    compile 'log4j:log4j:1.2.17'
-	    testCompile 'junit:junit:4.12'
-		}
-	```
-	
-	and NOT to the following approach:
-
-	```text
-	dependencies {
-	    compile 'log4j:log4j:1.2.17', 'junit:junit:4.12'
-		}
-	```
-	If the latter approach is used (i.e., `compile 'log4j:log4j:1.2.17', 'junit:junit:4.12'`), the JUnit library becomes available to `Math.java` and `Calculator.java` (i.e., files in the subdirectory `src/main`).  Since JUnit is not used by `Math.java` and `Calculator.java`, the `testCompile 'junit:junit:4.12'` is better.
-
-	In this tutorial, we used `'junit:junit:4.12'`.  In [Gradle's Dependency Management Tutorial](/gradle-dependency-management), it was discusssed that the dependency entry uses the following format: `'group:name:version'`.
-
-	To know how `'junit:junit:4.12'` was derived, you may go to the [Maven Central Repository](http://search.maven.org/).  In the search box, type `junit`.  For this tutorial, the row that was selected is the one with the following values:
-
-	GroupId | ArtifactId | Latest Vesion
-	-|-|-
-	junit | junit | 4.12
-
-	<br>
-
-1. Compile again the `.java` files under the subdirectory `src/test`, use the `testClasses' task.
-
-	```text
-	> gradle testClasses
-	```
-
-	**Output:**
-	
-	```text
-	:compileJava UP-TO-DATE
-	:processResources UP-TO-DATE
-	:classes UP-TO-DATE
-	:compileTestJava
-	Download https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.pom
-	Download https://repo1.maven.org/maven2/junit/junit/4.12/junit-4.12.jar
-	:processTestResources UP-TO-DATE
-	:testClasses
-	
-	BUILD SUCCESSFUL
-	
-	Total time: 1 mins 38.426 secs
-	```
-	
-	As expected, the compilation error due to JUnit dependency is resolved.
+	The `build` directory and its subdirectories and files are created.
 
 	The subdirectory `build/classes` now contains the subdirectory `test`:
-
-	```text
-	gradle-unit-testing/
-	|
-	|----build/classes/
-	           |
-	           |----main/ 
-	           |    |
-	           |    |----net/tutorial/
-	           |         |
-	           |         |----Math.class
-	           |         |----Calculator.class
-	           |
-	           |----test/ 
-	                |
-	                |----net/tutorial/
-	                     |
-	                     |----MyTest.class
-	                     |----TestRunner.class	     
-	``` 
+     
+	In this tutorial, the most important file that was created is the `build/libs/calcuapp.war` file.  This is the `.war` file containing the web application.
 
 
 	<br>
 
-####Run the Test
+####Launch the Web Application in Jetty
 
-1. To run the test, use the `test' task.
+1. Copy `calcuapp.war` to Jetty's `webapps` subdirectory.
 
-	>Make sure that you are in the gradle-unit-testing directory before issuing the command below.
+	>Refer to [Jetty Basics Tutorial](/jetty-basics) if your machine do not have the Jetty web server.
+	
+1. Make sure that the Jetty web server is running.
 
-	```text
-	> gradle test
-	```
+	>To start the Jetty web server, go to Jetty's home directory and issue the command `java -jar start.jar`.
+
+1. Open a web browser and go to [`http://localhost:8080/calcuapp/calculator.jsp`](http://localhost:8080/calcuapp/calculator.jsp).
 
 	**Output:**
-	
+		
 	```text
-	:compileJava UP-TO-DATE
-	:processResources UP-TO-DATE
-	:classes UP-TO-DATE
-	:compileTestJava UP-TO-DATE
-	:processTestResources UP-TO-DATE
-	:testClasses UP-TO-DATE
-	:test
-	
-	net.tutorial.MyTest > multiplyShouldReturnProduct FAILED
-	    org.junit.runners.model.TestTimedOutException at MyTest.java:27
-	
-	net.tutorial.MyTest > addShouldReturnSum FAILED
-	    java.lang.AssertionError at MyTest.java:17
-	
-	3 tests completed, 2 failed
-	:test FAILED
-	
-	FAILURE: Build failed with an exception.
-	
-	* What went wrong:
-	Execution failed for task ':test'.
-	> There were failing tests. See the report at: file:///D:/gradletemp/experiment/gradle-unit-testing/build/reports/tests/index.html
-	
-	* Try:
-	Run with --stacktrace option to get the stack trace. Run with --info o option to get more log output.
-	
-	BUILD FAILED
-	
-	Total time: 7.645 secs
+	5 + 9 = 14
+	8 - 2 = 6
+	4 x 7 = 28 
 	```
-	
-	As expected, the `multiplyShouldReturnProduct` test method resulted to an error since the `multiply` method of `Math.java` has a call to the `delay` method which produces a 3 sec. delay.  This is way longer than the 1 sec. timeout that is indicated in the annotation in the test method (i.e., `@Test(timeout=1000)`).
 
-	In addition, the `addShouldReturnSum` test method also failed since we intentionally made the `sum` method of `Math.java` incorrect.  Recall that we used `return a-b;` instead of `return a+b;` in the `sum` method of `Math.java`.
 
 	<br>
 	
