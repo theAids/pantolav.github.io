@@ -246,6 +246,8 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 1. Assemble the Gradle project.
 
+	> Make sure that you are in the `gradle-web-application` directory before issuing the command below.
+
 	```text
 	> gradle assemble
 	```
@@ -301,6 +303,12 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 ####Launch the Web Application in Bluemix
 
 1. Login to your Bluemix account using the `cf` tool.
+
+	> Make sure that you are in the `gradle-web-application` directory before issuing the command below.
+
+	```text
+	> cf login -a https://api.ng.bluemix.net -s dev
+	```
 
 1. Fix the error in `Math.java` by updating the `add` and `multiply` methods.
 
