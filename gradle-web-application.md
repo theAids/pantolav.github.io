@@ -17,7 +17,7 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 >You are **required** to do the [Gradle' Unit Testing Tutorial](/gradle-unit-testing).
 
->- The sample code used in this tutorial is based from the sample code used in [Gradle' Unit Testing Tutorial](/gradle-unit-testing). 
+>- The sample code used in the current tutorial is based from the sample code used in [Gradle' Unit Testing Tutorial](/gradle-unit-testing). 
 
 >You are not required (but **recommended**) to do the [Jetty Basics Tutorial](/jetty-basics).
 
@@ -45,11 +45,11 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	> cd gradletemp
 	```
 
-1. Clone the git repository `https://github.com/pong-pantola/gradle-unit-testing.git` and go to the created `gradle-unit-testing` directory.
+1. Clone the git repository `https://github.com/pong-pantola/gradle-web-application.git` and go to the created `gradle-web-application` directory.
 
 	```text
-	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
-	> cd gradle-unit-testing
+	> git clone https://github.com/pong-pantola/gradle-web-application.git
+	> cd gradle-web-application
 	```
  
 	The `gradle-unit-testing` directory has a subdirectory `src`.
