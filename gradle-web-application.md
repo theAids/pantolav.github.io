@@ -3,19 +3,33 @@ layout: post
 title: Gradle Web Application
 permalink: /gradle-web-application/
 ---
+jetty tutorial:
+-Dorg.apache.jasper.compiler.disablejsr199=true
 
 ##Application Development Tutorial
 
 ###Creating a Web Application using Gradle
-Gradle's unit testing allows execution of test classes (e.g., those created using the JUnit library).
+Gradle has an available `war` plugin that allows you to package your Java web application into a `.war` file.
 
-In this tutorial you will learn how to run a test class created using a JUnit library in Gradle.
+In this tutorial you will learn how to package into `.war` file a Java web application.  The application will be deployed twice: locally (through Jetty) and remotely (through [IBM Bluemix](https://ibm.biz/bluemixph)).
 
 >**Prerequisite:**
 
->It is **required** that you have performed the [JUnit Basics Tutorial](/junit-basics).
+>You are **required** to do the [Gradle' Unit Testing Tutorial](/gradle-unit-testing).
 
->It is also **required** that you have performed the [Gradle Dependency Management Tutorial](/gradle-dependency-management).
+>- The sample code used in this tutorial is based from the sample code used in [Gradle' Unit Testing Tutorial](/gradle-unit-testing). 
+
+>You are not required (but **recommended**) to do the [Jetty Basics Tutorial](/jetty-basics).
+
+>- **However**, ensure that your machine has the Jetty web server set-up as discussed in [Jetty Basics Tutorial](/jetty-basics).
+
+>You are not required (but **recommended**) to do  the [Bluemix Basics Tutorial](/bluemix-basics).
+
+>- **However**, ensure that you have a Bluemix account.  Your account should have the space `dev` under the region `US-South`.  The creation of the space `dev` is discussed in [Bluemix Basics Tutorial](/bluemix-basics).
+
+
+
+
 
 <br>
 
