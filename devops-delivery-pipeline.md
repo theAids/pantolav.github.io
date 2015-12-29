@@ -11,12 +11,12 @@ jetty tutorial:
 ###Bluemix Devops Services Delivery Pipeline
 [Bluemix Devops Services](https://hub.jazz.net) has a delivery pipeline that allows you to build, test, and deploy your web application.
 
-In this tutorial you will learn to create the build stage, test stage, and deploy stage.  The build stage will use Gradle.  The test stage will use JUnit through Gradle.  The deploy stage will use the cf tool.
+In this tutorial you will learn to set-up a delivery pipeline by creating a build stage, a test stage, and a deploy stage.  The build stage will use Gradle.  The test stage will use JUnit through Gradle.  The deploy stage will use the cf tool.
 
 
 >**Prerequisite:**
 
->You are **required** to do the [Gradle's Unit Testing Tutorial](/gradle-unit-testing).
+>You are **required** to do the [Creating a Web Application using Gradle Tutorial](/gradle-web-application).
 
 >- The sample code used in the current tutorial is based from the sample code used in [Gradle's Unit Testing Tutorial](/gradle-unit-testing). 
 
