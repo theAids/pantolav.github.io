@@ -282,7 +282,10 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 	
 1. Make sure that the Jetty web server is running.
 
-	>To start the Jetty web server, go to Jetty's home directory and issue the command `java -jar start.jar`.
+	>To start the Jetty web server
+	>- open another terminal window
+	>- go to Jetty's home directory
+	>- issue the command `java -jar start.jar`.
 
 1. On a web browser, go to [`http://localhost:8080/calcuapp/calculator.jsp`](http://localhost:8080/calcuapp/calculator.jsp).
 
