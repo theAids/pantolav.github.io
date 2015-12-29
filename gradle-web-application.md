@@ -15,9 +15,9 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 >**Prerequisite:**
 
->You are **required** to do the [Gradle' Unit Testing Tutorial](/gradle-unit-testing).
+>You are **required** to do the [Gradle's Unit Testing Tutorial](/gradle-unit-testing).
 
->- The sample code used in the current tutorial is based from the sample code used in [Gradle' Unit Testing Tutorial](/gradle-unit-testing). 
+>- The sample code used in the current tutorial is based from the sample code used in [Gradle's Unit Testing Tutorial](/gradle-unit-testing). 
 
 >You are not required (but **recommended**) to do the [Jetty Basics Tutorial](/jetty-basics).
 
@@ -52,7 +52,7 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	> cd gradle-web-application
 	```
  
-	The `gradle-unit-testing` directory has a subdirectory `src`.
+	The `gradle-web-application` directory has a subdirectory `src`.
 
 	```text
 	gradle-unit-testing/
@@ -69,9 +69,13 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	     |    |             |----Calculator.java
 	     |    |
 	     |    |----resources/
+	     |    |    |
+	     |    |    |----log4j.properties        
+	     |    |
+	     |    |----webapp/
 	     |         |
-	     |         |----log4j.properties        
-	     |
+	     |         |----calculator.jsp
+	     |	     
 	     |----test/
 	          |
 	          |----java/net/tutorial/
@@ -80,23 +84,18 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	                        |----TestRunner.java	
 	``` 
 
-	`src` has subdirectories `main` and `test`. 
+	The subdirectories and files are exactly the same as the one you used and created in [Gradle's Unit Testing Tutorial](/gradle-unit-testing).  However, an additional file is added: `src/main/webapp/calculator.jsp`.
 
-	`src/main` contains exactly the same files and subdirectories as the one in [Gradle's Dependency Management Tutorial](/gradle-dependency-management). 
+	`calculator.jsp` is the `.jsp` version of `Calculator.java`.
 
-	`src/test` contains exactly the same files and subidrectories as the one in [JUnit Basics Tutorial](/junit-basics).
-
-	`gradle-unit-testing` has a Gradle build script `build.gradle`.  Its contents are those that were discussed in [Gradle's Dependency Management Tutorial](/gradle-dependency-management).  Specifically, it defines Maven as a repository as well as the Log4j library dependency.
- 
-	In this tutorial, `build.gradle`will be updated to include entries related to unit testing.
+	The logical errors present in `Math.java` in the [Gradle's Unit Testing Tutorial](/gradle-unit-testing) are already corrected in this tutorial's version of `Math.java`.
 
 <br>
-
 
 ####Review the Java classes and Build script
 
 
-1. `Math.java`  contains the methods `add`, `sub`, and `multiply`.   This is exactly the same file that was discussed in [JUnit Basics Tutorial](/junit-basics). 
+1. As mentioned, `Math.java`  logical errors in [Gradle's Unit Testing Tutorial](/gradle-unit-testing) are already corrected.
  
 	 Remember that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`). 
 
