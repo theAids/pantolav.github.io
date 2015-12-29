@@ -300,7 +300,7 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 ####Launch the Web Application in Bluemix
 
-1. xxx
+1. Login to your Bluemix account using the `cf` tool.
 
 1. Fix the error in `Math.java` by updating the `add` and `multiply` methods.
 
