@@ -34,7 +34,7 @@ In this tutorial you will learn how to run a test class created using a JUnit li
 1. Clone the git repository `https://github.com/pong-pantola/gradle-unit-testing.git` and go to the created `gradle-unit-testing` directory.
 
 	```text
-	> git clone https://github.com/pong-pantola/gradle-dependency-management.git
+	> git clone https://github.com/pong-pantola/gradle-web-application.git
 	> cd gradle-unit-testing
 	```
  
