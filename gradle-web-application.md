@@ -94,7 +94,7 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 
 <br>
 
-####Review some of Java classes and Build script
+####Review some of the Java classes and Build script
 
 
 1. As mentioned, `Math.java`  logical errors in [Gradle's Unit Testing Tutorial](/gradle-unit-testing) are already corrected.
