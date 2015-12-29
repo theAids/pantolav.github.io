@@ -269,9 +269,7 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 	
 	The `build` directory and its subdirectories and files are created.
 
-	The subdirectory `build/classes` now contains the subdirectory `test`:
-     
-	In this tutorial, the most important file that was created is the `build/libs/calcuapp.war` file.  This is the `.war` file containing the web application.
+     	In this tutorial, the most important file that was created is the `build/libs/calcuapp.war` file.  This is the `.war` file containing the web application.
 
 
 	<br>
