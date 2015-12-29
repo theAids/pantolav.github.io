@@ -274,7 +274,7 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 
 	<br>
 
-####Launch the Web Application in Jetty
+####Deploy the Web Application in Jetty
 
 1. Copy `calcuapp.war` to Jetty's `webapps` subdirectory.
 
@@ -299,7 +299,7 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 
 	<br>
 
-####Launch the Web Application in Bluemix
+####Deploy the Web Application in Bluemix
 
 1. Login to your Bluemix account using the `cf` tool.
 
