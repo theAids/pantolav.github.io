@@ -18,20 +18,20 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 >You are **required** to do the [Creating a Web Application using Gradle Tutorial](/gradle-web-application).
 
->- The sample code used in the current tutorial is based from the sample code used in [Gradle's Unit Testing Tutorial](/gradle-unit-testing). 
-
->You are not required (but **recommended**) to do the [Jetty Basics Tutorial](/jetty-basics).
-
->- **However**, ensure that your machine has the Jetty web server set-up as discussed in [Jetty Basics Tutorial](/jetty-basics).
+>- The sample code used in the current tutorial is based from the sample code used in [Creating a Web Application using Gradle Tutorial](/gradle-web-application). 
 
 >You are not required (but **recommended**) to do  the [Bluemix Basics Tutorial](/bluemix-basics).
 
 >- **However**, ensure that you have a Bluemix account.  
 >- Your account should have the space `dev` under the region `US-South`.  The creation of the space `dev` is discussed in [Bluemix Basics Tutorial](/bluemix-basics).
->- Make sure that the `cf` tool is installed.  The installation of `cf` tool is discussed in [Bluemix Basics Tutorial](/bluemix-basics).
 
+>You are not required (but **recommended**) to do  the [Bluemix Devops Services Basics Tutorial](/devops-basics).
 
+>- **However**, ensure that you have a Bluemix Devops Services account.
 
+>You are not required (but **recommended**) to do  the [GitHub Basics Tutorial](/github-basics).
+
+>- **However**, ensure that you have a GitHub account.
 
 
 <br>
