@@ -285,7 +285,7 @@ In this tutorial you will learn how to package a Java application into `.war` fi
 
 	>To start the Jetty web server, go to Jetty's home directory and issue the command `java -jar start.jar`.
 
-1. On a web browser go to [`http://localhost:8080/calcuapp/calculator.jsp`](http://localhost:8080/calcuapp/calculator.jsp).
+1. On a web browser, go to [`http://localhost:8080/calcuapp/calculator.jsp`](http://localhost:8080/calcuapp/calculator.jsp).
 
 	**Output:**
 		
@@ -322,7 +322,7 @@ In this tutorial you will learn how to package a Java application into `.war` fi
 	> cf push calculator-pong -p build/libs/calcuapp.war
 	```
 
-1. On a web browser go to `http://calculator-<your_name>.mybluemix.net/calculator.jsp`.
+1. On a web browser, go to `http://calculator-<your_name>.mybluemix.net/calculator.jsp`.
 
 	**Output:**
 		
