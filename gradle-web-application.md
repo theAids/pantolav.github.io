@@ -338,6 +338,14 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 
 	<br>
 
+####Clean up
+
+1. Delete your Bluemix application `calculator-<your_name>`.
+1. Delete `calcuapp.war` from Jetty's `webapps` subdirectory.
+	>You may need to stop the Jetty web server to delete `calcuapp.war`.
+
+<br>
+
 ####End of Tutorial
 
 
