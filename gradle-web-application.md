@@ -96,6 +96,37 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 
 1. As mentioned, `Math.java`  logical errors in [Gradle's Unit Testing Tutorial](/gradle-unit-testing) are already corrected.
+
+	**Source code** of	`src/main/javanet/tutorial/Math.java`:
+ 
+	```java
+	package net.tutorial;
+	
+	public class Math{
+	
+	  //will be used in the multiply method to simulate that
+	  //the multiply method is taking too long to execute
+	  private void delay(){
+	    try{
+	      Thread.sleep(3000);//3000 msec. or 3 sec. delay
+	    } catch(InterruptedException ex) {
+	      Thread.currentThread().interrupt();
+	    }
+	  }
+	
+	  public int add(int a, int b){
+	    return a+b;
+	  }
+	
+	  public int sub(int a, int b){
+	    return a-b;
+	  }
+	
+	  public int multiply(int a, int b){
+	    return a*b;
+	  }
+	}
+	```
  
 	 Remember that the method `add` has a logical error (i.e., instead of `a+b`;, the return statement is `a-b;`). 
 
@@ -107,7 +138,7 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 	Recall that `Caculator.java` uses the Log4j library:
 	
-	```test
+	```text
 	import org.apache.log4j.Logger;
 	```
 
