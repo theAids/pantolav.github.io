@@ -285,7 +285,7 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 
 	>To start the Jetty web server, go to Jetty's home directory and issue the command `java -jar start.jar`.
 
-1. Open a web browser and go to [`http://localhost:8080/calcuapp/calculator.jsp`](http://localhost:8080/calcuapp/calculator.jsp).
+1. On a web browser go to [`http://localhost:8080/calcuapp/calculator.jsp`](http://localhost:8080/calcuapp/calculator.jsp).
 
 	**Output:**
 		
@@ -295,7 +295,7 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	4 x 7 = 28 
 	```
 
-	You have successfully launched the calculator application in Jetty.
+	You have successfully deployed the calculator application in Jetty.
 
 
 	<br>
@@ -310,55 +310,31 @@ In this tutorial you will learn how to package into `.war` file a Java web appli
 	> cf login -a https://api.ng.bluemix.net -s dev
 	```
 
-1. Fix the error in `Math.java` by updating the `add` and `multiply` methods.
-
-	Change the `add` method by changing `a-b` to `a+b`:
-
-	```java
-	  public int add(int a, int b){
-	    return a+b;
-	  }
-	```
-
-	Change the `multiply` method by commenting out `delay()`:
-
-	```java
-	  public int multiply(int a, int b){
-	    //added to simulate that this method is 
-	    //taking too long to execute	
-	    //delay();
-	
-	    return a*b;
-	  }
-	```
-
-	<br>
-	
-1. Run the test again.
+1. Upload the web application to your Bluemix account.
 
 	```text
-	> gradle test
+	> cf push calculator-<your_name> -p build/libs/calcuapp.war
 	```
+
+	**Example:**
+		
+	```text
+	> cf push calculator-pong -p build/libs/calcuapp.war
+	```
+
+1. On a web browser go to `http://calculator-<your_name>.mybluemix.net/calculator.jsp`.
 
 	**Output:**
 		
 	```text
-	:compileJava
-	:processResources UP-TO-DATE
-	:classes
-	:compileTestJava
-	:processTestResources UP-TO-DATE
-	:testClasses
-	:test
-	
-	BUILD SUCCESSFUL
-	
-	Total time: 7.322 secs
+	5 + 9 = 14
+	8 - 2 = 6
+	4 x 7 = 28 
 	```
 
-	The errors are now fixed.
+	You have successfully deployed the calculator application in Bluemix.
 
-<br>
+	<br>
 
 ####End of Tutorial
 
