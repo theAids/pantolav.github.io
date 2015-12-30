@@ -36,7 +36,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 
 
-####Copy Sample Code in GitHub and Create a Bluemix DevOps Project
+####Copy a GitHub Repository
 
 
 1. Open a web browser tab and login to [GitHub](https://github.com/).  In this tutorial, we will refer to this browser tab as `GITHUB TAB`.
@@ -45,18 +45,47 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. Fork the repository by clicking the `Fork` button. 
 
-1. Verify that your repository
+1. Verify that you have successfully forked the repository by checking its name:
 
-| Tables   |      Are      |  Cool |
-|----------|:-------------:|------:|
-| col 1 is |  left-aligned | $1600 |
-| col 2 is |    centered   |   $12 |
-| col 3 is | right-aligned |    $1 |
+	>**VERY IMPORTANT:**
+	>In this tutorial, we will use the username `juandelacruz`.  Kindly use your username in place of `juandelacruz` when you do the tutorial.
+
+	**Name of Repository:**
 
 	```text		
-	> mkdir gradletemp
-	> cd gradletemp
+	juandelacruz/devops-delivery-pipeline
 	```
+
+1. Take note of the URL of your Git repository:
+
+	**Git URL**
+
+	```text		
+	https://github.com/juandelacruz/devops-delivery-pipeline.git
+	```
+
+
+####Create a Bluemix DevOps Project based on the GitHub Repository
+
+1. Open another web browser tab and login to [Bluemix DevOps](https://hub.jazz.net/).  In this tutorial, we will refer to this browser tab as `DEVOPS TAB`.
+
+1. Click `CREATE PROJECT`.
+
+1. Name your project `devops-delivery-pipeline`.
+
+1. Click `Link to an existing GitHub repository`.
+
+	>If this is the first time you will link a Bluemix DevOps project to a GitHub repository, you will be asked to authorize your Bluemix DevOps account to access your GitHub account.  Click the `Authorize application` button and confirm your password.
+
+1. Select the repository `juandelacruz/devops-delivery-pipeline`
+
+1. Click the `CREATE` button.
+
+
+
+
+xxxxxxxxxxxxxxxxxxxxxxxx
+
 
 1. Clone the git repository `https://github.com/pong-pantola/gradle-web-application.git` and go to the created `gradle-web-application` directory.
 
