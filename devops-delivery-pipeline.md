@@ -41,9 +41,17 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. Open a web browser tab and login to [GitHub](https://github.com/).  In this tutorial, we will refer to this browser tab as `GITHUB TAB`.
 
-1. Open another web browser tab and go to the repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
+1. Open another web browser tab and go to the GitHub repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
 
-1. Fork the repository.  Click the `Fork` button. 
+1. Fork the repository by clicking the `Fork` button. 
+
+1. Verify that your repository
+
+| Tables   |      Are      |  Cool |
+|----------|:-------------:|------:|
+| col 1 is |  left-aligned | $1600 |
+| col 2 is |    centered   |   $12 |
+| col 3 is | right-aligned |    $1 |
 
 	```text		
 	> mkdir gradletemp
