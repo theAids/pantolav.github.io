@@ -81,7 +81,16 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. Click the `CREATE` button.
 
+	||||
+	|-|-|-|
+	| **param1** | value1 |
+	| **param22222** | value1 |
 
+
+| | | |
+|-|-|-|
+| Normal Key| Value1 |
+|__BoldKey__| Value2 |
 
 
 xxxxxxxxxxxxxxxxxxxxxxxx
