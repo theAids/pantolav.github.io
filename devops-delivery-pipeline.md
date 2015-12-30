@@ -3,13 +3,11 @@ layout: post
 title: Bluemix Devops Services Delivery Pipeline
 permalink: /devops-delivery-pipeline/
 ---
-jetty tutorial:
--Dorg.apache.jasper.compiler.disablejsr199=true
 
 ##Application Development Tutorial
 
-###Bluemix Devops Services Delivery Pipeline
-[Bluemix Devops Services](https://hub.jazz.net) has a delivery pipeline that allows you to build, test, and deploy your web application.
+###Bluemix DevOps Services Delivery Pipeline
+[Bluemix DevOps Services](https://hub.jazz.net) has a delivery pipeline that allows you to build, test, and deploy your web application.
 
 In this tutorial you will learn to set-up a delivery pipeline by creating a build stage, a test stage, and a deploy stage.  The build stage will use Gradle.  The test stage will use JUnit through Gradle.  The deploy stage will use the cf tool.
 
@@ -25,9 +23,9 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 >- **However**, ensure that you have a Bluemix account.  
 >- Your account should have the space `dev` under the region `US-South`.  The creation of the space `dev` is discussed in [Bluemix Basics Tutorial](/bluemix-basics).
 
->You are not required (but **recommended**) to do  the [Bluemix Devops Services Basics Tutorial](/devops-basics).
+>You are not required (but **recommended**) to do  the [Bluemix DevOps Services Basics Tutorial](/devops-basics).
 
->- **However**, ensure that you have a Bluemix Devops Services account.
+>- **However**, ensure that you have a Bluemix DevOps Services account.
 
 >You are not required (but **recommended**) to do  the [GitHub Basics Tutorial](/github-basics).
 
@@ -38,10 +36,14 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 
 
-####Copy Sample Codes from Git repository
+####Copy Sample Code in GitHub and Create a Bluemix DevOps Project
 
 
-1. Open a terminal window and create the directory `gradletemp` in the root directory.  Go to the created directory.
+1. Open a web browser tab and login to [GitHub](https://github.com/).  In this tutorial, we will refer to this browser tab as `GITHUB TAB`.
+
+1. Open another web browser tab and go to the repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
+
+1. Fork the repository.  Click the `Fork` button. 
 
 	```text		
 	> mkdir gradletemp
