@@ -184,6 +184,39 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
 
+
+####Create a Deploy Stage
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change `MyStage` to `Dev Deploy Stage`.
+
+	>Unlike the build and test stages which are named `Build Stage` and `Test Stage`, respectively, the name of the deploy stage you are about to create is `Dev Deploy Stage` to denote that that the application will be deployed in the `dev` space of your Bluemix account.  Another deploy stage will be created later.
+
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
+
+	||||
+	|-|-|-|
+	| **Input Type** | Build Artifacts |
+	| **Stage** | Build Stage |
+	| **Job** | Gradle Assemble |
+	| **Stage Trigger** | Run jobs when the previous stage is completed |
+
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Deploy`.   Change the name `Deploy` to `Cloud Foundry Push`.  Set the following values:
+
+	||||
+	|-|-|-|
+	| **Deployer Type** | Cloud Foundry |		
+	| **Build Shell Command** | `#!/bin/bash`<br>`gradle test`  |	
+	| **Stop running this stage if this job fails** | checked |
+
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
+
+
+
 xxxxxxxxxxxxxxxxxxxxxxxx
 
 
