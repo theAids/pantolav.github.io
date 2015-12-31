@@ -102,7 +102,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. On the `DEVOPS-EDITOR TAB`: Click (open in another browser tab) the `Git Repository` icon found on the left side of the screen.  We will refer to this browser tab as `DEVOPS-GIT TAB`.
 
-1. On the `DEVOPS-GIT TAB`: Set the following:
+1. On the `DEVOPS-GIT TAB`: Set the following values:
 
 	||||
 	|-|-|-|
@@ -128,6 +128,61 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 
 
+####Create a Build Stage
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change `MyStage` to `Build Stage`.
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
+
+	||||
+	|-|-|-|
+	| **Input Type** | SCM Repository |
+	| **Git URL** | https://github.com/juandelacruz/devops-delivery-pipeline.git |
+	| **Branch** | master |
+	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
+
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Build`.   Change `Build` to `Gradle Build`.  Set the following values:
+
+	||||
+	|-|-|-|
+	| **Builder Type** | Gradle |		
+	| **Build Shell Command** | `#!/bin/bash`<br>`gradle asemble`  |	
+	| **Stop running this stage if this job fails** | checked |
+
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
+
+	<br>
+	
+####Create a Test Stage
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change `MyStage` to `Test Stage`.
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
+
+	||||
+	|-|-|-|
+	| **Input Type** | Build Artifacts |
+	| **Git URL** | https://github.com/juandelacruz/devops-delivery-pipeline.git |
+	| **Branch** | master |
+	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
+
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Build`.   Change `Build` to `Gradle Build`.  Set the following values:
+
+	||||
+	|-|-|-|
+	| **Builder Type** | Gradle |		
+	| **Build Shell Command** | `#!/bin/bash`<br>`gradle asemble`  |	
+	| **Stop running this stage if this job fails** | checked |
+
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
 
 xxxxxxxxxxxxxxxxxxxxxxxx
 
