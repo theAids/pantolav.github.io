@@ -56,7 +56,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	juandelacruz/devops-delivery-pipeline
 	```
 
-1. Take note of the URL of your Git repository:
+1. Take note of the URL of your GitHub repository:
 
 	**Git URL**
 
@@ -275,9 +275,9 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 In the previous steps, you manually started the delivery pipeline by clicking the `Run Stage` icon of the `Build Stage`.  
 
-Since the `Build Stage` is configured to `Run jobs whenever a change is pushed to Git`, the delivery pipeline can be started whenever changes occur in the Git repository.
+Since the `Build Stage` is configured to `Run jobs whenever a change is pushed to Git`, the delivery pipeline can be started whenever changes occur in the GitHub repository.
 
-1.  On the `GITHUB TAB`:  open the file `src/main/webapp/calculator.jsp` for editing.
+1.  On the `GITHUB TAB`:  Open the file `src/main/webapp/calculator.jsp` for editing.
 
 1. On the `GITHUB TAB`:  Add the following lines at the end just before the `</body>` tag:
 
@@ -287,7 +287,7 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 	```
 1. On the `GITHUB TAB`:  Click the `Commit changes` button.
 
-1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automaticaly started due to the changes made in the Git repository.
+1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automatically started due to the changes made in the GitHub repository.
 
 1. Wait until the three stages are complete.
 
@@ -306,17 +306,56 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 
 	Let's modify again the  file `src/main/webapp/calculator.jsp` but this time using the Bluemix DevOps editor and see if the delivery pipeline is automatically triggered.
 
-1.  On the `DEVOPS-EDITOR TAB`:  open the file `src/main/webapp/calculator.jsp`.
+1.  On the `DEVOPS-EDITOR TAB`:  Open the file `src/main/webapp/calculator.jsp`.  
+
+	Notice that the lines you added in the `calculator.jsp`(i.e., `<%="2 + 2 = " + m.add(2, 2)%>` and `<br>`) in your GitHub repository does not appear in `calculator.jsp` of your working directory.
+
+	You need first to sync the working directory in your Bluemix DevOps project before you start editing another file.
+
+1.  On the `DEVOPS-GIT TAB`:  Refresh the page.
+
+1.  On the `DEVOPS-GIT TAB`:  Notice that there is an `Incoming` change due to the modification of `calculator.jsp`.  Click the `Sync` button to update the copy of `calculator.jsp` in the working directory in your Bluemix DevOps project.
+
+1.  On the `DEVOPS-EDITOR TAB`:  Refresh the page and reopen the file `src/main/webapp/calculator.jsp`.  Notice that the following lines now exist:
+
+	```java
+	<%="2 + 2 = " + m.add(2, 2)%>
+	<br>
+	```
 
 1. On the `DEVOPS-EDITOR TAB`:  Add the following lines at the end just before the `</body>` tag:
 
 	```java
-	<%="3 - 3 = " + m.sub(3, 3)%>
+	<%="3 - 3 = " + m.sub(a, 3)%>
 	<br>
 	```
-1. On the `DEVOPS-EDITOR TAB`:  Click the `Commit changes` button.
+1. On the `DEVOPS-EDITOR TAB`:  Make sure to save the changes made.
 
-1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automaticaly started due to the changes made in the Git repository.
+1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB`.  
+
+	Notice that the `Build Stage` did not start automatically.
+
+	Note that you only changed `calculator.jsp` that is in the working directory and not the one in the GitHub repository. 
+
+1. On the `DEVOPS-GIT TAB`: Refresh the page.
+
+1. On the `DEVOPS-GIT TAB`: Set the following values:
+
+	||||
+	|-|-|-|
+	| **Select All** | checked |
+	| **Commit message** | added another computation |
+
+	<br>
+
+1. On the `DEVOPS-GIT TAB`: Click the `Commit` button.
+
+
+1. On the `DEVOPS-GIT TAB`: Click the `Push` button.
+
+	Your GitHub repository is now updated with the new version of `calculator.jsp`.
+
+1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automatically started due to the changes made in the GitHub repository.
 
 xxxxxxxxxxxxxxxxxxxxxxxx
 
