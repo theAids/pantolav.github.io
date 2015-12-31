@@ -130,7 +130,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 ####Create a Build Stage
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change `MyStage` to `Build Stage`.
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Build Stage`.
 
 1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
 
@@ -143,7 +143,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	<br>
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Build`.   Change the name `Build` to `Gradle Assemble`.  Set the following values:
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOBS` tab, click the `ADD JOB` link and select `Build`.   Change the job name `Build` to `Gradle Assemble`.  Set the following values:
 
 	||||
 	|-|-|-|
@@ -159,7 +159,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	
 ####Create a Test Stage
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change `MyStage` to `Test Stage`.
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Test Stage`.
 
 1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
 
@@ -172,7 +172,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	<br>
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Test`.   Change the name `Test` to `JUnit Test through Gradle`.  Set the following values:
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOBS` tab, click the `ADD JOB` link and select `Test`.   Change the job name `Test` to `JUnit Test through Gradle`.  Set the following values:
 
 	||||
 	|-|-|-|
@@ -184,10 +184,11 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
 
+	<br>
 
 ####Create a Deploy Stage
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change `MyStage` to `Dev Deploy Stage`.
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Dev Deploy Stage`.
 
 	>Unlike the build and test stages which are named `Build Stage` and `Test Stage`, respectively, the name of the deploy stage you are about to create is `Dev Deploy Stage` to denote that that the application will be deployed in the `dev` space of your Bluemix account.  Another deploy stage will be created later.
 
@@ -203,7 +204,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	<br>
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Deploy`.   Change the name `Deploy` to `Cloud Foundry Push`.  Set the following values:
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOBS` tab, click the `ADD JOB` link and select `Deploy`.   Change the job name `Deploy` to `Cloud Foundry Push`.  Set the following values:
 
 	||||
 	|-|-|-|
@@ -221,7 +222,39 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
 
+	You have created a delivery pipeline. 
 
+
+
+#### Deploy the Application through the Delivery Pipeline
+
+1.  On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click (open in another browser tab) the `View logs and history ` link of the `Build Stage`.  We will refer to this browser tab as `DEVOPS-BUILD-STAGE-LOGS TAB`.
+
+1.  On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click (open in another browser tab) the `View logs and history ` link of the `Test Stage`.  We will refer to this browser tab as `DEVOPS-TEST-STAGE-LOGS TAB`.
+
+1.  On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click (open in another browser tab) the `View logs and history ` link of the `Dev Deploy Stage`.  We will refer to this browser tab as `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB`.
+
+	The `DEVOPS-BUILD-STAGE-LOGS TAB`, `DEVOPS-TEST-STAGE-LOGS TAB`, `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB` will allow you to monitor the status of the delivery pipeline in each stage.
+
+	Recall that in the [Creating a Web Application using Gradle Tutorial](/gradle-web-application) the following commands are used:
+
+	Command | Purpose
+	-|-
+	`gradle assemble` | build `calcuapp.war`
+	`gradle test` | run the JUnit test
+	`cf push` | deploy the web application in Bluemix
+
+	These three commands are exactly the same commands that the three stages will do.
+
+	In the next step, you will manually trigger the `Build Stage`.  Once the `Build Stage` starts, be ready to switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` in order to see the status of the `Build Stage`.
+
+	Once the `Build Stage` is complete, the `Test Stage` starts.  Similarly, be ready to switch to the `DEVOPS-TEST-STAGE-LOGS TAB` in order to see the status of the `Test Stage`.
+
+	Once the `TestStage` is complete, the `Dev Deploy Stage` starts.  Similarly, be ready to switch to the `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB` in order to see the status of the `Dev Deploy Stage`.
+
+1.  On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `Run Stage` icon.
+
+	>As mentioned, be ready to switch to the appropriate browser tab in order to see the status of each stage.
 
 xxxxxxxxxxxxxxxxxxxxxxxx
 
