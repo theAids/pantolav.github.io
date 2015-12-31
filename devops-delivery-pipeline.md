@@ -41,7 +41,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. Open a web browser tab and login to [GitHub](https://github.com/).  In this tutorial, we will refer to this browser tab as `GITHUB TAB`.
 
-1. Open another web browser tab and go to the GitHub repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
+1. Using the same web browser tab, go to the GitHub repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
 
 1. Fork the repository by clicking the `Fork` button. 
 
@@ -79,18 +79,54 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. Select the repository `juandelacruz/devops-delivery-pipeline`
 
-1. Click the `CREATE` button.
+1. Ensure the following options are chosen:
 
 	||||
 	|-|-|-|
-	| **param1** | value1 |
-	| **param22222** | value1 |
+	| **Private Project** | checked |
+	| **Add features for Scrum development** | checked |
+	| **Make this a Bluemix Project** | checked |
+	| **Region** | IBM Bluemix US South |
+	| **Organization** | you may leave the default selection |		
+	| **Space** | dev |
+
+	<br>
+	
+1. Click the `CREATE` button.  Wait for your project to be created.
+
+1. Click the `EDIT CODE` button.  You will be redirected to Bluemix DevOps' editor.  In this tutorial, we will refer to this browser tab as `DEVOPS-EDITOR TAB`.
+
+	The editor shows the working directory (and not the GitHub repository you forked earlier).  Since the Bluemix DevOps project is liked to the GitHub repository `juandelacruz/devops-delivery-pipeline`, the contents of the working directory is based from the repository. 
+
+	However, notice that there are additional files/subdirectories (e.g., `.cfignore` and `launchConfigurations`) that were added in the working directory.  These were added automatically when the Bluemix DevOps project was created.  To sync the working directory with the GitHub repository `juandelacruz/devops-delivery-pipeline`, these files/directories need to be pushed to the repository.
+
+1. On the `DEVOPS-EDITOR TAB`: Click (open in another browser tab) the `Git Repository` icon found on the left side of the screen.  We will refer to this browser tab as `DEVOPS-GIT TAB`.
+
+1. On the `DEVOPS-GIT TAB`: Set the following:
+
+	||||
+	|-|-|-|
+	| **Select All** | checked |
+	| **Commit message** | files created when Bluemix DevOps project was created |
+
+	<br>
+
+1. On the `DEVOPS-GIT TAB`: Click the `Commit` button.
 
 
-| | | |
-|-|-|-|
-| Normal Key| Value1 |
-|__BoldKey__| Value2 |
+1. On the `DEVOPS-GIT TAB`: Click the `Push` button.
+
+	Your working directory and GitHub repository are now the same.
+
+1. On the `GITHUB TAB`: Refresh the page and verify that `.cfignore` and `launchConfigurations` are added.
+
+	You are now ready to create the delivery pipeline (i.e., build stage, test stage, deploy stage).
+	
+1. On the `DEVOPS-GIT TAB`: Click (open in another browser tab) the `BUILD & DEPLOY` button.  We will refer to this browser tab as `DEVOPS-DELIVERY-PIPELINE TAB`.
+
+
+
+
 
 
 xxxxxxxxxxxxxxxxxxxxxxxx
