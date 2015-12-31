@@ -208,7 +208,11 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	||||
 	|-|-|-|
 	| **Deployer Type** | Cloud Foundry |		
-	| **Build Shell Command** | `#!/bin/bash`<br>`gradle test`  |	
+	| **Target** | IBM Bluemix US South - https://api.ng.bluemix.net |		
+	| **Organization** | you may leave the default selection |		
+	| **Space** | dev |	
+	| **Application Name** | blank |		
+	| **Deploy Script** | `#!/bin/bash`<br>`cf push calc-<your_name> -p build/libs/calcuapp.war`  |	
 	| **Stop running this stage if this job fails** | checked |
 
 	<br>
