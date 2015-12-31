@@ -270,6 +270,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	4 x 7 = 28 
 	```
 
+	<br>
 #### Automatically start the Delivery Pipeline
 
 In the previous steps, you manually started the delivery pipeline by clicking the `Run Stage` icon of the `Build Stage`.  
@@ -289,6 +290,34 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automaticaly started due to the changes made in the Git repository.
 
 1. Wait until the three stages are complete.
+
+1.  On the `CALCULATOR-APP TAB`:  Refresh the page to see the changes made in the calculator application.
+
+	**Output:**
+	
+	```text
+	5 + 9 = 14
+	8 - 2 = 6
+	4 x 7 = 28 
+	2 + 2 = 4 
+	```
+
+	As expected, `2 + 2 = 4` is included in the output.
+
+	Let's modify again the  file `src/main/webapp/calculator.jsp` but this time using the Bluemix DevOps editor and see if the delivery pipeline is automatically triggered.
+
+1.  On the `DEVOPS-EDITOR TAB`:  open the file `src/main/webapp/calculator.jsp`.
+
+1. On the `DEVOPS-EDITOR TAB`:  Add the following lines at the end just before the `</body>` tag:
+
+	```java
+	<%="3 - 3 = " + m.sub(3, 3)%>
+	<br>
+	```
+1. On the `DEVOPS-EDITOR TAB`:  Click the `Commit changes` button.
+
+1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automaticaly started due to the changes made in the Git repository.
+
 xxxxxxxxxxxxxxxxxxxxxxxx
 
 
