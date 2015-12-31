@@ -143,7 +143,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	<br>
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Build`.   Change `Build` to `Gradle Build`.  Set the following values:
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Build`.   Change the name `Build` to `Gradle Assemble`.  Set the following values:
 
 	||||
 	|-|-|-|
@@ -166,18 +166,18 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	||||
 	|-|-|-|
 	| **Input Type** | Build Artifacts |
-	| **Git URL** | https://github.com/juandelacruz/devops-delivery-pipeline.git |
-	| **Branch** | master |
-	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
+	| **Stage** | Build Stage |
+	| **Job** | Gradle Assemble |
+	| **Stage Trigger** | Run jobs when the previous stage is completed |
 
 	<br>
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Build`.   Change `Build` to `Gradle Build`.  Set the following values:
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOB` tab, click the `ADD JOB` link and select `Test`.   Change the name `Test` to `JUnit Test through Gradle`.  Set the following values:
 
 	||||
 	|-|-|-|
-	| **Builder Type** | Gradle |		
-	| **Build Shell Command** | `#!/bin/bash`<br>`gradle asemble`  |	
+	| **Tester Type** | Simple |		
+	| **Build Shell Command** | `#!/bin/bash`<br>`gradle test`  |	
 	| **Stop running this stage if this job fails** | checked |
 
 	<br>
