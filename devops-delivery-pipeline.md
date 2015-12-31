@@ -252,10 +252,43 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	Once the `TestStage` is complete, the `Dev Deploy Stage` starts.  Similarly, be ready to switch to the `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB` in order to see the status of the `Dev Deploy Stage`.
 
-1.  On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `Run Stage` icon.
+1.  On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `Run Stage` icon of the `Build Stage`.
 
 	>As mentioned, be ready to switch to the appropriate browser tab in order to see the status of each stage.
 
+	You should see that the three stages are executed succesfully.
+
+1. Open another web browser tab.  We will refer to this browser tab as `CALCULATOR-APP TAB`.
+
+1.  On the `CALCULATOR-APP TAB`:  Go to `http://calculator-<your_name>.mybluemix.net/calculator.jsp`.
+
+	**Output:**
+	
+	```text
+	5 + 9 = 14
+	8 - 2 = 6
+	4 x 7 = 28 
+	```
+
+#### Automatically start the Delivery Pipeline
+
+In the previous steps, you manually started the delivery pipeline by clicking the `Run Stage` icon of the `Build Stage`.  
+
+Since the `Build Stage` is configured to `Run jobs whenever a change is pushed to Git`, the delivery pipeline can be started whenever changes occur in the Git repository.
+
+1.  On the `GITHUB TAB`:  open the file `src/main/webapp/calculator.jsp` for editing.
+
+1. On the `GITHUB TAB`:  Add the following lines at the end just before the `</body>` tag:
+
+	```java
+	<%="2 + 2 = " + m.add(2, 2)%>
+	<br>
+	```
+1. On the `GITHUB TAB`:  Click the `Commit changes` button.
+
+1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automaticaly started due to the changes made in the Git repository.
+
+1. Wait until the three stages are complete.
 xxxxxxxxxxxxxxxxxxxxxxxx
 
 
