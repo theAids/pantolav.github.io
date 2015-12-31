@@ -75,7 +75,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 1. Click `Link to an existing GitHub repository`.
 
-	>If this is the first time you will link a Bluemix DevOps project to a GitHub repository, you will be asked to authorize your Bluemix DevOps account to access your GitHub account.  Click the `Authorize application` button and confirm your password.
+	>If this is the first time you will link a Bluemix DevOps project to a GitHub repository, you will be asked to authorize your Bluemix DevOps account to access your GitHub account.  Proceed with confirming authorization.
 
 1. Select the repository `juandelacruz/devops-delivery-pipeline`
 
