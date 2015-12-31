@@ -177,7 +177,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	||||
 	|-|-|-|
 	| **Tester Type** | Simple |		
-	| **Build Shell Command** | `#!/bin/bash`<br>`gradle test`  |	
+	| **Test Command** | `#!/bin/bash`<br>`gradle test`  |	
 	| **Stop running this stage if this job fails** | checked |
 
 	<br>
@@ -212,10 +212,12 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	| **Organization** | you may leave the default selection |		
 	| **Space** | dev |	
 	| **Application Name** | blank |		
-	| **Deploy Script** | `#!/bin/bash`<br>`cf push calc-<your_name> -p build/libs/calcuapp.war`  |	
+	| **Deploy Script** | `#!/bin/bash`<br>`cf push calculator-<your_name> -p build/libs/calcuapp.war`  |	
 	| **Stop running this stage if this job fails** | checked |
 
 	<br>
+
+	
 
 1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
 
