@@ -448,7 +448,7 @@ Having separate deploy stages for development and production is essential to ens
 	| **Organization** | you may leave the default selection |		
 	| **Space** | prod |	
 	| **Application Name** | blank |		
-	| **Deploy Script** | `#!/bin/bash`<br>`cf push calculator-<your_name> -m 256M -p build/libs/calcuapp.war`  |	
+	| **Deploy Script** | `#!/bin/bash`<br>`cf push calculator-prod-<your_name> -m 256M -p build/libs/calcuapp.war`  |	
 	| **Stop running this stage if this job fails** | checked |
 
 	<br>
@@ -456,6 +456,42 @@ Having separate deploy stages for development and production is essential to ens
 	
 
 1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
+
+	You have completed the `Prod Deploy Stage`.  You can now test the **Stage Trigger** of this stage.
+
+1.  On the `GITHUB TAB`:  Open the file `src/main/webapp/calculator.jsp` for editing.
+
+1. On the `GITHUB TAB`:  Add the following lines at the end just before the `</body>` tag:
+
+	```java
+	<%="4 x 4 = " + m.add(4, 4)%>
+	<br>
+	```
+1. On the `GITHUB TAB`:  Click the `Commit changes` button.
+
+1. Quickly switch to the `DEVOPS-DELIVERY-PIPELINE TAB` and verify that the `Build Stage` is triggered automatically, followed by the `Test Stage`, and followed by the `Dev Deploy Stage`.
+
+	Notice that the `Prod Deploy Stage` does not start automatically after the `Dev Deploy Stage` is complete.  You need to manually start the `Prod Deploy Stage`.
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `Run Stage` icon of the `Prod Deploy Stage`.
+
+	Wait for this stage to be completed.
+
+1. Open another web browser tab.  We will refer to this browser tab as `CALCULATOR-PROD-APP TAB`.
+
+1.  On the `CALCULATOR-PROD-APP TAB`:  Go to `http://calculator-prod-<your_name>.mybluemix.net/calculator.jsp`.
+
+	**Output:**
+	
+	```text
+	5 + 9 = 14
+	8 - 2 = 6
+	4 x 7 = 28 
+	```
+
+	Note that what you have viewed is the production version of the calculator application (`http://calculator-prod-<your_name>.mybluemix.net/calculator.jsp`)
+
+	The development version of the application is accessible through `http://calculator-<your_name>.mybluemix.net/calculator.jsp`.
 
 
 
