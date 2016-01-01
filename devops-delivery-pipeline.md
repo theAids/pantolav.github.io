@@ -204,7 +204,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	<br>
 
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOBS` tab, click the `ADD JOB` link and select `Deploy`.   Change the job name `Deploy` to `Cloud Foundry Push`.  Set the following values:
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOBS` tab, click the `ADD JOB` link and select `Deploy`.   Change the job name `Deploy` to `Cloud Foundry Push to Dev Space`.  Set the following values:
 
 	||||
 	|-|-|-|
@@ -213,7 +213,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	| **Organization** | you may leave the default selection |		
 	| **Space** | dev |	
 	| **Application Name** | blank |		
-	| **Deploy Script** | `#!/bin/bash`<br>`cf push calculator-<your_name> -p build/libs/calcuapp.war`  |	
+	| **Deploy Script** | `#!/bin/bash`<br>`cf push calculator-<your_name> -m 256M -p build/libs/calcuapp.war`  |	
 	| **Stop running this stage if this job fails** | checked |
 
 	<br>
@@ -224,7 +224,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	You have created a delivery pipeline. 
 
-
+	<br>
 
 #### Deploy the Application through the Delivery Pipeline
 
@@ -326,7 +326,7 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 1. On the `DEVOPS-EDITOR TAB`:  Add the following lines at the end just before the `</body>` tag:
 
 	```java
-	<%="3 - 3 = " + m.sub(a, 3)%>
+	<%="3 - 3 = " + m.sub(3, 3)%>
 	<br>
 	```
 1. On the `DEVOPS-EDITOR TAB`:  Make sure to save the changes made.
@@ -394,13 +394,20 @@ You will intentionally introduce errors in `src/main/java/net/tutorial/Math.java
 1. On the `GITHUB TAB`:  Click the `Commit changes` button.
 
 1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB`.  
-xx
+
 	As expected,  the `Build Stage` started automatically.
 
 1. Once the `Build Stage`  is finished, switch to  the `DEVOPS-TEST-STAGE-LOGS TAB`.
 
 1. On the `DEVOPS-TEST-STAGE-LOGS TAB`: View the logs to verify that both `add` and `multiply` methods encounter problems.
 
+
+1.  On the `GITHUB TAB`:  Open again the file `src/main/java/net/tutorial/Math.` for editing.  Correct the errors you introduced earlier (i.e., bring back `a+b` in the `add` method and remove the  `delay()` in the `multiply` method).  Don't forget to click the `Commit changes` button.
+
+1. On the `DEVOPS-BUILD-STAGE-LOGS TAB`, `DEVOPS-TEST-STAGE-LOGS TAB`, `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB`: Ensure that all the stages are executed successfully.
+
+	<br>
+	
 #### Create another Deploy Stage
 
 The `Dev Deploy Stage` created earlier deploys the web application in the `dev` space in your Bluemix account.
@@ -408,6 +415,50 @@ The `Dev Deploy Stage` created earlier deploys the web application in the `dev` 
 You will create another deploy stage called `Prod Deploy Stage` which will redeploy the same application in the `prod` space in your Bluemix account.
 
 Having separate deploy stages for development and production is essential to ensure that features/functionalities that are added to a web application is verified first in the `dev` space.  Once the features/functionalities are verified to be working properly, this is the only time the updated web application is redeployed to the `prod` space through the `Prod Deploy Stage`.
+
+1. Make sure that you have a `prod` space under the region `US-South` in your Bluemix account. 
+
+	>If you don't have a `prod` space,  you may use the [Bluemix Basics Tutorial](/bluemix-basics) as a guide in creating a space.
+
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Prod Deploy Stage`.
+
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
+
+	||||
+	|-|-|-|
+	| **Input Type** | Build Artifacts |
+	| **Stage** | Build Stage |
+	| **Job** | Gradle Assemble |
+	| **Stage Trigger** | Run jobs only when this stage is run manually |
+
+	It should be noted that the **Stage Trigger** for this stage is `Run jobs only when this stage is run manually`.  This is different from the `Dev Deploy Stage` that uses the **Stage Trigger** `Run jobs when the previous stage is completed`.
+
+	Unlike the web application in the `dev` space, the web application deployed in the `prod` space should be free from errors.  If you use the **Stage Trigger** `Run jobs when the previous stage is completed`, it is possible that a an application developer may push changes to the GitHub repository which will eventually trigger the `Prod Deploy Stage` to run even if the changes made by the developer are unverified.
+	
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `JOBS` tab, click the `ADD JOB` link and select `Deploy`.   Change the job name `Deploy` to `Cloud Foundry Push to Prod Space`.  Set the following values:
+
+	||||
+	|-|-|-|
+	| **Deployer Type** | Cloud Foundry |		
+	| **Target** | IBM Bluemix US South - https://api.ng.bluemix.net |		
+	| **Organization** | you may leave the default selection |		
+	| **Space** | prod |	
+	| **Application Name** | blank |		
+	| **Deploy Script** | `#!/bin/bash`<br>`cf push calculator-<your_name> -m 256M -p build/libs/calcuapp.war`  |	
+	| **Stop running this stage if this job fails** | checked |
+
+	<br>
+
+	
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `SAVE` button.
+
+
+
 
 
 xxxxxxxxxxxxxxxxxxxxxxxx
