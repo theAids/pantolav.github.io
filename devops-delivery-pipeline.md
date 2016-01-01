@@ -333,9 +333,9 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 
 1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB`.  
 
-	Notice that the `Build Stage` did not start automatically.
+	Notice that the `Build Stage` did not start automatically.  You only changed `calculator.jsp` that is in the working directory and not the one in the GitHub repository.   You need to push the changes made in the working directory to the GitHub repository for the `Build Stage` to start.
 
-	Note that you only changed `calculator.jsp` that is in the working directory and not the one in the GitHub repository. 
+
 
 1. On the `DEVOPS-GIT TAB`: Refresh the page.
 
@@ -356,6 +356,49 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 	Your GitHub repository is now updated with the new version of `calculator.jsp`.
 
 1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automatically started due to the changes made in the GitHub repository.
+
+####See the Effect if an Error is encountered in the Delivery Piipeline
+
+You will intentionally introduce errors in `src/main/java/net/tutorial/Math.java` so that the `Test Stage` will detect an error.
+
+1.  On the `GITHUB TAB`:  Open the file `src/main/java/net/tutorial/Math.` for editing.
+
+1. On the `GITHUB TAB`:  Change the method `add` to the following:
+
+	```java
+	  public int add(int a, int b){
+	    return a-b;
+	  }
+	```
+	Since `a+b` is changed to `a-b`, we expect the following error to occur:
+	 
+	```text
+	addShouldReturnSum(net.tutorial.MyTest): 3 + 7 should be 10 expected:<10> but was:<-4>
+	```
+	This error is discussed in detail in the [JUnit Basics Tutorial](/junit-basic) and revisited in [Gradle's Unit Testing Tutorial](/gradle-unit-testing).
+
+	<br>
+	
+1. On the `GITHUB TAB`:  Change the method `multiply` to the following:
+
+	```java
+	  public int multiply(int a, int b){
+	    delay();
+	    return a*b;
+	  }
+	```
+
+	Since `delay()` is added, we expect that `multiply` method will execute for at least 3 secs..  This will cause the folowing errors to occur:
+
+	```text
+	multiplyShouldReturnProduct(net.tutorial.MyTest): test timed out after 1000 milliseconds
+	```
+
+	This error is also discussed in detail in the [JUnit Basics Tutorial](/junit-basic) and revisited in [Gradle's Unit Testing Tutorial](/gradle-unit-testing).
+
+	<br>
+
+1. On the `GITHUB TAB`:  Click the `Commit changes` button.
 
 xxxxxxxxxxxxxxxxxxxxxxxx
 
