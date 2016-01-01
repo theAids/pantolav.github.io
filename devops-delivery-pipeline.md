@@ -370,11 +370,8 @@ You will intentionally introduce errors in `src/main/java/net/tutorial/Math.java
 	    return a-b;
 	  }
 	```
-	Since `a+b` is changed to `a-b`, we expect the following error to occur:
-	 
-	```text
-	addShouldReturnSum(net.tutorial.MyTest): 3 + 7 should be 10 expected:<10> but was:<-4>
-	```
+	Since `a+b` is changed to `a-b`, we expect an error to be reported related to the `add` method.
+	
 	This error is discussed in detail in the [JUnit Basics Tutorial](/junit-basic) and revisited in [Gradle's Unit Testing Tutorial](/gradle-unit-testing).
 
 	<br>
@@ -388,17 +385,30 @@ You will intentionally introduce errors in `src/main/java/net/tutorial/Math.java
 	  }
 	```
 
-	Since `delay()` is added, we expect that `multiply` method will execute for at least 3 secs..  This will cause the folowing errors to occur:
-
-	```text
-	multiplyShouldReturnProduct(net.tutorial.MyTest): test timed out after 1000 milliseconds
-	```
+	Since `delay()` is added, we expect that `multiply` method will execute for at least 3 secs..  This will cause a timeout error.
 
 	This error is also discussed in detail in the [JUnit Basics Tutorial](/junit-basic) and revisited in [Gradle's Unit Testing Tutorial](/gradle-unit-testing).
 
 	<br>
 
 1. On the `GITHUB TAB`:  Click the `Commit changes` button.
+
+1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB`.  
+xx
+	As expected,  the `Build Stage` started automatically.
+
+1. Once the `Build Stage`  is finished, switch to  the `DEVOPS-TEST-STAGE-LOGS TAB`.
+
+1. On the `DEVOPS-TEST-STAGE-LOGS TAB`: View the logs to verify that both `add` and `multiply` methods encounter problems.
+
+#### Create another Deploy Stage
+
+The `Dev Deploy Stage` created earlier deploys the web application in the `dev` space in your Bluemix account.
+
+You will create another deploy stage called `Prod Deploy Stage` which will redeploy the same application in the `prod` space in your Bluemix account.
+
+Having separate deploy stages for development and production is essential to ensure that features/functionalities that are added to a web application is verified first in the `dev` space.  Once the features/functionalities are verified to be working properly, this is the only time the updated web application is redeployed to the `prod` space through the `Prod Deploy Stage`.
+
 
 xxxxxxxxxxxxxxxxxxxxxxxx
 
