@@ -56,12 +56,36 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	juandelacruz/devops-delivery-pipeline
 	```
 
-1. Take note of the URL of your GitHub repository:
+		The repository contains the following.
 
-	**Git URL**
-
-	```text		
-	https://github.com/juandelacruz/devops-delivery-pipeline.git
+	```text
+	devops-delivery-pipeline/
+	|
+	|----build.gradle
+	|
+	|----src/
+	     |
+	     |----main/
+	     |    |
+	     |    |----java/net/tutorial/
+	     |    |             |
+	     |    |             |----Math.java
+	     |    |             |----Calculator.java
+	     |    |
+	     |    |----resources/
+	     |    |    |
+	     |    |    |----log4j.properties        
+	     |    |
+	     |    |----webapp/
+	     |         |
+	     |         |----calculator.jsp
+	     |	     
+	     |----test/
+	          |
+	          |----java/net/tutorial/
+	                        |
+	                        |----MyTest.java
+	                        |----TestRunner.java	
 	```
 
 
