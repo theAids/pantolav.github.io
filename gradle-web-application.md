@@ -315,7 +315,7 @@ In this tutorial you will learn how to create a `.war` file.  The `.war` file wi
 1. Upload the web application to your Bluemix account.
 
 	```text
-	> cf push calculator-<your_name> -p build/libs/calcuapp.war
+	> cf push calculator-<your_name> -m 256M -p build/libs/calcuapp.war
 	```
 
 	**Example:**
