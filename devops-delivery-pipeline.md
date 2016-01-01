@@ -246,17 +246,18 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 	These three commands are exactly the same commands that the three stages will do.
 
-	In the next step, you will manually trigger the `Build Stage`.  Once the `Build Stage` starts, be ready to switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` in order to see the status of the `Build Stage`.
-
-	Once the `Build Stage` is complete, the `Test Stage` starts.  Similarly, be ready to switch to the `DEVOPS-TEST-STAGE-LOGS TAB` in order to see the status of the `Test Stage`.
-
-	Once the `TestStage` is complete, the `Dev Deploy Stage` starts.  Similarly, be ready to switch to the `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB` in order to see the status of the `Dev Deploy Stage`.
 
 1.  On the `DEVOPS-DELIVERY-PIPELINE TAB`:  Click the `Run Stage` icon of the `Build Stage`.
 
-	>As mentioned, be ready to switch to the appropriate browser tab in order to see the status of each stage.
+	Notice that the status o fthe `Build Stage` changes to `STAGE RUNNING`.  W
 
-	You should see that the three stages are executed succesfully.
+	Once the status `Build Stage` changed to `STAGE PASSED`, the `Test Stage` will automatically start.
+
+	Similarly, when the status `Test Stage` changed to `STAGE PASSED`, the `Dev Deploy Stage` will automatically start.
+
+	Wait for the status of the `Dev Deploy Stage` to change to `STAGE PASSED`.
+
+	You may view the `DEVOPS-BUILD-STAGE-LOGS TAB`, `DEVOPS-TEST-STAGE-LOGS TAB`, `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB` to see the logs related to the execution of the three stages.
 
 1. Open another web browser tab.  We will refer to this browser tab as `CALCULATOR-APP TAB`.
 
@@ -287,9 +288,9 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 	```
 1. On the `GITHUB TAB`:  Click the `Commit changes` button.
 
-1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automatically started due to the changes made in the GitHub repository.
+1. Quickly switch to the `DEVOPS-DELIVERY-PIPELINE TAB` and verify that the `Build Stage` automatically started due to the changes made in the GitHub repository.
 
-1. Wait until the three stages are complete.
+	Wait until the three stages are complete.
 
 1.  On the `CALCULATOR-APP TAB`:  Refresh the page to see the changes made in the calculator application.
 
@@ -331,9 +332,9 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 	```
 1. On the `DEVOPS-EDITOR TAB`:  Make sure to save the changes made.
 
-1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB`.  
+1. Quickly switch to the `DEVOPS-DELIVERY-PIPELINE TAB`.  
 
-	Notice that the `Build Stage` did not start automatically.  You only changed `calculator.jsp` that is in the working directory and not the one in the GitHub repository.   You need to push the changes made in the working directory to the GitHub repository for the `Build Stage` to start.
+	Notice that the `Build Stage` did not start automatically.  You only changed the `calculator.jsp` that is in the working directory and not the one in the GitHub repository.   You need to push the changes made in the working directory to the GitHub repository for the `Build Stage` to start.
 
 
 
@@ -355,11 +356,11 @@ Since the `Build Stage` is configured to `Run jobs whenever a change is pushed t
 
 	Your GitHub repository is now updated with the new version of `calculator.jsp`.
 
-1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB` and verify that the `Build Stage` automatically started due to the changes made in the GitHub repository.
+1. Quickly switch to the `DEVOPS-DELIVERY-PIPELINE TAB` and verify that the `Build Stage` automatically started due to the changes made in the GitHub repository.
 
 ####See the Effect if an Error is encountered in the Delivery Piipeline
 
-You will intentionally introduce errors in `src/main/java/net/tutorial/Math.java` so that the `Test Stage` will detect an error.
+You will intentionally introduce errors in `src/main/java/net/tutorial/Math.java` so that you can verify if the `Test Stage` will detect the errors.
 
 1.  On the `GITHUB TAB`:  Open the file `src/main/java/net/tutorial/Math.` for editing.
 
@@ -393,18 +394,20 @@ You will intentionally introduce errors in `src/main/java/net/tutorial/Math.java
 
 1. On the `GITHUB TAB`:  Click the `Commit changes` button.
 
-1. Quickly switch to the `DEVOPS-BUILD-STAGE-LOGS TAB`.  
+1. Quickly switch to the `DEVOPS-DELIVERY-PIPELINE TAB`.  
 
-	As expected,  the `Build Stage` started automatically.
+	As expected,  the `Build Stage` started automatically. 
 
-1. Once the `Build Stage`  is finished, switch to  the `DEVOPS-TEST-STAGE-LOGS TAB`.
+	After the `Build Stage` is complete, the `Test Stage` started as well.  Due to the errors you introduced in the previous steps, the status of the `Test Stage` becomes `STAGE FAILED`.
+
+	<br>
 
 1. On the `DEVOPS-TEST-STAGE-LOGS TAB`: View the logs to verify that both `add` and `multiply` methods encounter problems.
 
 
 1.  On the `GITHUB TAB`:  Open again the file `src/main/java/net/tutorial/Math.` for editing.  Correct the errors you introduced earlier (i.e., bring back `a+b` in the `add` method and remove the  `delay()` in the `multiply` method).  Don't forget to click the `Commit changes` button.
 
-1. On the `DEVOPS-BUILD-STAGE-LOGS TAB`, `DEVOPS-TEST-STAGE-LOGS TAB`, `DEVOPS-DEV-DEPLOY-STAGE-LOGS TAB`: Ensure that all the stages are executed successfully.
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: Ensure that all the stages are executed successfully.
 
 	<br>
 	
@@ -487,6 +490,9 @@ Having separate deploy stages for development and production is essential to ens
 	5 + 9 = 14
 	8 - 2 = 6
 	4 x 7 = 28 
+	2 + 2 = 4
+	3 - 3 = 0
+	4 x 4 = 16 	
 	```
 
 	Note that what you have viewed is the production version of the calculator application (`http://calculator-prod-<your_name>.mybluemix.net/calculator.jsp`)
