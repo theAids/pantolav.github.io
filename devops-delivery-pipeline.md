@@ -88,6 +88,7 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 	                        |----TestRunner.java	
 	```
 
+	The subdirectories and files are exactly the same as the one you used and created in [Creating a Web Application using Gradle Tutorial](/gradle-web-application). 
 
 ####Create a Bluemix DevOps Project based on the GitHub Repository
 
