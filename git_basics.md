@@ -6,10 +6,10 @@ permalink: /git_basics/
 
 ##Application Development Tutorial
 
-###Bluemix DevOps Services Delivery Pipeline
-[Bluemix DevOps Services](https://hub.jazz.net) has a delivery pipeline that allows you to build, test, and deploy your web application.
+###Git Basics
+[Git](https://hub.jazz.net) is a version control system for software development.
 
-In this tutorial you will learn to set-up a delivery pipeline by creating a build stage, a test stage, and a deploy stage.  The build stage will use Gradle.  The test stage will use JUnit through Gradle.  The deploy stage will use the cf tool.
+In this tutorial you will learn how to use the version control of Git to revert from a current version to a previous version.
 
 
 >**Prerequisite:**
@@ -36,10 +36,48 @@ In this tutorial you will learn to set-up a delivery pipeline by creating a buil
 
 
 
-####Copy a GitHub Repository
+####Install a Git Client
 
 
-1. Open a web browser tab and login to [GitHub](https://github.com/).  In this tutorial, we will refer to this browser tab as `GITHUB TAB`.
+1. Go to [Git](https://git-scm.com/).
+
+1. Download the Git client installer and install.
+
+1. Test if the Git client is installed successfully.  Open a terminal window.
+
+	```text
+	> git
+	```
+	**Output:**
+
+	```text
+	usage: git [--version] [--help] [-C <path>] [-c name=value]
+	           [--exec-path[=<path>]] [--html-path] [--man-path] [--info-path]
+	           [-p|--paginate|--no-pager] [--no-replace-objects] [--bare]
+	           [--git-dir=<path>] [--work-tree=<path>] [--namespace=<name>]
+	           <command> [<args>]
+	
+	The most commonly used git commands are:
+	   add        Add file contents to the index
+	   bisect     Find by binary search the change that introduced a bug
+	   :
+	   :
+	```
+
+	You should see the help screen of the Git client.
+
+	<br>
+	
+####Create several text files and use Git to manage the versions of the files
+
+In this tutorial, you will be creating several `.txt` files that will contain a list of words representing each letter of the alphabet.  The use of this approach will help you understand how Git works.  Once you are familiar with Git, you may use Git with your source code (e.g., `.java` file).
+
+1. Create the directory `gittemp` in the root directory.  Go to the created directory.
+
+	```text
+	mkdir gittemp
+	cd gittemp
+	```
 
 1. Using the same web browser tab, go to the GitHub repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
 
