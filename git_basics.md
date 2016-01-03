@@ -75,9 +75,61 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 1. Create the directory `gittemp` in the root directory.  Go to the created directory.
 
 	```text
-	mkdir gittemp
-	cd gittemp
+	> mkdir gittemp
+	> cd gittemp
 	```
+
+1. Create the subdirectory `alphabet` in the `gittemp` directory.  Go to the created directory.
+
+	```text
+	> mkdir alphabet
+	> cd alphabet
+	```
+
+	The `alphabet` directory represents a working directory containing your source code.  As mentioned earlier, instead of source code, text files will be used in this tutorial.
+
+1. Make the `alphabet` directory a local Git repository.
+
+	```text
+	> git init
+	```
+
+	**Output:**
+
+	```text
+	Initialized empty Git repository in D:/gittemp/alphabet/.git/
+	```
+
+	A hidden directory named `.git` is created after you issued the `git init` command.  You should not modify the contents of the `.git` hidden directory.  This contains information that will track the changes you made inside the `alphabet` directory.
+
+	<br>
+
+
+1. Check the status of your local Git repository.
+
+	```text
+	> git status
+	```
+
+	**Output:**
+
+	```text
+	On branch master
+	
+	Initial commit
+	
+	nothing to commit (create/copy files and use "git add" to track)
+	```
+
+		As stated in the status, there is `nothing to commit`.  This will change once you start creating files.
+
+
+1. Create a file `animal.txt` with the following contents:
+
+```text
+
+
+```
 
 1. Using the same web browser tab, go to the GitHub repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
 
