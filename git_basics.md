@@ -9,7 +9,9 @@ permalink: /git_basics/
 ###Git Basics
 [Git](https://hub.jazz.net) is a version control system for software development.
 
-In this tutorial you will learn how to use the version control of Git to revert from a current version to a previous version.
+There are two ways to manage versions using Git.  Either through a series of commits or through the use of branches.
+
+In this tutorial you will learn how to use the version control of Git using commit and revert to a previous commit.
 
 
 >**Prerequisite:**
@@ -121,15 +123,52 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	nothing to commit (create/copy files and use "git add" to track)
 	```
 
-		As stated in the status, there is `nothing to commit`.  This will change once you start creating files.
+	As stated in the status, there is `nothing to commit`.  This will change once you start creating files.
 
-
+	<br>
+	
 1. Create a file `animal.txt` with the following contents:
 
-```text
+	```text
+	ant
+	bat
+	cat
+	dog
+	eagle
+	fox
+	goat
+	horse
+	```
+
+	<br>
+	
+1. Check the status of your local Git repository.
+
+	```text
+	> git status
+	```
+
+	**Output:**
+
+	```text
+	On branch master
+	
+	Initial commit
+	
+	Untracked files:
+	  (use "git add <file>..." to include in what will be committed)
+	
+	        animal.txt
+	
+	nothing added to commit but untracked files present (use "git add" to track)
+	```
+
+	Git detected the `animal.txt` file that you created.  However, it is currently untracked by Git.
+
+	Git does not track all the files you created since it is possible that some of the files are non-essential.  You need to explicitly tell Git to track a file.
 
 
-```
+
 
 1. Using the same web browser tab, go to the GitHub repository [`https://github.com/pong-pantola/devops-delivery-pipeline`](https://github.com/pong-pantola/devops-delivery-pipeline).
 
