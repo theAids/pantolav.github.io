@@ -239,7 +239,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	nothing to commit, working directory clean
 	```
 
-	At this point,  changes made in `animal.txt` is committed.  In the `git commit` command, you included a message `added words from ant to horse` to give a short description on what changes were committed.  This is very useful when you perform several commits later and you want to undo a particular commit.
+	At this point,  changes made in `animal.txt` is committed.  In the `git commit` command, you included a message `added words from ant to horse` to give a short description on what changes were committed.  This is very useful when you perform several commits later and you want to undo previous commits.
 
 	<br>
 
