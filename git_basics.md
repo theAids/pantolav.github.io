@@ -129,7 +129,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 
 	<br>
 	
-1. Create a file `animal.txt` with the following contents:
+1. Create a file `animal.txt` in the `alphabet` directory with the following contents:
 
 	```text
 	ant
@@ -165,7 +165,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	nothing added to commit but untracked files present (use "git add" to track)
 	```
 
-	Git detected the `animal.txt` file that you created.  However, it is currently untracked by Git.
+	Git detected the `animal.txt` file that you created.  However, it is currently untracked by Git.  Untracked files are those in the working directory but are NOT in index.
 
 	Git does not track all the files you created since it is possible that some of the files are non-essential.  You need to explicitly tell Git to track a file.
 
@@ -177,7 +177,9 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	> git add animal.txt
 	```
 
-	If there are multiple files that you want Git to track, you may use the same `git add` command and just separate the files with a `space`.
+	>If there are multiple files that you want Git to track, you may use the same `git add` command and just separate the files with a `space`.
+
+	The `git add animal.txt` command places the `animal.txt` in the index.  Those files in the index are staged. Staging means that a file is being prepared to be committed. 
 
 	<br>
 	
@@ -200,7 +202,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	        new file:   animal.txt
 	```
 
-	At this point, `animal.txt` is being tracked by Git.  However, changes made in `animal.txt` is not yet commited.
+	At this point, `animal.txt` is already in index and being tracked by Git.  However, changes made in `animal.txt` is not yet committed.
 
 	<br>
 
@@ -220,7 +222,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	
 	<br>
 
-	Note that if there are other files that are being tracked aside from `animal.txt`, the changes made in those files will also be committed.
+	Note that if there are other files that are staged aside from `animal.txt`, the changes made in those files will also be committed.
 
 	<br>
 	
@@ -237,7 +239,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	nothing to commit, working directory clean
 	```
 
-	At this point,  changes made in `animal.txt` is committed.  In the `git commit` command, you included a message `added words from ant to horse` to give a short description on what changes were committed.  This is very useful when you perform several commits later and you want to revert back to a particular commit.
+	At this point,  changes made in `animal.txt` is committed.  In the `git commit` command, you included a message `added words from ant to horse` to give a short description on what changes were committed.  This is very useful when you perform several commits later and you want to undo a particular commit.
 
 	<br>
 
