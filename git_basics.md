@@ -255,7 +255,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	*master added words from ant to horse
 	```	
 
-	`gitk` is a tool which allows you to visualize the commits you performed.  You may use `gitk` as a guide when you need to revert to a particular commit.
+	`gitk` is a tool which allows you to visualize the commits you performed.  You may use `gitk` as a guide when you need to undo previous commits.
 	
 	<br>
 
