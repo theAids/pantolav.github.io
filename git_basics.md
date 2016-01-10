@@ -525,11 +525,11 @@ The `git checkout` command that was demonstrated above allows you to inspect the
 	
 	    added words from ant to horse
 	
-	D:\gittemp\alphabet>git checkout master
+	/gittemp/alphabet>git checkout master
 	Previous HEAD position was 828389d... added words from ant to horse
 	Switched to branch 'master'
 	
-	D:\gittemp\alphabet>git log
+	/gittemp/alphabet>git log
 	commit f1fbe3cfccfa0343f0b4ffe0d9c35967174b5f77
 	Author: Alexis V. Pantola <pantolav@gmail.com>
 	Date:   Sun Jan 10 23:32:48 2016 +0800
