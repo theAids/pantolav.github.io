@@ -349,9 +349,9 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 
 
 
-####Undo Previous Commits
+####Checkout Previous Commits
 
-Undoing previous commits allow you to recover the contents of a file. 
+Checking out previous commits allows you to inspect the state of the files after a particular commit.  This is done by changing back the contents of the working directory.  However, the latest committed changes remain intact.
 
 1. Get a summary of the commits performed in the local Git repository.
 
@@ -380,24 +380,44 @@ Undoing previous commits allow you to recover the contents of a file.
 	    added words from ant to horse
 	```
 
-	>You may press `Q` to exit the log console.
+	>**NOTE**: You may press `Q` to exit the log console.
 
-	Notice that the three commits performed earlier are listed in the log.  In addition, there are unique hash values identifying each comit.  As an example, the commit `added words from ant to horse` has a hash value of `9a2936788cecdce40f7c9abb2602f7c5129dcb92`.  
+	Notice that the three commits performed earlier are listed in the log.  In addition, there are unique hash values identifying each commit.  As an example, in the log above, the commit `added words from ant to horse` has a hash value of `9a2936788cecdce40f7c9abb2602f7c5129dcb92`.  Note that the hash value in your repository is not necessarily the same as the one shown in this tutorial.
 
 	The hash value is important to undo previous commits and go to a particular state of a file.
 
-1. Go to the state of the file when the words ant to horse has just been added.
+1. Inspect the state of the file when the words ant to horse has just been added.
 
 	```text
-	> git reset --hard 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	> git checkout <hash of commit for "added words from ant to horse">
 	```
+
+	**Example:**
+
+	```text
+	> git checkout 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	```
+
 
 	**Output:**
 
 	```text
-	HEAD is now at 9a29367 added words from ant to horse
+	Note: checking out 'c4a7a1b5fdd9437017ed07b744ca1fcffb88538e'.
+
+	You are in 'detached HEAD' state. You can look around, make experimental
+	changes and commit them, and you can discard any commits you make in this
+	state without impacting any branches by performing another checkout.
+	
+	If you want to create a new branch to retain commits you create, you may
+	do so (now or later) by using -b with the checkout command again. Example:
+	
+	  git checkout -b new_branch_name
+	
+	HEAD is now at c4a7a1b... added words from ant to horse
 	```
 
+	<br>
+	
 1. Open (or reload) `animal.txt`and verify that its content is now the following:
 
 	```text
@@ -411,6 +431,203 @@ Undoing previous commits allow you to recover the contents of a file.
 	horse
 	```
 
+	As expected,  you went back to the state  when the words ant to horse has just been added to `animal.txt`.
+	
+	<br>
+	
+1. Check the contents of the log.
+
+	```text
+	> git log
+	```
+
+	**Output:**
+
+	```text
+	commit c4a7a1b5fdd9437017ed07b744ca1fcffb88538e
+	Author: Alexis V. Pantola <pantolav@gmail.com>
+	Date:   Sun Jan 10 21:54:27 2016 +0800
+	
+	    added words from ant to horse
+	```
+
+	Notice that the log has only one commit.
+
+	<br>
+
+
+
+1. Go back to the last commit you made (i.e., `added words from quail to zebra, deleted dog, and changed monkey to mouse`).
+
+	```text
+	> git checkout master
+	```
+
+	**Output:**
+
+	```text
+	Previous HEAD position was c4a7a1b... added words from ant to horse
+	Switched to branch 'master'
+	```
+
+	<br>
+	
+1. Open (or reload) `animal.txt`and verify that its content is now the following:
+
+	```text
+	ant
+	bat
+	cat
+	eagle
+	fox
+	goat
+	horse
+	iguana
+	jaguar
+	kangaroo
+	lion
+	mouse
+	newt
+	octopus
+	pig
+	quail
+	rabbit
+	snail
+	tiger
+	uakari
+	vulture
+	wolf
+	x-ray tetra
+	yak
+	zebra
+	```
+
+	As expected, you are able to go return to the latest state of the file.
+
+	<br>
+
+
+####Go back to a particular Commit
+
+The `git checkout` command that was demonstrated above allows you to inspect the state of a file of a particular commit.  However, the latest committed changes remain intact.  In the event that you really want to go back to a particular commit (e.g., you realized that you erroneously changed the contents of a file and want to go back to its correct state), you may use the `git reset` command.
+
+1. Get a summary of the commits performed in the local Git repository.
+
+	```text
+	> git log
+	```
+
+	**Output:**
+
+	```text
+	commit 444408167f0a81c4684d8ba5d32017455c3b562d
+	Author: Alexis V. Pantola <pantolav@gmail.com>
+	Date:   Sun Jan 3 15:39:05 2016 +0800
+	
+	    added words from quail to zebra, deleted dog, and changed monkey to
+	commit bf58ca94a64c0b71d84aee72cdfefa7789714a01
+	Author: Alexis V. Pantola <pantolav@gmail.com>
+	Date:   Sun Jan 3 15:30:11 2016 +0800
+	
+	    added words from iguana to pig
+	
+	commit 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	Author: Alexis V. Pantola <pantolav@gmail.com>
+	Date:   Sun Jan 3 12:16:55 2016 +0800
+	
+	    added words from ant to horse
+	```
+
+	This is the same log that was shown in the previous steps.
+
+1. Go back to the state of the file when the words ant to horse has just been added.
+
+	```text
+	> git reset --hard <hash of commit for "added words from ant to horse">
+	```
+
+	**Example:**
+
+	```text
+	> git reset --hard 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	```
+
+
+	**Output:**
+
+	```text
+	HEAD is now at c4a7a1b added words from ant to horse
+	```
+
+	<br>
+	
+1. Open (or reload) `animal.txt`and verify that its content is now the following:
+
+	```text
+	ant
+	bat
+	cat
+	dog
+	eagle
+	fox
+	goat
+	horse
+	```
+
+	Similar to `git checkout`,  you are able to go back to the state   when the words ant to horse has just been added to `animal.txt` using `git reset`.  You will see later the difference of these two commands.
+	
+	<br>
+	
+1. Check the contents of the log.
+
+	```text
+	> git log
+	```
+
+	**Output:**
+
+	```text
+	commit c4a7a1b5fdd9437017ed07b744ca1fcffb88538e
+	Author: Alexis V. Pantola <pantolav@gmail.com>
+	Date:   Sun Jan 10 21:54:27 2016 +0800
+	
+	    added words from ant to horse
+	```
+
+	<br>
+
+
+
+1. **TRY** to go back to the last commit you made (i.e., `added words from quail to zebra, deleted dog, and changed monkey to mouse`).
+
+	```text
+	> git checkout master
+	```
+
+	**Output:**
+
+	```text
+	Already on 'master'
+	```
+	Notice that the last commit you made  (i.e., `added words from quail to zebra, deleted dog, and changed monkey to mouse`) is already forgotten.  Even the commit `added words from iguana to pig` is lost.
+	
+	<br>
+	
+1. Open (or reload) `animal.txt`and verify that its content is **STILL** ant to horse:
+
+	```text
+	ant
+	bat
+	cat
+	dog
+	eagle
+	fox
+	goat
+	horse
+	```
+
+	<br>
+	
 ####End of Tutorial
 
 
