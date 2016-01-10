@@ -101,7 +101,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	**Output:**
 
 	```text
-	Initialized empty Git repository in D:/gittemp/alphabet/.git/
+	Initialized empty Git repository in /gittemp/alphabet/.git/
 	```
 
 	A hidden directory named `.git` is created after you issued the `git init` command.  You should not modify the contents of the `.git` hidden directory.  This contains information that will track the changes you made inside the `alphabet` directory.
@@ -215,13 +215,11 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	**Output:**
 
 	```text
-	[master (root-commit) 9a29367] added words from ant to horse
+	[master (root-commit) 828389d] added words from ant to horse
 	 1 file changed, 8 insertions(+)
 	 create mode 100644 animal.txt
 	```
 	
-	<br>
-
 	Note that if there are other files that are staged aside from `animal.txt`, the changes made in those files will also be committed.
 
 	<br>
@@ -239,7 +237,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	nothing to commit, working directory clean
 	```
 
-	At this point,  changes made in `animal.txt` is committed.  In the `git commit` command, you included a message `added words from ant to horse` to give a short description on what changes were committed.  This is very useful when you perform several commits later and you want to undo previous commits.
+	At this point,  changes made in `animal.txt` are committed.  In the `git commit` command, you included a message `added words from ant to horse` to give a short description on what changes were committed.  This is very useful when you perform several commits later and you want to undo previous commits.
 
 	<br>
 
@@ -292,7 +290,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	**Output:**
 
 	```text
-	[master bf58ca9] added words from iguana to pig
+	[master 5394740] added words from iguana to pig
 	 1 file changed, 9 insertions(+), 1 deletion(-)
 	```	
 	
@@ -340,7 +338,7 @@ In this tutorial, you will be creating several `.txt` files that will contain a 
 	**Output:**
 
 	```text
-	[master 4444081] added words from quail to zebra, deleted dog, and changed monkey to mouse
+	[master f1fbe3c] added words from quail to zebra, deleted dog, and changed monkey to mouse
 	 1 file changed, 12 insertions(+), 3 deletions(-)
 	```	
 	
@@ -362,27 +360,27 @@ Checking out previous commits allows you to inspect the state of the files after
 	**Output:**
 
 	```text
-	commit 444408167f0a81c4684d8ba5d32017455c3b562d
+	commit f1fbe3cfccfa0343f0b4ffe0d9c35967174b5f77
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 3 15:39:05 2016 +0800
+	Date:   Sun Jan 10 23:32:48 2016 +0800
 	
 	    added words from quail to zebra, deleted dog, and changed monkey to
-	commit bf58ca94a64c0b71d84aee72cdfefa7789714a01
+	commit 539474028f1a73dcb01111ce79eefa4a50a31baf
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 3 15:30:11 2016 +0800
+	Date:   Sun Jan 10 23:31:45 2016 +0800
 	
 	    added words from iguana to pig
 	
-	commit 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	commit 828389d84eedf01b1ca4fa842c879139bc8e62b5
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 3 12:16:55 2016 +0800
+	Date:   Sun Jan 10 23:29:40 2016 +0800
 	
 	    added words from ant to horse
 	```
 
 	>**NOTE**: You may press `Q` to exit the log console.
 
-	Notice that the three commits performed earlier are listed in the log.  In addition, there are unique hash values identifying each commit.  As an example, in the log above, the commit `added words from ant to horse` has a hash value of `9a2936788cecdce40f7c9abb2602f7c5129dcb92`.  Note that the hash value in your repository is not necessarily the same as the one shown in this tutorial.
+	Notice that the three commits performed earlier are listed in the log.  In addition, there are unique hash values identifying each commit.  As an example, in the log above, the commit `added words from ant to horse` has a hash value of `828389d84eedf01b1ca4fa842c879139bc8e62b5`.  Note that the hash value in your repository is not necessarily the same as the one shown in this tutorial.
 
 	The hash value is important to undo previous commits and go to a particular state of a file.
 
@@ -395,14 +393,14 @@ Checking out previous commits allows you to inspect the state of the files after
 	**Example:**
 
 	```text
-	> git checkout 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	> git checkout 828389d84eedf01b1ca4fa842c879139bc8e62b5
 	```
 
 
 	**Output:**
 
 	```text
-	Note: checking out 'c4a7a1b5fdd9437017ed07b744ca1fcffb88538e'.
+	Note: checking out '828389d84eedf01b1ca4fa842c879139bc8e62b5'.
 
 	You are in 'detached HEAD' state. You can look around, make experimental
 	changes and commit them, and you can discard any commits you make in this
@@ -413,7 +411,7 @@ Checking out previous commits allows you to inspect the state of the files after
 	
 	  git checkout -b new_branch_name
 	
-	HEAD is now at c4a7a1b... added words from ant to horse
+	HEAD is now at 828389d... added words from ant to horse
 	```
 
 	<br>
@@ -444,9 +442,9 @@ Checking out previous commits allows you to inspect the state of the files after
 	**Output:**
 
 	```text
-	commit c4a7a1b5fdd9437017ed07b744ca1fcffb88538e
+	commit 828389d84eedf01b1ca4fa842c879139bc8e62b5
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 10 21:54:27 2016 +0800
+	Date:   Sun Jan 10 23:29:40 2016 +0800
 	
 	    added words from ant to horse
 	```
@@ -463,10 +461,11 @@ Checking out previous commits allows you to inspect the state of the files after
 	> git checkout master
 	```
 
+
 	**Output:**
 
 	```text
-	Previous HEAD position was c4a7a1b... added words from ant to horse
+	Previous HEAD position was 828389d... added words from ant to horse
 	Switched to branch 'master'
 	```
 
@@ -502,7 +501,7 @@ Checking out previous commits allows you to inspect the state of the files after
 	zebra
 	```
 
-	As expected, you are able to go return to the latest state of the file.
+	As expected, you are able to return to the latest state of the file.
 
 	<br>
 
@@ -520,20 +519,31 @@ The `git checkout` command that was demonstrated above allows you to inspect the
 	**Output:**
 
 	```text
-	commit 444408167f0a81c4684d8ba5d32017455c3b562d
+	commit 828389d84eedf01b1ca4fa842c879139bc8e62b5
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 3 15:39:05 2016 +0800
+	Date:   Sun Jan 10 23:29:40 2016 +0800
+	
+	    added words from ant to horse
+	
+	D:\gittemp\alphabet>git checkout master
+	Previous HEAD position was 828389d... added words from ant to horse
+	Switched to branch 'master'
+	
+	D:\gittemp\alphabet>git log
+	commit f1fbe3cfccfa0343f0b4ffe0d9c35967174b5f77
+	Author: Alexis V. Pantola <pantolav@gmail.com>
+	Date:   Sun Jan 10 23:32:48 2016 +0800
 	
 	    added words from quail to zebra, deleted dog, and changed monkey to
-	commit bf58ca94a64c0b71d84aee72cdfefa7789714a01
+	commit 539474028f1a73dcb01111ce79eefa4a50a31baf
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 3 15:30:11 2016 +0800
+	Date:   Sun Jan 10 23:31:45 2016 +0800
 	
 	    added words from iguana to pig
 	
-	commit 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	commit 828389d84eedf01b1ca4fa842c879139bc8e62b5
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 3 12:16:55 2016 +0800
+	Date:   Sun Jan 10 23:29:40 2016 +0800
 	
 	    added words from ant to horse
 	```
@@ -549,14 +559,14 @@ The `git checkout` command that was demonstrated above allows you to inspect the
 	**Example:**
 
 	```text
-	> git reset --hard 9a2936788cecdce40f7c9abb2602f7c5129dcb92
+	> git reset --hard 828389d84eedf01b1ca4fa842c879139bc8e62b5
 	```
 
 
 	**Output:**
 
 	```text
-	HEAD is now at c4a7a1b added words from ant to horse
+	HEAD is now at 828389d added words from ant to horse
 	```
 
 	<br>
@@ -587,9 +597,9 @@ The `git checkout` command that was demonstrated above allows you to inspect the
 	**Output:**
 
 	```text
-	commit c4a7a1b5fdd9437017ed07b744ca1fcffb88538e
+	commit 828389d84eedf01b1ca4fa842c879139bc8e62b5
 	Author: Alexis V. Pantola <pantolav@gmail.com>
-	Date:   Sun Jan 10 21:54:27 2016 +0800
+	Date:   Sun Jan 10 23:29:40 2016 +0800
 	
 	    added words from ant to horse
 	```
