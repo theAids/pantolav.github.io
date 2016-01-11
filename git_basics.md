@@ -608,7 +608,7 @@ The `git checkout` command that was demonstrated above allows you to inspect the
 	```text
 	Already on 'master'
 	```
-	Notice that the last commit you made  (i.e., `added words from quail to zebra, deleted dog, and changed monkey to mouse`) is already forgotten.  Even the commit `added words from iguana to pig` is lost.
+	Notice that the output is `Already on 'master'`.  This means that you have reset the last commit from `added words from quail to zebra, deleted dog, and changed monkey to mouse` to `added words from ant to horse`.   The `added words from quail to zebra, deleted dog, and changed monkey to mouse`commit as well as the `added words from iguana to pig` commit are already removed.
 	
 	<br>
 	
