@@ -6,24 +6,115 @@ permalink: /bluemix-basics/
 
 ##Application Development Tutorial
 
-###JUnit Basics
-JUnit is a simple framework to write repeatable tests. You may go to [http://junit.org/](http://junit.org/) for additional information regarding JUnit.
+###Bluemix Basics
+IBM [Bluemix](https://ibm.biz/bluemixph) is a platform as a service (PaaS) cloud technology of IBM.  You may develop applications and deploy them in Bluemix.
 
-In this tutorial you will learn how to create a simple test class that is used to test the methods of a Java class.
+In this tutorial you will learn how to deploy a sample JSP application in Bluemix.  In addition, you will also learn how to create a PostgreSQL database service that will be used by the sample application.
 
 >**Prerequisite:**
-
+xxxx
 >Having a good understanding of Java programming is required to do this tutorial.
 
 <br>
 
-####Copy Sample Codes from Git repository
-1. Open a terminal window and create the directory `junittemp` in the root directory.  Go to the created directory.
+####Create a Bluemix Account
+1. Go to [Bluemix](https://ibm.biz/bluemixph) and click the `SIGN UP` button.
+
+1. Fill-up and submit the registration form.
+
+1. Wait for a confirmation e-mail and follow the instructions in the e-mail to validate your Bluemix registration.
+
+<br>
+
+####Explore your Bluemix Account
+
+1. Login to your [Bluemix](https://ibm.biz/bluemixph) account.
+
+1. You will be redirected to your dashboard.  Your dashboard:
+	- provides some information regarding your account (e.g., organization, spaces, etc.)
+	- summarizes the amount of resources you have consumed 
+	- enumerates the applications, services, containers, and virtual machines you have created.
+
+1. You may have one ore more organizations.  By default, you only have one organization.  The name of this organization is the same as your Bluemix account.
+
+	Additional organizations may become available in your Bluemix account when other Bluemix users share his/her organization to you.  The procedure in sharing an organization is not covered in this tutorial.
+	
+1. Each organization has an allotted set of resources.  As an example, your dashboard shows the following:
+
+	Resource | Consumed | Total Allocation
+	-|-|-
+	Cloud Foundry Apps | 0GB | 2GB
+	Services and APIs | 0 | 10
+
+	Note that there are other resources in your dashboard not listed above.
+
+	Since you have a total allocation of 2GB for Cloud Foundry apps, it means that you can have one or more running applications in your account that has a total memory consumption of 2GB.  As an example, if you deploy Application A in Bluemix with a memory allocation of 1GB, you still have 1GB left that can be used for another application (or applications).
+
+	For services and APIs, you are given an allocation of 10.  An example of a service is a PostgreSQL database service which you will create later. 
+
+1. The physical location (e.g., location of the data center) of the Bluemix servers that will host your application is referred to as Bluemix regions.  Currently there are three Bluemix regions: `United Kingdom`, `Sydney,` and `US South`.
+
+	In this tutorial, you will be using the `US South` region.  However, in an actual deployment, you may choose any of the available regions.  If you will be deploying several applications, these applications may be deployed in different region (e.g., your first application is in `United Kingdom`, while the second one is in `US South`).  However, the total consumed resources in these regions should not exceed the allocation of your organization.
+
+1. Make sure that the current region used by your Bluemix account is `US South` by  clicking the `Person` icon on the upper-right corner of your account.  
+
+	>Once you select `US South` it is possible that you will be prompted to create a space.  If you are prompted, enter a space named `dev`.  This purpose of a space is explained in the next step.
+
+1. Under the `US South` region, you may deploy one ore more applications.  As the number of applications you deploy increases, the harder it is to manage your applications.  To help manage them, applications are grouped together in spaces.  As an example, you may create spaces which groups applications belonging to the same phase.  For example, you may create a space called `dev` and deploy all of your applications that are still under development under this phase.  You may create a second space called `prod` for applications that are already in production.
+
+	Another way to utilize spaces is to group applications based on projects.  For example, you may create a space called `proj1` for all projecs belonging to project 1.
+
+1. Verify if you have a `dev` space at the left side of your dashboard.  If there is no `dev` space, create one by clicking the `Create a Space` link.
+
+<br>
+
+####Explore the Bluemix Catalog
+
+1. In the menu, click `CATALOG`.  The Bluemix Catalog shows the different services and APIs, as well as runtimes and containers that you may create.
+
+1. Scroll down until you see `PostgreSQL by Compose`.  PostgreSQL is a type of relational database.  
+
+	In Bluemix, there are services that are very similar.  As an example, in this tutorial, you will be creating a PostgreSQL service.  However, the PostgreSQL service that you will be using is NOT `PostgreSQL by Compose`.
+
+1. Scroll down further in the `CATALOG` page until you see the `Bluemix Labs Catalog` link.  Click this link.
+
+1. Scroll down until you see `postgresql`.   The `postgresql` service and the `PostgreSQL by Compose` service are very similar (i.e., both are PostgreSQL services).  In this tutorial, you will be using `postgresql`.  When you are asked to create a PostgreSQL service in the succeeding step, make sure to use `postgresql` and not `PostgreSQL by Compose`.
+
+	<br>
+
+###Install the Cloud Foundry (`cf`) tool.
+
+Cloud Foundry is an open-source platform as a service cloud technology.  Bluemix is based from Cloud Foundry.  Cloud Foundry has a command-line tool called `cf` that is used to deploy applications in cloud foundry-based environment.  Since Bluemix is based on Cloud Foundry, the same `cf` tool is used to deploy your application in Bluemix.
+
+
+1. Go to the Cloud Foundry `cf` tool [repository](https://github.com/cloudfoundry/cli/releases).
+
+1. Download the appropriate installer (not the binary).
+
+1. Install using the default options.
+
+1. To test if installation is successful, open a terminal window and issue the following command:
 
 	```text		
-	> mkdir junittemp
-	> cd junittemp
+	> cf
 	```
+
+	**Output:**
+		
+	```
+	NAME:
+	   cf - A command line tool to interact with Cloud Foundry
+	
+	USAGE:
+	   [environment variables] cf [global options] command [arguments...] [command options]
+	   :
+	   :
+	```
+	
+	You should see the help screen of `cf` (see above sample).
+
+
+
 
 1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
 
