@@ -160,7 +160,35 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	The `-s` switch allows you to specify the space where you will deploy the application.  In this tutorial, you will be deploying the application in the `dev` space you created earlier.
 
-1. 
+1. Upload the sample application to your Bluemix account.
+
+	```text
+	> cf push myfirstapp-<your_name> -m 256M -p build/libs/calcuapp.war
+	```
+
+	**Example:**
+		
+	```text
+	> cf push myfirstapp-pong -m 256M -p PostgreSQLUpload.war
+	```
+
+	**Output:**
+		
+	```text
+	
+	```
+
+
+
+	In the example above, the name of the application is `myfirstapp-pong`.  Replace `pong` with your name.  The name of your application will be concatenated with string `.mybluemix.net` and this will be the URL of your application.  As an example, the application `myfirstapp-pong` is accessible using the URL http://myfirstapp-pong.mybluemix.net.
+
+	>If you encounter an error message `host is taken`, it means that the application name you specified has already been used by another Bluemix user.  Issue the `cf push` command again but change the name of your applicatio.  In the example above, instead of `myfirstapp-pong`, it can be `myfirstapp-pong2`.
+
+	The `-m` switch allows you to specify the memory allocation of your application.
+
+	The `-p` switch allows you to specify the location of the file containing the sample application.
+
+1. On a web browser, go to `http://myfirstapp-<your_name>.mybluemix.net`.
 
 
 
