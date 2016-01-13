@@ -114,6 +114,63 @@ Cloud Foundry is an open-source platform as a service cloud technology.  Bluemix
 	You should see the help screen of `cf` (see above sample).
 
 
+####Copy Sample Application
+You will download a copy of a sample application that you will deploy in your Bluemix account.
+
+
+1. Create the directory `bluemixtemp` in the root directory.  Create a subdirectory `myfirstapp` in `bluemixtemp`.
+
+1. Download [PostgreSQLUpload.war](https://github.com/ibmjstart/bluemix-java-postgresql-uploader/releases/download/v1.1/PostgreSQLUpload.war) and save it in the `myfirstapp` subdirectory.
+
+<br>
+
+
+####Deploy Sample Application in Bluemix using the `cf` tool.
+
+1. Open a terminal window and go to the `myfirstapp` subdirectory.
+
+1. Login to your Bluemix account using the `cf` tool.
+
+	```text
+	> cf login -a https://api.ng.bluemix.net -s dev
+	```
+	
+	>When asked for a username (or e-mail) and password, enter the username and password of your Bluemix account.
+
+	**Output:**
+
+	```
+	API endpoint: https://api.ng.bluemix.net
+	
+	Username> ----------
+	
+	Password>
+	Authenticating...
+	OK
+	
+	Targeted space dev
+	
+	API endpoint: https://api.ng.bluemix.net (API version: 2.40.0)
+	User:         -----------
+	Org:          -----------
+	Space:        dev
+	```
+	
+	The `-a` switch allows you to specify the URL of the Bluemix region.  In this tutorial, you are using the `US South` region.  The URL of this region is `https://api.ng.bluemix.net`.
+
+	The `-s` switch allows you to specify the space where you will deploy the application.  In this tutorial, you will be deploying the application in the `dev` space you created earlier.
+
+1. 
+
+
+
+
+
+
+	```text
+	> git clone https://github.com/pong-pantola/junit-basics.git
+	> cd junit-basics
+	```
 
 
 1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
