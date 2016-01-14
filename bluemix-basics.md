@@ -197,7 +197,15 @@ You will download a copy of a sample application that you will deploy in your Bl
 		b. your application is not yet running (**solution:** wait for your application to run, refer to the sample output above)
 		c. your application failed to run (**solution:** look at the error message and issue again the `cf push` command)
 
-	The `PostgreSQL Upload` sample application is shown on the screen.  Take note that aside from logging in using the `cf` tool, the only other command you issued earlier is `cf push` which deployed your application in your Bluemix account.  You NEVER explicitly created a web application.
+	The `PostgreSQL Upload` sample application is shown on the screen.  Take note that aside from logging in using the `cf` tool, the only other command you issued earlier is `cf push` which deployed your application in your Bluemix account.  You NEVER explicitly created/set-up a web server to host your application.  When you issued the `cf push` command, Bluemix determined that you want to deploy a Java-based web application and automatically created the necessary web server (which we refer to in Bluemix as runtime) to host your application.  You will see later the specific type of runtime that was created to host your application. 
+
+	The sample application allows you to upload a text file in a PostgreSQL database.  You will test if this sample application is correctly running.
+
+1. Click the `Browse` button of the sample application and choose any text file
+	> Make sure it is a text file and not a binary file.
+	> If you don't have any text file, just create one and place at least 3 lines of text.
+
+
 
 	
 	adsf
