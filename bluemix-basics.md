@@ -130,9 +130,9 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 ####Deploy Sample Application in Bluemix using the `cf` tool.
 
- 1. Open a terminal window and go to the `myfirstapp` subdirectory.
+1. Open a terminal window and go to the `myfirstapp` subdirectory.
 
- 2. Login to your Bluemix account using the `cf` tool.
+1. Login to your Bluemix account using the `cf` tool.
 
 	```text
 	> cf login -a https://api.ng.bluemix.net -s dev
@@ -163,7 +163,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	The `-s` switch allows you to specify the space where you will deploy the application.  In this tutorial, you will be deploying the application in the `dev` space you created earlier.
 
- 3. Upload the sample application to your Bluemix account.
+1. Upload the sample application to your Bluemix account.
 
 	```text
 	> cf push myfirstapp-<your_name> -m 256M -p PostgreSQLUpload.war
@@ -192,7 +192,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	The `-p` switch allows you to specify the location of the file containing the sample application.
 
- 4. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
+1. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
 
 	The `Applications` section of your dashboard shows a widget representing the application `myfirstapp-<your_name>` you deployed earlier.
 
@@ -235,21 +235,35 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	<br>
 
- 2. Click the `Browse` button of the sample application and choose any text file
+1. Click the `Browse` button of the sample application and choose any text file
 	> Make sure it is a text file and not a binary file.
 	> If you don't have any text file, just create one and place at least 3 lines of text.
 	
- 3. Click the `Upload` button.  If the upload operation is successful, the contents of the text file will be saved in a PostgreSQL database.  
+1. Click the `Upload` button.  If the upload operation is successful, the contents of the text file will be saved in a PostgreSQL database.  
 
 	HOWEVER, since you have not created any PostgreSQL database yet, you encountered the error `No PostgreSQL service URL found. Make sure you have bound the correct services to your app.`.  You will fix this error by creating a PostgreSQL server later.
 
 
 ####Add a PostgreSQL Service and Bind it to the Sample Application
 
- 1. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
+ 1. Go back to the browser tab containing your Bluemix account.  On the left pane, click the `Overview` link. 
 	
-	adsf
-	adf
+1. Click the `ADD A SERVICE OR API` link.  You will be redirected to the `Catalog` page. 
+
+1. Look for the `postgresql` service and click it.
+
+	>**VERY IMPORTANT:**
+	The `postgresql` service that you will use in this tutorial is NOT the `PostgreSQL by Compose`.  
+	<br>
+	In the `Catalog` page, scroll down in the `CATALOG` page until you see the `Bluemix Labs Catalog` link.  Click this link.
+	<br>
+	Look for the service named `postgresql` and click this service.
+
+
+
+
+
+
 
 xxx
 1. In the menu, click `CATALOG`.  The Bluemix Catalog shows the different services and APIs, as well as runtimes and containers that you may create.
