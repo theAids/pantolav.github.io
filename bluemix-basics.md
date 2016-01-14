@@ -223,7 +223,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 	Bluemix has a system-defined environment variable called `VCAP_SERVICES`.  Currently, the value of `VCAP_SERVICES` is empty.   You will see later the purpose of `VCAP_SERVICES`.
 	
 
- 1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://myfirstapp-<your_name>.mybluemix.net` to verify that the sample application is successfully deployed.
+1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://myfirstapp-<your_name>.mybluemix.net` to verify that the sample application is successfully deployed.
 
 	> If you encounter a `404 Not Found: Requested route ('-----.mybluemix.net') does not exist`, it may mean any of the following:
 		a. you typed the wrong URL (**solution:** double check the URL)
@@ -235,7 +235,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	<br>
 
-1. Click the `Browse` button of the sample application and choose any text file
+1. Click the `Browse` button of the sample application and choose any text file.
 	> Make sure it is a text file and not a binary file.
 	> If you don't have any text file, just create one and place at least 3 lines of text.
 	
@@ -243,10 +243,11 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	HOWEVER, since you have not created any PostgreSQL database yet, you encountered the error `No PostgreSQL service URL found. Make sure you have bound the correct services to your app.`.  You will fix this error by creating a PostgreSQL server later.
 
+1. Close the browser tab containing the sample application.
 
 ####Add a PostgreSQL Service and Bind it to the Sample Application
 
- 1. Go back to the browser tab containing your Bluemix account.  On the left pane, click the `Overview` link. 
+1. Go back to the browser tab containing your Bluemix account.  On the left pane, click the `Overview` link. 
 	
 1. Click the `ADD A SERVICE OR API` link.  You will be redirected to the `Catalog` page. 
 
@@ -260,19 +261,117 @@ You will download a copy of a sample application that you will deploy in your Bl
 	Look for the service named `postgresql` and click this service.
 
 
+1. In the `Service name` text box, type `postgresql-myfirstservice`.
+
+1. Click the `CREATE` button.
+
+1. When asked to restage your application, click the `RESTAGE` button.  Wait for your application to restage.
+
+1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://myfirstapp-<your_name>.mybluemix.net` to test if the sample application can already connect to the created PostgreSQL service.
+
+	<br>
+
+1. Click the `Browse` button of the sample application and choose any text file.
+
+	
+1. Click the `Upload` button.  
+
+	This time, the upload is successful.  You will see the contents of the text file displayed on the page.   The sample application is programmed to display the contents of the PostgreSQL service.  Since the contents of the text file is displayed on the page, the content is successfully saved in the PostgreSQL service.
 
 
+###Analyze How the Sample Application communicates with PostgreSQL Service
+
+If you review the steps above, you did two important tasks: (1) deployed the sample application and (2) created a PostgreSQL service.
+
+It seems impossible for the sample application to be able to communicate with the PostgreSQL service since you have not updated the sample application to use the credentials of the service (e.g., username, password, IP address, port no., etc.).  
+
+However, as demonstrated in the steps above, you were able to make the sample application to communicate with the service.  This was accomplished by coding the sample application such that the database credentials needed to create the connection string is not hard coded.  Instead it uses the credentials found in the environment variable `VCAP_SERVICES` you inspected earlier.
 
 
+1. Go back to the browser tab containing your Bluemix account.  On the left pane, click the `Environment Variables` link. 
 
-xxx
-1. In the menu, click `CATALOG`.  The Bluemix Catalog shows the different services and APIs, as well as runtimes and containers that you may create.
-
+	Recall that earlier `VCAP_SERVICES` is empty.  However, it now contains a value similar to the one you see below:
 
 	```text
-	> git clone https://github.com/pong-pantola/junit-basics.git
-	> cd junit-basics
+	{
+	   "postgresql-9.1": [
+	      {
+	         "name": "postgresql-myfirstservice",
+	         "label": "postgresql-9.1",
+	         "plan": "100",
+	         "credentials": {
+	            "name": "d318bc5931cd540b694de846b004b3955",
+	            "host": "198.11.228.48",
+	            "hostname": "198.11.228.48",
+	            "port": 5433,
+	            "user": "u536f68cf365d4ee6a3a3e00cbf209c53",
+	            "username": "u536f68cf365d4ee6a3a3e00cbf209c53",
+	            "password": "pdf27393fb94d4d45913cd54751d346ad",
+	            "uri": "postgres://u536f68cf365d4ee6a3a3e00cbf209c53:pdf27393fb94d4d45913cd54751d346ad@198.11.228.48:5433/d318bc5931cd540b694de846b004b3955"
+	         }
+	      }
+	   ]
+	}
 	```
+
+	The value above contains the credentials of the PostgreSQL service.  This value was produced when you created the service earlier.  
+
+	Recall that you clicked the `ADD A SERVICE OR API` link earlier then created the PostgreSQL service.  Adding a service (or API) does two things:
+		- create a servicebutton)
+		- bind the service to the application
+
+	Binding the PostgreSQL service to the application simply instructs Bluemix to share the credentials of the PostgreSQL service to the sample application.  The credentials are shared by placing the values of the credentials to `VCAP_SERVICES`.
+
+	However, it needs to be emphasized that even if the credentials are shared through the `VCAP_SERVICES`, this sharing is useless unless the application explicitly use the `VCAP_SERVICES` environment variable.
+
+	You will examine the source code inside `PostgreSQLUpload.war` to see how `VCAP_SERVICES` is used.
+
+1. If you extract the contents of `PostgreSQLUpload.war` you will see the subdirectory `WEB-INF/classes/com/ibm/bluemix/samples`.  This contains several `.java` files including `PostgreSQLClient.java`.
+
+	> You don't need to extract the contents of the `.war` file since the contents of the needed files are shown below.  However, you may use tools such as `7Zip` to extract the contents.
+	
+	`PostgreSQLClient.java` has a method called `getConnection`:
+	
+	```java
+		private static Connection getConnection() throws Exception {
+			Map<String, String> env = System.getenv();
+			
+			if (env.containsKey("VCAP_SERVICES")) {
+				// we are running on cloud foundry, let's grab the service details from vcap_services
+				JSONParser parser = new JSONParser();
+				JSONObject vcap = (JSONObject) parser.parse(env.get("VCAP_SERVICES"));
+				JSONObject service = null;
+				
+				// We don't know exactly what the service is called, but it will contain "postgresql"
+				for (Object key : vcap.keySet()) {
+					String keyStr = (String) key;
+					if (keyStr.toLowerCase().contains("postgresql")) {
+						service = (JSONObject) ((JSONArray) vcap.get(keyStr)).get(0);
+						break;
+					}
+				}
+				
+				if (service != null) {
+					JSONObject creds = (JSONObject) service.get("credentials");
+					String name = (String) creds.get("name");
+					String host = (String) creds.get("host");
+					Long port = (Long) creds.get("port");
+					String user = (String) creds.get("user");
+					String password = (String) creds.get("password");
+					
+					String url = "jdbc:postgresql://" + host + ":" + port + "/" + name;
+					
+					return DriverManager.getConnection(url, user, password);
+				}
+			}
+			
+			throw new Exception("No PostgreSQL service URL found. Make sure you have bound the correct services to your app.");
+		}
+	```
+
+	The method parses the contents of `VCAP_SERVICES` and looks for the credentials of the PostgreSQL service.  This approach allowed the sample application to dynamically get the credentials of the service instead of hard coding it.
+
+	The use of `VCAP_SERVICES` explains how the sample application is able to connect to the PostgreSQL service.  However, this did not explain how a database table (that stores the content of text files) was created.  Recall that you never performed a task that explicilty created a table in the PostgreSQL service.
 
 
 1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
