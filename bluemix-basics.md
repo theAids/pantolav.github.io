@@ -12,8 +12,8 @@ IBM [Bluemix](https://ibm.biz/bluemixph) is a platform as a service (PaaS) cloud
 In this tutorial you will learn how to deploy a sample JSP application in Bluemix.  In addition, you will also learn how to create a PostgreSQL database service that will be used by the sample application.
 
 >**Prerequisite:**
-xxxx
->Having a good understanding of Java programming is required to do this tutorial.
+
+>Having a good background in web application development is required in this tutorial.
 
 <br>
 
@@ -85,7 +85,7 @@ xxxx
 1. Leave your Bluemix account open on the browser.  You will use this again later.
 	<br>
 
-###Install the Cloud Foundry (`cf`) tool.
+####Install the Cloud Foundry (`cf`) tool.
 
 Cloud Foundry is an open-source platform as a service cloud technology.  Bluemix is based from Cloud Foundry.  Cloud Foundry has a command-line tool called `cf` that is used to deploy applications in cloud foundry-based environment.  Since Bluemix is based on Cloud Foundry, the same `cf` tool is used to deploy your application in Bluemix.
 
@@ -279,7 +279,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 	This time, the upload is successful.  You will see the contents of the text file displayed on the page.   The sample application is programmed to display the contents of the PostgreSQL service.  Since the contents of the text file is displayed on the page, the content is successfully saved in the PostgreSQL service.
 
 
-###Analyze How the Sample Application communicates with PostgreSQL Service
+####Analyze How the Sample Application communicates with PostgreSQL Service
 
 If you review the steps above, you did two important tasks: (1) deployed the sample application and (2) created a PostgreSQL service.
 
@@ -373,368 +373,56 @@ However, as demonstrated in the steps above, you were able to make the sample ap
 
 	The use of `VCAP_SERVICES` explains how the sample application is able to connect to the PostgreSQL service.  However, this did not explain how a database table (that stores the content of text files) was created.  Recall that you never performed a task that explicilty created a table in the PostgreSQL service.
 
-
-1. Clone the git repository `https://github.com/pong-pantola/junit-basics.git` and go to the created `junit-basics` directory.
-
-	```text
-	> git clone https://github.com/pong-pantola/junit-basics.git
-	> cd junit-basics
+	`PostgreSQLClient.java` has another method called `createTable`:
+	
+	```java
+		private void createTable() throws Exception {
+			String sql = "CREATE TABLE IF NOT EXISTS posts (" +
+							"id serial primary key, " +
+							"text text" +
+						 ");";
+			Connection connection = null;
+			PreparedStatement statement = null;
+			
+			try {
+				connection = getConnection();
+				statement = connection.prepareStatement(sql);
+				statement.executeUpdate();
+			} finally {			
+				if (statement != null) {
+					statement.close();
+				}
+				
+				if (connection != null) {
+					connection.close();
+				}
+			}
+		}
 	```
+
+	The `createTable` method allowed the tables to be programmatically created (i.e., no need for you to manually create the table).  In usual practices, the database administrator creates the tables.  However, the sample application was designed to programmatically create the table to easily demonstrate the use of a service in Bluemix.
+
+####Delete the Sample Application and PostgreSQL Service
+You may delete applications and services that you don't anymore need.  This will free up some resources which is essential since to accommodate new applications and services you want to deploy in the future.
+
+1. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
+
+	Notice that the widget of the sample application got updated.  An icon was added in the widget.  If you will mouse hover on the icon, you will see that the icon refers to the PostgreSQL service you created earlier.  The presence of this icon in the widget of the sample application  means that the service is bound to the application.  
+
+	Take note that it is possible that you may have additional services bound to the same application.
+
+	In addition, notice that a widget for the PostgreSQL service is also available.  It also has an icon that refers to the sample application.  The presence of this icon in the widget of the PostgreSQL service means that the application uses this service. 
+
+	Take note that it is possible that you may have additional applications bound to the same service.
  
-	The `junit-basics` directory has two subdirectories: `src` and `build`.
+1. Click the `gear` icon in the widget of the sample application.
 
-	```text
-	junit-basics/
-	|
-	|----src/
-	|    |
-	|    |----main/java/net/tutorial/
-	|    |                  |
-	|    |                  |----Math.java
-	|    |                  |----Calculator.java
-	|    |
-	|    |----test/java/net/tutorial
-	|                       |
-	|                       |----MyTest.java
-	|                       |----TestRunner.java
-	|
-	|----build/
-	     |
-	     |----classes/
-	     |    |
-	     |    |----main/
-	     |    |----test/
-	     |    
-	     |----libs/
-	``` 
- 
-	`src` has two subdirectories: `main` and `test`. 
+1. Click the `Delete App` entry.  In the `Services` tab, make sure that the PostgreSQL service is selected.  In the `Routes` tab, make sure that the route (i.e., URL) is selected.
 
-	`src/main` contains the Java class `src/main/java/net/tutorial/Math.java` which you will test later using JUnit.  In addition, it contains the `src/main/java/net/tutorial/Calculator.java` which is a sample Java application that uses `Math.java`. 
-
-	`src/test` contains the Java class `src/test/java/net/tutorial/MyTest.java` which is the test class that will be used to test `Math.java`.  In addition, it contains the `src/test/java/net/tutorial/TestRunner.java` which is a Java application that will run the test. 
- 
-	`build` has two subdirectories: `classes` and `libs`. 
-
-	`build/classes` is used to hold the the `.class` files that will be created later when you compile your `.java` files.
-
-	`build/libs` is used for the JUnit libraries (i.e, `.jar` files) that you will download later.
-
-<br>
-####Download the JUnit libraries
-1. Go to [https://github.com/junit-team/junit/wiki/Download-and-Install](https://github.com/junit-team/junit/wiki/Download-and-Install).
- 
-	>Just in case the URL is broken, you may go to [http://junit.org/](http://junit.org/) and find the download link.
- 
-2. Download the latest version of `junit.jar` and `hamcrest-core.jar` and save them in the subdirectory `build/libs`.
+1. Click the `DELETE` button.
 
 <br>
 
-####Examine the Java class to be tested
-
-
-1. Let's examine the sample class `Math.java` which you will test later with JUnit.
- 
-	**Source code** of	`src/main/java/net/tutorial/Math.java`:
- 
-	```java
-	package net.tutorial;
-	
-	public class Math{
-	
-	  //will be used in the multiply method to simulate that
-	  //the multiply method is taking too long to execute
-	  private void delay(){
-		try{
-	      Thread.sleep(3000);//3000 msec. or 3 sec. delay
-	    } catch(InterruptedException ex) {
-	      Thread.currentThread().interrupt();
-	    }
-	  }
-	
-	  public int add(int a, int b){
-	    //a-b is used instead of a+b to simulate
-	    //a possible error in the source code
-	    return a-b;
-	  }
-	
-	  public int sub(int a, int b){
-	    return a-b;
-	  }
-	
-	  public int multiply(int a, int b){
-		//added delay to simulate that this method is 
-	    //taking too long to execute	
-		delay();
-	
-	    return a*b;
-	  }
-	}
-	```
- 
-	`Math.java` contains the methods you want to test: `add`, `sub`, and `multiply`.  
- 
-	The `add` method is intentionally made incorrect by using `return a-b;` instead of `return a+b;` to demonstrate errors that may be detected by JUnit.
-
-	The `multiply` method contains the line `delay();` to force the `multiply` method to execute for more than 3 secs.  This is useful when you demonstrate the concept of timeout in JUnit.
-
-	The `sub` method is included to serve as a control.  Since the implementation of `sub` is correct, JUnit should not report any error involving `sub`.
- 
-	<br>
-
-1. `Math.java` may be used by other Java classes to create an application. An example of this is `Calculator.java`.
-
-	**Source code** of	`src/main/java/net/tutorial/Calculator.java`:
- 
-	```java
-	package net.tutorial;
-	
-	public class Calculator{
-	
-	  public static void main (String args[]){
-	    Math m = new Math();
-		
-		System.out.println("5 + 9 = " + m.add(5, 3));
-		
-		System.out.println("8 - 2 = " + m.sub(8, 2));	
-		
-		System.out.println("4 x 7 = " + m.multiply(4, 7));
-	  }
-	}
-	```
-
-	`Calculator.java` represents a sample application that uses the `Math.java` class.  
-
-	<br>
- 
-1. Compile `Math.java` and `Calculator.java`.
-
-	```text
-	> javac -d build/classes/main src/main/java/net/tutorial/*.java
-	```
-	
-	> Make sure that you are in the `junit-basics` directory before issuing the command above.
-	
-	>It is worth noting that the subdirectory `build/classes/main` already exists prior to compilation.  This is essential since the `-d build/classes/main` option in the command above means that the subdirectory `build/classes/main` will be used as the base directory of the `.class` files that will be created during compilation.  If the subdirectory does not exist, the command above will produce an error.
-
-	<br>
-	
-
-1. Run the `Calculator` application.
-
-	```text
-	> java -classpath build/classes/main net/tutorial/Calculator
-	```
-
-	**Output:**
-
-	```text
-	5 + 9 = -4
-	8 - 2 = 6
-	4 x 7 = 28
-	```
-
-	As expected, the output `5 + 9 = -4` is wrong.  In addition, it took approximately 3 secs. before the line `4 x 7 = 28` appeared.
- 
-<br>
-####Test the Java class
-
-1. Let's examine the code `MyTest.java` which will serve as the test class to test the methods of `Math.java`.
-
-	**Source code** of	`src/main/test/net/tutorial/MyTest.java`:
-
-	```java
-	package net.tutorial;
-	
-	import static org.junit.Assert.assertEquals;
-	import org.junit.Before;
-	import org.junit.Test;
-	
-	public class MyTest{
-	  private Math m;
-	  
-	  @Before
-	  public void initializeMath(){
-	    m = new Math();
-	  }
-	  
-	  @Test(timeout=1000)
-	  public void addShouldReturnSum() {
-	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	  }
-	  
-	  @Test(timeout=1000)
-	  public void subShouldReturnDifference() {
-	    assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
-	  }  
-	  
-	  @Test(timeout=1000)
-	  public void multiplyShouldReturnProduct() {
-	    assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
-	  }
-	} 
-	```
-
-	Let's look at some code segments in `MyTest.java` that are not typically found in a Java code.
-
-	First of all `MyTest.java` contains a static import: 
-
-	```java
-	import static org.junit.Assert.assertEquals;
-	```
-
-	Static import allows you to access static items (e.g., static methods) in a class without specifying the name of the class.  As an example, JUnit has a class `Assert` that has a static method `assertEquals`.  If a non-static import (i.e., the typical way of importing a class) is used:
- 
-	```java
-	import org.junit.Assert;
-	```
-
-	you need to specify the `Assert` class when calling the `assertEquals` method:
-
-	```java
-	    Assert.assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	```
-
-	Since `MyTest.java` utilizes static import, you may omit the class `Assert`:
-
-	```java
-	    assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	```
-
-	This makes the code shorter especially if you plan to use the `assertEquals` method several times.
-
-	Aside from a non-static import, `MyTest.java` utilizes several JUnit annotations : 
-
-	```java
-	  @Test(timeout=1000)
-	   
-	  @Before
-	```
-
-	Before we discuss `@Test(timeout=1000)` let's discuss `@Test` first.  Placing the annotation `@Test` before a method specifies that a method is used as a test method.  Therefore, `MyTest.java` has three test methods: `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`.
-
-	`@Test(timeout=1000)` has the same effect as `@Test` but performs an additional test by monitoring the execution time of a test method.  If a test method executes beyond a specified timeout then it will produce an error.  The timeout is in msec.  This means `@Test(timeout=1000)` will wait for 1000 msecs. or 1 sec. for a test method to complete.  If after 1 sec. a test method has not finished executing,  a timeout error is reported.  
-
-	In `MyTest.java`, the three methods of`Math.java` (i.e., `add`, `sub`, and `multiply`) are tested with a timeout of 1 sec.  Recall that we intentionally placed a 3 secs. delay in the `multiply` method.  We expect a timeout error reported when you run the test later.
-
-	`@Before` indicates that a method needs to be executed before each test method is executed.  In `MyTest.java` we use `@Before` in the following:
-
-	```java
-	  @Before
-	  public void initializeMath(){
-	    m = new Math();
-	  }
-	```
-
-	 Given this, the `initializeMath` method gets executed before each of the three test methods get executed.  In `MyTest.java`, you may opt to omit the `@Before` annotation as well as the `initializeMath` method.  However, you need to insert the instantiation of `m` in each test method.  An example is shown below:
-
-	```java
-	    @Test(timeout=1000)
-	    public void addShouldReturnSum() {
-	      m = new Math();
-	      assertEquals("3 + 7 should be 10", 10, m.add(3, 7));
-	    }
-	    
-	    @Test(timeout=1000)
-	    public void subShouldReturnDifference() {
-	      m = new Math();      
-	      assertEquals("5 - 9 should be -4", -4, m.sub(5, 9));
-	    }  
-	    
-	    @Test(timeout=1000)
-	    public void multiplyShouldReturnProduct() {
-	      m = new Math();      
-	      assertEquals("8 * 4 should be 32", 32, m.multiply(8, 4));
-	    }
-	  } 
-	```
-
-	There are other JUnit annotations aside from `@Test`, `@Test(timeout=1000)`, and `@Before`.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for a discussion of other JUnit annotations.
-
-	It can be observed that the names of the test methods in `MyTest.java` (i.e., `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct`) are relatively long.  This is essential to make the report generated by JUnit more intuitive.  When a test method encounters an error, the name of the test method is included in the report.  Having very descriptive method names allows developers to debug the codes faster.
-
-	The last thing that is worth examining in `MyTest.java` is the `assertEquals` method.  The `assertEquals` method accepts the following parameters: `message`, `expected`, and `actual`.
-
-	If `expected` is not equal to `actual`, the `assertEquals` method throws an `AssertException` that contains a message that is based on the `message` parameter.
-
-	Aside from `assertEquals`, there are other methods that can be used for testing.  You may check the webpage [Unit Testing with JUnit - Tutorial](http://www.vogella.com/tutorials/JUnit/article.html) for additional methods that can be used for testing.
-
-	<br>
- 
-1. Let's now see how the test class `MyTest.java` is executed.   `TestRunner.java` is an application that runs the test methods found in `MyTest.java`.
-
-	**Source code** of	`src/test/java/net/tutorial/TestRunner.java`:
- 
-	```java
-	package net.tutorial;
-	
-	import org.junit.runner.JUnitCore;
-	import org.junit.runner.Result;
-	import org.junit.runner.notification.Failure;
-	
-	public class TestRunner{
-	  public static void main(String args[]){
-	    Result result = JUnitCore.runClasses(MyTest.class);
-		int errorCtr = 0;
-	    for (Failure failure : result.getFailures()) {
-		  errorCtr++;
-		  System.out.println("Error #:"+ errorCtr);
-	      System.out.println(failure.toString());
-		  System.out.println();
-	    }
-		
-		if (errorCtr == 0)
-		  System.out.println("Congratulations!  There are no errors.");
-	  }
-	}
-	```
-
-	Notice that `TestRunner.java` never explicitly called the test methods `addShouldReturnSum`, `subShouldReturnDifference`, and `multiplyShouldReturnProduct` found in `MyTest.java`.
-
-	Instead, it simply calls the `runClasses` method in `JUnitCore`:
- 
-	```java
-	      Result result = JUnitCore.runClasses(MyTest.class); 
-	``` 
-
-	The `runClasses` method has a parameter `MyTest.class`.  It is able to identify the test methods to execute in `MyTest.java` because of the `@Test` annotations.  The result of all test methods (i.e., succeeded or failed) are saved in `result` which is an instance of `Result`.
-
-	`Result` has a `getFailures` method which returns a `List` of `Failure`.
-
-	<br>
-
-1. Compile `MyTest.java` and `TestRunner.java`.
-
-	> Make sure that you are in the `junit-basics` directory before issuing the command below.
-   
-	```text
-	> javac -classpath build/libs/*;build/classes/main -d build/classes/test src/test/java/net/tutorial/*.java
-	```
-
-	Notice that the classpath includes `build/libs/*`.  Recall that you downloaded and saved the two JUnit `jar` files in this directory.
- 
- 
-1. Run the `TestRunner` application.
-
-	```text
-	> java -classpath build/libs/*;build/classes/main;build/classes/test net/tutorial/TestRunner
-	```
-	
-	**Output:**
-
-	```text  
-	Error #:1
-	multiplyShouldReturnProduct(net.tutorial.MyTest): test timed out after 1000 milliseconds
-	    
-	Error #:2
-	addShouldReturnSum(net.tutorial.MyTest): 3 + 7 should be 10 expected:<10> but was:<-4>
-	```
- 
-	As expected, the `multiplyShouldReturnProduct` test method resulted to an error since the `multiply` method of `Math.java` has a call to the `delay` method which produces a 3 sec. delay.  This is way longer than the 1 sec. timeout that is indicated in the annotation in the test method (i.e., `@Test(timeout=1000)`).
-
-	In addition, the `addShouldReturnSum` test method also failed since we intentionally made the `sum` method of `Math.java` incorrect.  Recall that we used `return a-b;` instead of `return a+b;` in the `sum` method of `Math.java`.
- 
-<br>
 ####End of Tutorial
 
 
