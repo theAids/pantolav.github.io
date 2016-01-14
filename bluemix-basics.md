@@ -60,11 +60,13 @@ xxxx
 
 	>Once you select `US South` it is possible that you will be prompted to create a space.  If you are prompted, enter a space named `dev`.  This purpose of a space is explained in the next step.
 
-1. Under the `US South` region, you may deploy one ore more applications.  As the number of applications you deploy increases, the harder it is to manage your applications.  To help manage them, applications are grouped together in spaces.  As an example, you may create spaces which groups applications belonging to the same phase.  For example, you may create a space called `dev` and deploy all of your applications that are still under development under this phase.  You may create a second space called `prod` for applications that are already in production.
+1. Under the `US South` region, you may deploy one ore more applications.  
+
+	As the number of applications you deploy in a region increases, the harder it is to manage your applications.  To help manage them, applications are grouped together in spaces.  As an example, you may create spaces which groups applications belonging to the same phase.  For example, you may create a space called `dev` and deploy all of your applications that are still under development under this phase.  You may create a second space called `prod` for applications that are already in production.
 
 	Another way to utilize spaces is to group applications based on projects.  For example, you may create a space called `proj1` for all projecs belonging to project 1.
 
-1. Verify if you have a `dev` space at the left side of your dashboard.  If there is no `dev` space, create one by clicking the `Create a Space` link.
+1. Verify if you have a `dev` space at the left side of your dashboard.  If there is no `dev` space, create one by clicking the `Create a Space` link. 
 
 <br>
 
@@ -128,9 +130,9 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 ####Deploy Sample Application in Bluemix using the `cf` tool.
 
-1. Open a terminal window and go to the `myfirstapp` subdirectory.
+ 1. Open a terminal window and go to the `myfirstapp` subdirectory.
 
-1. Login to your Bluemix account using the `cf` tool.
+ 2. Login to your Bluemix account using the `cf` tool.
 
 	```text
 	> cf login -a https://api.ng.bluemix.net -s dev
@@ -161,7 +163,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	The `-s` switch allows you to specify the space where you will deploy the application.  In this tutorial, you will be deploying the application in the `dev` space you created earlier.
 
-1. Upload the sample application to your Bluemix account.
+ 3. Upload the sample application to your Bluemix account.
 
 	```text
 	> cf push myfirstapp-<your_name> -m 256M -p PostgreSQLUpload.war
@@ -190,23 +192,61 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	The `-p` switch allows you to specify the location of the file containing the sample application.
 
-1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://myfirstapp-<your_name>.mybluemix.net` to verify that the sample application is successfully deployed.
+ 4. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
+
+	The `Applications` section of your dashboard shows a widget representing the application `myfirstapp-<your_name>` you deployed earlier.
+
+	The widget shows some information regarding the application:
+	- **status**: your application is in a running state
+	- **route (a.k.a. URL)**: `myfirstapp-<your_name>.mybluemix.net`
+	- **runtime**: Liberty for Java (this is the type of web server hosting your application)
+	- **list of services the app is bound to**: currently empty
+
+	Take note that aside from logging in using the `cf` tool, the only other command you issued earlier is `cf push` which deployed your application in your Bluemix account.  You NEVER explicitly created/set-up a web server (e.g., Liberty for Java web server) to host your application.  When you issued the `cf push` command, Bluemix determined that you want to deploy a Java-based web application and automatically created the necessary web server (which we refer to in Bluemix as **runtime**) to host your application.
+
+	Currently the **list of services the app is bound to** is empty but when you add a PostgreSQL service later you will see an icon added in the widget representing the service.
+
+1. Click the widget of your application to see its overview.
+
+	The overview shows the following information:
+	- **instances**: 1
+	- **memory quota**: 256MB
+	- **activity log**
+	- **routes**: `myfirstapp-<your_name>.mybluemix.net`
+
+	Adjusting the **instances** value allows you to perform horizontal scaling.  For example, if you observe that a deployed application cannot handle anymore the number of users accessing the application then you may increase the number of instances.  However, take note that for every additional instance you add, your application will consume an additional memory space equal to the **memory quota**.  For example, if you have 2 instances and 256MB as the memory quota, then your application consumes 512MB of memory.
+
+	Adjusting the **memory quota** value allows you to perform vertical scaling.  
+
+1. On the left pane, click the `Environment Variables` link.
+
+	Bluemix has a system-defined environment variable called `VCAP_SERVICES`.  Currently, the value of `VCAP_SERVICES` is empty.   You will see later the purpose of `VCAP_SERVICES`.
+	
+
+ 1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://myfirstapp-<your_name>.mybluemix.net` to verify that the sample application is successfully deployed.
 
 	> If you encounter a `404 Not Found: Requested route ('-----.mybluemix.net') does not exist`, it may mean any of the following:
 		a. you typed the wrong URL (**solution:** double check the URL)
 		b. your application is not yet running (**solution:** wait for your application to run, refer to the sample output above)
 		c. your application failed to run (**solution:** look at the error message and issue again the `cf push` command)
 
-	The `PostgreSQL Upload` sample application is shown on the screen.  Take note that aside from logging in using the `cf` tool, the only other command you issued earlier is `cf push` which deployed your application in your Bluemix account.  You NEVER explicitly created/set-up a web server to host your application.  When you issued the `cf push` command, Bluemix determined that you want to deploy a Java-based web application and automatically created the necessary web server (which we refer to in Bluemix as runtime) to host your application.  You will see later the specific type of runtime that was created to host your application. 
-
+		
 	The sample application allows you to upload a text file in a PostgreSQL database.  You will test if this sample application is correctly running.
 
-1. Click the `Browse` button of the sample application and choose any text file
+	<br>
+
+ 2. Click the `Browse` button of the sample application and choose any text file
 	> Make sure it is a text file and not a binary file.
 	> If you don't have any text file, just create one and place at least 3 lines of text.
+	
+ 3. Click the `Upload` button.  If the upload operation is successful, the contents of the text file will be saved in a PostgreSQL database.  
+
+	HOWEVER, since you have not created any PostgreSQL database yet, you encountered the error `No PostgreSQL service URL found. Make sure you have bound the correct services to your app.`.  You will fix this error by creating a PostgreSQL server later.
 
 
+####Add a PostgreSQL Service and Bind it to the Sample Application
 
+ 1. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
 	
 	adsf
 	adf
