@@ -28,7 +28,7 @@ xxxx
 
 ####Explore your Bluemix Account
 
-1. Login to your [Bluemix](https://ibm.biz/bluemixph) account.
+1. Open a web browser and login to your [Bluemix](https://ibm.biz/bluemixph) account.
 
 1. You will be redirected to your dashboard.  Your dashboard:
 	- provides some information regarding your account (e.g., organization, spaces, etc.)
@@ -80,6 +80,7 @@ xxxx
 
 1. Scroll down until you see `postgresql`.   The `postgresql` service and the `PostgreSQL by Compose` service are very similar (i.e., both are PostgreSQL services).  In this tutorial, you will be using `postgresql`.  When you are asked to create a PostgreSQL service in the succeeding step, make sure to use `postgresql` and not `PostgreSQL by Compose`.
 
+1. Leave your Bluemix account open on the browser.  You will use this again later.
 	<br>
 
 ###Install the Cloud Foundry (`cf`) tool.
@@ -135,14 +136,14 @@ You will download a copy of a sample application that you will deploy in your Bl
 	> cf login -a https://api.ng.bluemix.net -s dev
 	```
 	
-	>When asked for a username (or e-mail) and password, enter the username and password of your Bluemix account.
+	>When asked for a username (e-mail address) and password, enter the username and password of your Bluemix account.
 
 	**Output:**
 
 	```
 	API endpoint: https://api.ng.bluemix.net
 	
-	Username> ----------
+	Username> -----
 	
 	Password>
 	Authenticating...
@@ -151,8 +152,8 @@ You will download a copy of a sample application that you will deploy in your Bl
 	Targeted space dev
 	
 	API endpoint: https://api.ng.bluemix.net (API version: 2.40.0)
-	User:         -----------
-	Org:          -----------
+	User:         -----
+	Org:          -----
 	Space:        dev
 	```
 	
@@ -163,7 +164,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 1. Upload the sample application to your Bluemix account.
 
 	```text
-	> cf push myfirstapp-<your_name> -m 256M -p build/libs/calcuapp.war
+	> cf push myfirstapp-<your_name> -m 256M -p PostgreSQLUpload.war
 	```
 
 	**Example:**
@@ -175,24 +176,35 @@ You will download a copy of a sample application that you will deploy in your Bl
 	**Output:**
 		
 	```text
-	
+	:
+	:
+	     state     since                    cpu    memory           disk
+	#0   running   2016-01-14 08:00:15 AM   0.8%   185.1M of 256M   180.9M	
 	```
-
-
 
 	In the example above, the name of the application is `myfirstapp-pong`.  Replace `pong` with your name.  The name of your application will be concatenated with string `.mybluemix.net` and this will be the URL of your application.  As an example, the application `myfirstapp-pong` is accessible using the URL http://myfirstapp-pong.mybluemix.net.
 
-	>If you encounter an error message `host is taken`, it means that the application name you specified has already been used by another Bluemix user.  Issue the `cf push` command again but change the name of your applicatio.  In the example above, instead of `myfirstapp-pong`, it can be `myfirstapp-pong2`.
+	>**IMPORTANT:** If you encounter an error message `host is taken`, it means that the application name you specified has already been used by another Bluemix user.  Issue the `cf push` command again but change the name of your application.  In the example above, instead of `myfirstapp-pong`, it can be `myfirstapp-pong2`.
 
 	The `-m` switch allows you to specify the memory allocation of your application.
 
 	The `-p` switch allows you to specify the location of the file containing the sample application.
 
-1. On a web browser, go to `http://myfirstapp-<your_name>.mybluemix.net`.
+1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://myfirstapp-<your_name>.mybluemix.net` to verify that the sample application is successfully deployed.
 
+	> If you encounter a `404 Not Found: Requested route ('-----.mybluemix.net') does not exist`, it may mean any of the following:
+		a. you typed the wrong URL (**solution:** double check the URL)
+		b. your application is not yet running (**solution:** wait for your application to run, refer to the sample output above)
+		c. your application failed to run (**solution:** look at the error message and issue again the `cf push` command)
 
+	The `PostgreSQL Upload` sample application is shown on the screen.  Take note that aside from logging in using the `cf` tool, the only other command you issued earlier is `cf push` which deployed your application in your Bluemix account.  You NEVER explicitly created a web application.
 
+	
+	adsf
+	adf
 
+xxx
+1. In the menu, click `CATALOG`.  The Bluemix Catalog shows the different services and APIs, as well as runtimes and containers that you may create.
 
 
 	```text
