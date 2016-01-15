@@ -130,7 +130,9 @@ Cloud Foundry is an open-source platform as a service cloud technology.  Bluemix
 	   :
 	```
 	
-	You should see the help screen of `cf` (see above sample).
+	You should see the help screen of `cf` (see above example).
+
+	<br>
 
 
 ####Copy Sample Application
