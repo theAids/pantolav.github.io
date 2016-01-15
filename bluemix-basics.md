@@ -46,11 +46,7 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 1. Each organization has an allotted set of resources.  As an example, your dashboard shows the following:
 
 
-	Item     | Value
-	-------- | ---
-	Computer | $1600
-	Phone    | $12
-	Pipe     | $1
+	
 	
 	Resource          b | Consumed | Total Allocation
 	--- | --- | ---
