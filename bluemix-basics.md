@@ -98,11 +98,12 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 	<br>
 	
 1. Leave your Bluemix account open on the browser.  You will use this again later.
+
 	<br>
 
 ####Install the Cloud Foundry (`cf`) tool.
 
-Cloud Foundry is an open-source platform as a service cloud technology.  Bluemix is based from Cloud Foundry.  Cloud Foundry has a command-line tool called `cf` that is used to deploy applications in cloud foundry-based environment.  Since Bluemix is based on Cloud Foundry, the same `cf` tool is used to deploy your application in Bluemix.
+Cloud Foundry is an open-source platform as a service cloud technology.  Bluemix is based from Cloud Foundry.  Cloud Foundry has a command-line tool called `cf` that is used to deploy applications in cloud foundry-based environment.  Since Bluemix is based on Cloud Foundry, the same `cf` tool can be used to deploy applications in Bluemix.
 
 
 1. Go to the Cloud Foundry `cf` tool [repository](https://github.com/cloudfoundry/cli/releases).
