@@ -35,9 +35,13 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 	- summarizes the amount of resources you have consumed 
 	- enumerates the applications, services, containers, and virtual machines you have created.
 
+	<br>
+
 1. You may have one ore more organizations.  By default, you only have one organization.  The name of this organization is the same as your Bluemix account.
 
 	Additional organizations may become available in your Bluemix account when other Bluemix users share his/her organization to you.  The procedure in sharing an organization is not covered in this tutorial.
+	
+	<br>
 	
 1. Each organization has an allotted set of resources.  As an example, your dashboard shows the following:
 
@@ -49,27 +53,33 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 
 	Note that there are other resources in your dashboard not listed above.  In addition, the amount of total allocation may vary depending on the type of account (e.g., trial account, etc.)
 
-	Having a total allocation of 2GB for Cloud Foundry apps means that you can have one or more running applications in your account that has a total memory consumption of 2GB.  As an example, if you deploy Application A in Bluemix with a memory allocation of 1GB, you still have 1GB left that can be used for another application (or applications).
+	Having a total allocation of 2GB for Cloud Foundry apps means that you can have one or more running applications in your account that have a total memory consumption of 2GB.  As an example, if you deploy Application A in Bluemix with a memory allocation of 1GB, you still have 1GB left that can be used for another application (or applications).
 
 	For services and APIs, you are given an allocation of 10.  An example of a service is a PostgreSQL database service which you will create later. 
 
+	<br>
+	
 1. The physical location (e.g., location of the data center) of the Bluemix servers that will host your application is referred to as Bluemix regions.  Currently there are three Bluemix regions: `United Kingdom`, `Sydney,` and `US South`.
 
-	In this tutorial, you will be using the `US South` region.  However, in an actual deployment, you may choose any of the available regions.  If you will be deploying several applications, these applications may be deployed in different region (e.g., your first application is in `United Kingdom`, while the second one is in `US South`).  However, the total consumed resources in these regions should not exceed the allocation of your organization.
+	In this tutorial, you will be using the `US South` region.  However, in an actual deployment, you may choose any of the available regions.  If you will be deploying several applications, these applications may be deployed in different region (e.g., your first application is in `United Kingdom`, while the second one is in `US South`).  However, the total consumed resources in these regions should not exceed the allocation given to your organization (e.g., 2GB memory and 10 services)
 
+	<br>
+	
 1. Make sure that the current region used by your Bluemix account is `US South` by  clicking the `Person` icon on the upper-right corner of your account.  
 
 	>Once you select `US South` it is possible that you will be prompted to create a space.  If you are prompted, enter a space named `dev`.  This purpose of a space is explained in the next step.
 
 1. Under the `US South` region, you may deploy one ore more applications.  
 
-	As the number of applications you deploy in a region increases, the harder it is to manage your applications.  To help manage them, applications are grouped together in spaces.  As an example, you may create spaces which groups applications belonging to the same phase.  For example, you may create a space called `dev` and deploy all of your applications that are still under development under this phase.  You may create a second space called `prod` for applications that are already in production.
+	As the number of applications you deploy in a region increases, the harder it is to manage your applications.  To help manage them, applications are grouped together in spaces.  As an example, you may create spaces which groups applications belonging to the same phase.  For example, you may create a space called `dev` and deploy all of your applications that are still under development phase.  You may create a second space called `prod` for applications that are already in production.
 
-	Another way to utilize spaces is to group applications based on projects.  For example, you may create a space called `proj1` for all projecs belonging to project 1.
+	Another way to utilize spaces is to group applications based on projects.  For example, you may create a space called `proj1` for all projects belonging to project 1.
+
+	<br>
 
 1. Verify if you have a `dev` space at the left side of your dashboard.  If there is no `dev` space, create one by clicking the `Create a Space` link. 
 
-<br>
+	<br>
 
 ####Explore the Bluemix Catalog
 
@@ -79,10 +89,14 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 
 	In Bluemix, there are services that are very similar.  As an example, in this tutorial, you will be creating a PostgreSQL service.  However, the PostgreSQL service that you will be using is NOT `PostgreSQL by Compose`.
 
+	<br>
+	
 1. Scroll down further in the `CATALOG` page until you see the `Bluemix Labs Catalog` link.  Click this link.
 
-1. Scroll down until you see `postgresql`.   The `postgresql` service and the `PostgreSQL by Compose` service are very similar (i.e., both are PostgreSQL services).  In this tutorial, you will be using `postgresql`.  When you are asked to create a PostgreSQL service in the succeeding step, make sure to use `postgresql` and not `PostgreSQL by Compose`.
+1. Scroll down until you see `postgresql`.   The `postgresql` service and the `PostgreSQL by Compose` service are very similar (i.e., both are PostgreSQL services).  In this tutorial, you will be using `postgresql`.  When you are asked to create a PostgreSQL service in later steps, make sure to use `postgresql` and not `PostgreSQL by Compose`.
 
+	<br>
+	
 1. Leave your Bluemix account open on the browser.  You will use this again later.
 	<br>
 
