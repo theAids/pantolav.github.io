@@ -47,7 +47,7 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 	Cloud Foundry Apps | 0GB | 2GB
 	Services and APIs | 0 | 10
 
-	Note that there are other resources in your dashboard not listed above.
+	Note that there are other resources in your dashboard not listed above.  In addition, the amount of total allocation may vary depending on the type of account (e.g., trial account, etc.)
 
 	Since you have a total allocation of 2GB for Cloud Foundry apps, it means that you can have one or more running applications in your account that has a total memory consumption of 2GB.  As an example, if you deploy Application A in Bluemix with a memory allocation of 1GB, you still have 1GB left that can be used for another application (or applications).
 
