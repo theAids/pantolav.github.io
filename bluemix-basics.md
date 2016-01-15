@@ -13,7 +13,7 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 
 >**Prerequisite:**
 
->Having a good background in web application development is required in this tutorial.
+>Having a basic background in web application development is required in this tutorial.
 
 <br>
 
@@ -40,6 +40,13 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 	Additional organizations may become available in your Bluemix account when other Bluemix users share his/her organization to you.  The procedure in sharing an organization is not covered in this tutorial.
 	
 1. Each organization has an allotted set of resources.  As an example, your dashboard shows the following:
+
+|                  | ASCII                        | HTML              |
+ ----------------- | ---------------------------- | ------------------
+| Single backticks | `'Isn't this fun?'`            | 'Isn't this fun?' |
+| Quotes           | `"Isn't this fun?"`            | "Isn't this fun?" |
+| Dashes           | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |
+
 
 	Resource | Consumed | Total Allocation
 	-|-|-
