@@ -41,12 +41,6 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 	
 1. Each organization has an allotted set of resources.  As an example, your dashboard shows the following:
 
-|                  | ASCII                        | HTML              |
- ----------------- | ---------------------------- | ------------------
-| Single backticks | `'Isn't this fun?'`            | 'Isn't this fun?' |
-| Quotes           | `"Isn't this fun?"`            | "Isn't this fun?" |
-| Dashes           | `-- is en-dash, --- is em-dash` | -- is en-dash, --- is em-dash |
-
 
 	Resource | Consumed | Total Allocation
 	-|-|-
