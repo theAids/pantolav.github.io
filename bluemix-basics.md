@@ -46,7 +46,7 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 1. Each organization has an allotted set of resources.  As an example, your dashboard shows the following:
 
 
-	|Resource          x | Consumed | Total Allocation|
+	|Resource          y | Consumed | Total Allocation|
 	|---|---|---|
 	|Cloud Foundry Apps | 0GB | 2GB|
 	|Services and APIs | 0 | 10|
