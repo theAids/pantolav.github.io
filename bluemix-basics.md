@@ -48,8 +48,8 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 
 	
 	
-	Resource          b | Consumed | Total Allocation
-	--- | --- | ---
+	Resource    | Consumed | Total Allocation
+	---------------------- | --- | ---
 	Cloud Foundry Apps | 0GB | 2GB
 	Services and APIs | 0 | 10
 
