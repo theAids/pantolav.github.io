@@ -181,6 +181,8 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	The `-s` switch allows you to specify the space where you will deploy the application.  In this tutorial, you will be deploying the application in the `dev` space you created earlier.
 
+	<br>
+	
 1. Upload the sample application to your Bluemix account.
 
 	```text
@@ -210,6 +212,8 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	The `-p` switch allows you to specify the location of the file containing the sample application.
 
+	<br>
+	
 1. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
 
 	The `Applications` section of your dashboard shows a widget representing the application `myfirstapp-<your_name>` you deployed earlier.
@@ -224,6 +228,8 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	Currently the **list of services the app is bound to** is empty but when you add a PostgreSQL service later you will see an icon added in the widget representing the service.
 
+	<br>
+	
 1. Click the widget of your application to see its overview.
 
 	The overview shows the following information:
@@ -236,17 +242,20 @@ You will download a copy of a sample application that you will deploy in your Bl
 
 	Adjusting the **memory quota** value allows you to perform vertical scaling.  
 
+	<br>
+	
 1. On the left pane, click the `Environment Variables` link.
 
 	Bluemix has a system-defined environment variable called `VCAP_SERVICES`.  Currently, the value of `VCAP_SERVICES` is empty.   You will see later the purpose of `VCAP_SERVICES`.
 	
+	<br>
 
 1. Open another browser tab (do not close the browser tab containing your Bluemix account).  Go to `http://myfirstapp-<your_name>.mybluemix.net` to verify that the sample application is successfully deployed.
 
 	> If you encounter a `404 Not Found: Requested route ('-----.mybluemix.net') does not exist`, it may mean any of the following:
-		a. you typed the wrong URL (**solution:** double check the URL)
-		b. your application is not yet running (**solution:** wait for your application to run, refer to the sample output above)
-		c. your application failed to run (**solution:** look at the error message and issue again the `cf push` command)
+	>a. you typed the wrong URL (**solution:** double check the URL)
+	>b. your application is not yet running (**solution:** wait for your application to run, refer to the sample output above)
+	>c. your application failed to run (**solution:** look at the error message and issue again the `cf push` command)
 
 		
 	The sample application allows you to upload a text file in a PostgreSQL database.  You will test if this sample application is correctly running.
@@ -257,12 +266,17 @@ You will download a copy of a sample application that you will deploy in your Bl
 	> Make sure it is a text file and not a binary file.
 	> If you don't have any text file, just create one and place at least 3 lines of text.
 	
+	<br>
+	
 1. Click the `Upload` button.  If the upload operation is successful, the contents of the text file will be saved in a PostgreSQL database.  
 
 	HOWEVER, since you have not created any PostgreSQL database yet, you encountered the error `No PostgreSQL service URL found. Make sure you have bound the correct services to your app.`.  You will fix this error by creating a PostgreSQL server later.
 
+	<br>
 1. Close the browser tab containing the sample application.
 
+	<br>
+	
 ####Add a PostgreSQL Service and Bind it to the Sample Application
 
 1. Go back to the browser tab containing your Bluemix account.  On the left pane, click the `Overview` link. 
@@ -278,6 +292,7 @@ You will download a copy of a sample application that you will deploy in your Bl
 	<br>
 	Look for the service named `postgresql` and click this service.
 
+	<br>
 
 1. In the `Service name` text box, type `postgresql-myfirstservice`.
 
@@ -294,16 +309,17 @@ You will download a copy of a sample application that you will deploy in your Bl
 	
 1. Click the `Upload` button.  
 
-	This time, the upload is successful.  You will see the contents of the text file displayed on the page.   The sample application is programmed to display the contents of the PostgreSQL service.  Since the contents of the text file is displayed on the page, the content is successfully saved in the PostgreSQL service.
+	This time, the upload is successful.  You will see the contents of the text file displayed on the page.   The sample application is programmed to display the contents of the PostgreSQL service.  Since the contents of the text file is displayed on the page, the contents are successfully saved in the PostgreSQL service.
 
+	<br>
 
 ####Analyze How the Sample Application communicates with PostgreSQL Service
 
-If you review the steps above, you did two important tasks: (1) deployed the sample application and (2) created a PostgreSQL service.
+Reviewing the procedure above, you did two important tasks: (1) deployed the sample application and (2) created a PostgreSQL service.
 
 It seems impossible for the sample application to be able to communicate with the PostgreSQL service since you have not updated the sample application to use the credentials of the service (e.g., username, password, IP address, port no., etc.).  
 
-However, as demonstrated in the steps above, you were able to make the sample application to communicate with the service.  This was accomplished by coding the sample application such that the database credentials needed to create the connection string is not hard coded.  Instead it uses the credentials found in the environment variable `VCAP_SERVICES` you inspected earlier.
+However, as demonstrated, you were able to make the sample application to communicate with the service.  This was accomplished by coding the sample application such that the database credentials needed to create the connection string are not hard coded.  Instead it uses the credentials found in the environment variable `VCAP_SERVICES` which was originally empty earlier.
 
 
 1. Go back to the browser tab containing your Bluemix account.  On the left pane, click the `Environment Variables` link. 
@@ -335,7 +351,7 @@ However, as demonstrated in the steps above, you were able to make the sample ap
 	The value above contains the credentials of the PostgreSQL service.  This value was produced when you created the service earlier.  
 
 	Recall that you clicked the `ADD A SERVICE OR API` link earlier then created the PostgreSQL service.  Adding a service (or API) does two things:
-		- create a servicebutton)
+		- create a service
 		- bind the service to the application
 
 	Binding the PostgreSQL service to the application simply instructs Bluemix to share the credentials of the PostgreSQL service to the sample application.  The credentials are shared by placing the values of the credentials to `VCAP_SERVICES`.
@@ -344,9 +360,11 @@ However, as demonstrated in the steps above, you were able to make the sample ap
 
 	You will examine the source code inside `PostgreSQLUpload.war` to see how `VCAP_SERVICES` is used.
 
+	<br>
+	
 1. If you extract the contents of `PostgreSQLUpload.war` you will see the subdirectory `WEB-INF/classes/com/ibm/bluemix/samples`.  This contains several `.java` files including `PostgreSQLClient.java`.
 
-	> You don't need to extract the contents of the `.war` file since the contents of the needed files are shown below.  However, you may use tools such as `7Zip` to extract the contents.
+	> You don't need to extract the contents of the `.war` file since the contents of the needed files are shown below.  However, you may use tools such as `7Zip` if you want to extract the contents.
 	
 	`PostgreSQLClient.java` has a method called `getConnection`:
 	
@@ -420,8 +438,10 @@ However, as demonstrated in the steps above, you were able to make the sample ap
 
 	The `createTable` method allowed the tables to be programmatically created (i.e., no need for you to manually create the table).  In usual practices, the database administrator creates the tables.  However, the sample application was designed to programmatically create the table to easily demonstrate the use of a service in Bluemix.
 
+	<br>
+	
 ####Delete the Sample Application and PostgreSQL Service
-You may delete applications and services that you don't anymore need.  This will free up some resources which is essential since to accommodate new applications and services you want to deploy in the future.
+You may delete applications and services that you don't anymore need.  This will free up some resources which is essential to accommodate new applications and services you want to deploy in the future.
 
 1. Go back to the browser tab containing your Bluemix account.  In the menu, click `DASHBOARD`.  
 
@@ -429,9 +449,11 @@ You may delete applications and services that you don't anymore need.  This will
 
 	Take note that it is possible that you may have additional services bound to the same application.
 
-	In addition, notice that a widget for the PostgreSQL service is also available.  It also has an icon that refers to the sample application.  The presence of this icon in the widget of the PostgreSQL service means that the application uses this service. 
+	In addition, notice that a widget for the PostgreSQL service is also available.  It also has an icon that refers to the sample application.  The presence of this icon in the widget of the PostgreSQL service means that the application may use this service. 
 
 	Take note that it is possible that you may have additional applications bound to the same service.
+	
+	<br>
  
 1. Click the `gear` icon in the widget of the sample application.
 
