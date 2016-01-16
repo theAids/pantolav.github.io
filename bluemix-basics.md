@@ -16,7 +16,7 @@ In this tutorial you will learn how to deploy a sample JSP application in Bluemi
 >Having a basic background in web application development is required in this tutorial.
 
 <br>
-
+A
 ####Create a Bluemix Account
 1. Go to [Bluemix](https://ibm.biz/bluemixph) and click the `SIGN UP` button.
 
