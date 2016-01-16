@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Bluemix Basics
-permalink: /bluemix-basics2/
+permalink: /bluemix-basics/
 ---
 
 ##Application Development Tutorial
 
-###Bluemix Basics
+###Bluemix Basics - I'M STILL EDITING THIS
 IBM [Bluemix](https://ibm.biz/bluemixph) is a platform as a service (PaaS) cloud technology of IBM.  You may develop applications and deploy them in Bluemix.
 
 In this tutorial you will learn how to deploy a sample JSP application in Bluemix.  In addition, you will also learn how to create a PostgreSQL database service that will be used by the sample application.
