@@ -198,4 +198,36 @@ To connect to the service, the service URI is needed. This application used the 
 	        return (String)credential.get( "url" );
       	}
 
-asdfadf
+The service's URI/URL is needed to create a new `MongoDB Client`. Unlike SQL databases, `NoSQL` do not use the traditional SQL statements but instead, it uses objects or documents in `JSON style format` to perform database operations. In MongoDB's context, a `collection` is the counterpart of `RDBMS's table`. And as shown in the code below, a collection will be automatically created if it is used prior to its existence.
+
+	 public boolean addEntry(String jsonString) throws Exception
+    	{
+	        BasicDBObject entry = (BasicDBObject)JSON.parse(jsonString);
+	
+	        try{
+	            String connURL = getServiceURI();
+	
+	            MongoClient mongo = new MongoClient(new MongoClientURI(connURL));
+	
+	            //database name is defined by the service, check VCAP_SERVICES
+	            DB db = mongo.getDB("db");
+		
+		    //MongoDB will create the collection 'books' if it does not yet exist in the database.
+	            DBCollection table = db.getCollection("books");
+	            WriteResult wr = table.insert(entry);
+	
+	            //Returns true if the write was acknowledged.
+	            return wr.wasAcknowledged();
+	        }
+	        catch (Exception e) 
+	        {
+	            e.printStackTrace();
+	        }
+	
+	        return false;
+    	}
+
+MongoDB provides, high performance, high availability, and easy scalability. It is often used in  Big Data, Content Management Delivery and Data Hub.
+
+####End of Tutorial
+
