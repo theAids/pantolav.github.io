@@ -127,7 +127,7 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 1. On the `BUILD & DEPLOY` tab, click the `Run Stage` icon of the `Build Stage`.
 	>Wait for the process to finish and make sure that it passed all the stages of the delivery pipeline.
 
-2. Using your browser, log in to your [IBM Bluemix](ibm.biz/bluemixph) account.
+2. Using your browser, log in to your [IBM Bluemix](https://ibm.biz/bluemixph) account.
 
 3. Click the widget of your application `mongodb-<your name>`.
 
