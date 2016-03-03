@@ -56,6 +56,72 @@ permalink: /mongodb/
 
 	<br>
 
-1. On the `DEVOPS-GIT TAB`: Click the `Commit` button followed by the `Push` button to sync your working directory with the github repository.
+1. Click the `Commit` button followed by the `Push` button to sync your working directory with the github repository.
 
-1. When the process is complete, click the `BUILD & DEPLOY` button. We will now create the `Devops Delivery Pipeline.
+1. When the process is complete, click the `BUILD & DEPLOY` button. We will now create the `Devops Delivery Pipeline`.
+
+<br>
+
+####Create a Build Stage
+
+1.Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Build Stage`.
+
+1.On the `INPUT` tab, set the following values:
+
+	||||
+	|---|---|---|
+	| **Input Type** | SCM Repository |
+	| **Git URL** | https://github.com/<username>/mongodb.git |
+	| **Branch** | master |
+	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
+
+	<br>
+
+1. On the `JOBS` tab, click the `ADD JOB` link and select `Build`.   Change the job name `Build` to `Gradle Assemble`.  Set the following values:
+
+	||||
+	|---|---|---|
+	| **Builder Type** | Gradle |		
+	| **Build Shell Command** | `#!/bin/bash`<br>`gradle assemble`  |	
+	| **Stop running this stage if this job fails** | checked |
+
+	<br>
+
+1. Click the `SAVE` button.
+
+	<br>
+
+####Create a Deploy Stage
+
+1. Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Dev Deploy Stage`.
+
+	<br>
+
+1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
+
+	||||
+	|---|---|---|
+	| **Input Type** | Build Artifacts |
+	| **Stage** | Build Stage |
+	| **Job** | Gradle Assemble |
+	| **Stage Trigger** | Run jobs when the previous stage is completed |
+
+	<br>
+
+1. On the `JOBS` tab, click the `ADD JOB` link and select `Deploy`.   Change the job name `Deploy` to `Cloud Foundry Push to Dev Space`.  Set the following values:
+
+	||||
+	|---|---|---|
+	| **Deployer Type** | Cloud Foundry |		
+	| **Target** | IBM Bluemix US South - https://api.ng.bluemix.net |		
+	| **Organization** | you may leave the default selection |		
+	| **Space** | dev |	
+	| **Application Name** | blank |		
+	| **Deploy Script** | `#!/bin/bash`<br>`cf push mongodb-<your_name> -m 256M -p build/libs/mongodb.war`  |	
+	| **Stop running this stage if this job fails** | checked |
+	
+	<br>
+
+1. Click the `SAVE` button.
+
+	<br>
