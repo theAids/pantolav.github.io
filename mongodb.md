@@ -125,3 +125,34 @@ permalink: /mongodb/
 1. Click the `SAVE` button.
 
 	<br>
+####Deploy the Application using Delivery Pipeline
+1. On the `BUILD & DEPLOY` tab, click the `Run Stage` icon of the `Build Stage`.
+	>Wait for the process to finish and make sure that it passed all the stages of the delivery pipeline.
+
+2. Go to [IBM Bluemix](ibm.biz/bluemixph) Website and login.
+
+3. Click the widget of your application `os-<your_name>`.
+
+4. Click the `ADD A SERVICE OR API` to add the Object Storage service to your application.
+
+5. In the `CATALOG` page, look for the `Object Storage` service and click it.
+
+6. Type `ObjectStorage-<your name>` in the `service name` text box and select the `Free` plan.
+
+7. Click `CREATE`. When asked to restage your application, click the `RESTAGE` button. Wait for your application to restage.
+8. Open a new tab and go to `http://os-<your_name>.mybluemix.net/home.jsp` to test if the application can connect to the Object Storage service. 
+
+	> If you received an error, clear your web browser's cache.
+	> Go to Bluemix and click the widget of your application.
+	> In the App Health section, restart your application by clicking the `RESTART` button.
+	> Once done, click the route link and add `/home.jsp`.
+
+9. Choose any file you want to upload by clicking the `Choose File` button.
+
+10. Click the `Upload File` button.
+
+11. After clicking the button, you will be redirected to `home.jsp` page and this time, the file you uploaded earlier is displayed on the page.
+
+12. Try to click the `Download` button and check if the application can successfully download the file.
+
+<br>
