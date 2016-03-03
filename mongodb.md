@@ -120,8 +120,8 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 	<br>
 
 1. Click the `SAVE` button.
-
 	<br>
+	
 ####Deploy the Application using Delivery Pipeline
 
 1. On the `BUILD & DEPLOY` tab, click the `Run Stage` icon of the `Build Stage`.
