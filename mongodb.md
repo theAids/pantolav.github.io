@@ -142,6 +142,7 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 8. In your computer, open a text editor. Copy these lines and save them as follows:
 
 	gagamba.json
+	
 	```text
 	{
 		"title" : "Gagamba",
@@ -153,7 +154,9 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 		}
 	}
 	```
+	
 	mans_search.json
+	
 	```text
 	{
 		"title" : "Mans Search for Meaning",
