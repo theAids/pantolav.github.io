@@ -4,9 +4,9 @@ title: mongodb
 permalink: /mongodb/
 ---
 
->[MongoDB](https://console.ng.bluemix.net/docs/services/MongoDB/index.html#MongoDB) is an open source document, NoSQL database that is owned by MongoDB Inc. You can use MongoDB to quickly develop applications by using the features that are provided, such as data scaling, auto-sharding, and high availability. You can also use MongoDB to store different types of document objects, such as JSON files, with a key-value pair.
+[MongoDB](https://console.ng.bluemix.net/docs/services/MongoDB/index.html#MongoDB) is an open source document, NoSQL database that is owned by MongoDB Inc. You can use MongoDB to quickly develop applications by using the features that are provided, such as data scaling, auto-sharding, and high availability. You can also use MongoDB to store different types of document objects, such as JSON files, with a key-value pair.
 
->In this tutorial you will learn how to use the MongoDB driver for Java to connect to your MongoDB service in Bluemix.
+In this tutorial you will learn how to use the MongoDB driver for Java to connect to your MongoDB service in Bluemix.
 
 <br>
 
