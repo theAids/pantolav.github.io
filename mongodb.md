@@ -47,4 +47,15 @@ permalink: /mongodb/
 
 1. Click the `Git Repository` icon found on the left side of the screen. It will redirect you to another page.
 
+1. On the `Working Directory` section (right side of the page) Set the following values:
 
+	||||
+	|---|---|---|
+	| **Select All** | checked |
+	| **Commit message** | files created when Bluemix DevOps project was created |
+
+	<br>
+
+1. On the `DEVOPS-GIT TAB`: Click the `Commit` button followed by the `Push` button to sync your working directory with the github repository.
+
+1. When the process is complete, click the `BUILD & DEPLOY` button. We will now create the `Devops Delivery Pipeline.
