@@ -141,8 +141,33 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 
 8. Open a new tab and go to `http://mongodb-<your name>.mybluemix.net`.
 
-9. Download these two files: [gagamba.json](https://github.com/theAids/theAids.github.io/blob/master/gagamba.json?raw=true) and [mans_search.json](https://github.com/theAids/theAids.github.io/blob/master/mans_search.json?raw=true).
-	>These are two json files containing information about two books.
-10. 
+9. In your computer, open a text editor. Copy these lines and save them as follows:
+	gagamba.json
+	```text
+	{
+		"title" : "Gagamba",
+		"isbn"	: "978-971-8845-59-2",
+		"year" : 1991,
+		"author": {
+			"fname" : "f. sionil",
+			"lname" : "jose"
+		}
+	}
+	```
+	mans_search.json
+	```text
+	{
+		"title" : "Mans Search for Meaning",
+		"isbn" : "978-0-8070-1429-5",
+		"year"	: 1992,
+		"author": {
+			"fname" : "viktor",
+			"lname" : "frankl"
+		},
+		"foreword" : "harold kushner"
+	}
+	```
+
+	
 
 
