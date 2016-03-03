@@ -62,11 +62,11 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 
 <br>
 
-####Create a Build Stage
+####**Create a Build Stage**
 
-1.Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Build Stage`.
+1. Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Build Stage`.
 
-1.On the `INPUT` tab, set the following values:
+1. On the `INPUT` tab, set the following values:
 
 	||||
 	|---|---|---|
