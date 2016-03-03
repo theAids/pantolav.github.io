@@ -185,7 +185,6 @@ To be able to perform MongoDB operations, the MongoDB API for Java is needed. So
 
 To connect to the service, the service URI is needed. This application used the `Cloudfoundry API` to parse the `VCAP_SERVICES` and get the service URI. Thus the `org.cloudfoundry:cloudfoundry-runtime:0.8.4` library is needed to solve the dependency problem.
 
-	```text
 	protected static String getServiceURI() throws Exception
     	{
     		CloudEnvironment environment = new CloudEnvironment();
@@ -198,6 +197,5 @@ To connect to the service, the service URI is needed. This application used the 
 	     
 	        return (String)credential.get( "url" );
       	}
-	```
 
 asdfadf
