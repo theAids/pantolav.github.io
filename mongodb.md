@@ -95,9 +95,7 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 
 1. Click the `ADD STAGE` button.  Change the stage name `MyStage` to `Dev Deploy Stage`.
 
-	<br>
-
-1. On the `DEVOPS-DELIVERY-PIPELINE TAB`: On the `INPUT` tab, set the following values:
+1. On the `INPUT` tab, set the following values:
 
 	||||
 	|---|---|---|
@@ -106,7 +104,6 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 	| **Job** | Gradle Assemble |
 	| **Stage Trigger** | Run jobs when the previous stage is completed |
 
-	<br>
 
 1. On the `JOBS` tab, click the `ADD JOB` link and select `Deploy`.   Change the job name `Deploy` to `Cloud Foundry Push to Dev Space`.  Set the following values:
 
