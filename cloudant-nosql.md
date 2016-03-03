@@ -1,6 +1,6 @@
 ---
 layout: post
-title: cloudant nosql
+title: cloudant nosql db
 permalink: /cloudant-nosql/
 ---
 
@@ -24,11 +24,11 @@ In this tutorial you will learn how to use the Cloudant API for Java and the Clo
 
 1. Click `NEW PROJECT`.
 
-1. Name your project `mongodb`.
+1. Name your project `cloudant`.
 
 1. Click `Link to an existing GitHub repository`.
 
-1. Select the repository `<username>/mongodb`
+1. Select the repository `<username>/cloudant`
 
 1. Ensure the following options are chosen:
 
@@ -71,7 +71,7 @@ In this tutorial you will learn how to use the Cloudant API for Java and the Clo
 	||||
 	|---|---|---|
 	| **Input Type** | SCM Repository |
-	| **Git URL** | https://github.com/your_username/mongodb.git |
+	| **Git URL** | https://github.com/your_username/cloudant.git |
 	| **Branch** | master |
 	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
 
@@ -114,7 +114,7 @@ In this tutorial you will learn how to use the Cloudant API for Java and the Clo
 	| **Organization** | you may leave the default selection |		
 	| **Space** | dev |	
 	| **Application Name** | blank |		
-	| **Deploy Script** | `#!/bin/bash`<br>`cf push mongodb-<your_name> -m 256M -p build/libs/mongodb.war`  |	
+	| **Deploy Script** | `#!/bin/bash`<br>`cf push cloudant-<your_name> -m 256M -p build/libs/cloudant.war`  |	
 	| **Stop running this stage if this job fails** | checked |
 	
 	<br>
@@ -130,17 +130,15 @@ In this tutorial you will learn how to use the Cloudant API for Java and the Clo
 
 2. Using your browser, log in to your [IBM Bluemix](https://ibm.biz/bluemixph) account.
 
-3. Click the widget of your application `mongodb-<your name>`.
+3. Click the widget of your application `cloudant-<your name>`.
 
 4. Click `ADD A SERVICE OR API`.
 
-5. Scroll down further in the `CATALOG` page until you see the `Bluemix Labs Catalog` link. Click this link.
+5. Look for `Cloudant NoSQL DB` under the `Data and Analytics` category.
 
-6. Look for `mongodb` under the `Data and Analytics` category.
+6. Click `CREATE`. When asked to restage your application, click the `RESTAGE` button. Wait for your application to restage.
 
-7. Click `CREATE`. When asked to restage your application, click the `RESTAGE` button. Wait for your application to restage.
-
-8. In your computer, open a text editor. Copy these lines and save them as follows:
+7. In your computer, open a text editor. Copy these lines and save them as follows:
 
 	gagamba.json
 	
@@ -172,15 +170,13 @@ In this tutorial you will learn how to use the Cloudant API for Java and the Clo
 	```
 We are going to use these two files to populate our database.
 
-9. Open a new tab and go to `http://mongodb-<your name>.mybluemix.net`.
+9. Open a new tab and go to `http://cloudant-<your name>.mybluemix.net`.
 
 10. Click `Choose File` and locate the saved file `gagamba.json`. Click `Open`. 
 
 11. Click the `Upload` button. The inserted database entry is shown at the bottom.
 
-12. Repeat steps 10 - 11 fo the file `mans_search.json`. 
-	>Notice that even though the `mans_search.json` file has an extra field `foreword`, it is still inserted into the database. This is because mondodb is a `schema less` database. Meaning, the number of field from one entry can differ fron another.
-
+12. 
 <br>
 
 ####**Analyze how the Object Storage Application works**
