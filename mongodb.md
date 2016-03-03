@@ -40,7 +40,11 @@ permalink: /mongodb/
 	| **Region** | IBM Bluemix US South |
 	| **Organization** | you may leave the default selection |		
 	| **Space** | dev |
-
-	<br>
 	
 1. Click the `CREATE` button and  wait for your project to be created.
+
+1. Click the `EDIT CODE` button.  You will be redirected to Bluemix DevOps' editor
+
+1. Click the `Git Repository` icon found on the left side of the screen. It will redirect you to another page.
+
+
