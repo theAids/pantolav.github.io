@@ -22,7 +22,7 @@ In this tutorial you will learn how to use the Cloudant API for Java and the Clo
 
 1. Open another web browser tab and login to [Bluemix DevOps](https://hub.jazz.net/).
 
-1. Click `NEW PROJECT`.
+1. Click `CREATE PROJECT`.
 
 1. Name your project `cloudant`.
 
