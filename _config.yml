@@ -3,7 +3,7 @@
 #
 
 # Name of your site (displayed in the header)
-name: Pong V. Pantola
+name: Adrian M. Perez
 
 # Short bio or description (displayed in the header)
 description: web developer
@@ -18,10 +18,10 @@ avatar: https://raw.githubusercontent.com/barryclark/jekyll-now/master/images/je
 # Includes an icon in the footer for each username you enter
 footer-links:
   dribbble:
-  email: pantolav@gmail.com
-  facebook: pong.pantola@delasalle.ph
+  email: aidsperez@yahoo.com
+  facebook: aidsperez@yahoo.com
   flickr:
-  github: pong-pantola/jekyll-now
+  github: theAids/theAids.github.io
   instagram:
   linkedin:
   pinterest:
