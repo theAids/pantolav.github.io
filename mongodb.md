@@ -188,7 +188,7 @@ To connect to the service, the service URI is needed. This application used the 
 	```text
 	protected static String getServiceURI() throws Exception
     	{
-	        CloudEnvironment environment = new CloudEnvironment();
+    		CloudEnvironment environment = new CloudEnvironment();
 	        if ( environment.getServiceDataByLabels("mongodb").size() == 0 ) 
 	        {
 	            throw new Exception( "No MongoDB service is bound to this app!!" );
@@ -198,5 +198,6 @@ To connect to the service, the service URI is needed. This application used the 
 	     
 	        return (String)credential.get( "url" );
       	}
-      	```
+	```
+
 asdfadf
