@@ -180,12 +180,11 @@ We are going to use these two files to populate our database.
 <br>
 
 ####**Analyze how the Object Storage Application works**
-To be able to perform MongoDB operations, the MongoDB API for Java is needed. So it is important to include the the `MongoDB driver` in the `build.gradle` file.
 
-	```text
-	compile 'org.mongodb:mongodb-driver:3.2.2'
-	```
+To be able to perform MongoDB operations, the MongoDB API for Java is needed. So it is important to include the the `org.mongodb:mongodb-driver:3.2.2` in the `build.gradle` file.
+
 To connect to the service, the service URI is needed. This application used the `Cloudfoundry API` to parse the `VCAP_SERVICES` and get the service URI. Thus the `org.cloudfoundry:cloudfoundry-runtime:0.8.4` library is needed to solve the dependency problem.
+
 	```text
 	protected static String getServiceURI() throws Exception
     	{
@@ -200,3 +199,4 @@ To connect to the service, the service URI is needed. This application used the 
 	        return (String)credential.get( "url" );
       	}
       	```
+asdfadf
