@@ -139,9 +139,8 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 
 7. Click `CREATE`. When asked to restage your application, click the `RESTAGE` button. Wait for your application to restage.
 
-8. Open a new tab and go to `http://mongodb-<your name>.mybluemix.net`.
+8. In your computer, open a text editor. Copy these lines and save them as follows:
 
-9. In your computer, open a text editor. Copy these lines and save them as follows:
 	gagamba.json
 	```text
 	{
@@ -167,7 +166,16 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 		"foreword" : "harold kushner"
 	}
 	```
+We are going to use these two files to populate our database.
 
+9. Open a new tab and go to `http://mongodb-<your name>.mybluemix.net`.
+
+10. Click `Choose File` and locate the saved file `gagamba.json`. Click `Open`. 
+
+11. Click the `Upload` button. The inserted database entry is shown at the bottom.
+
+12. Repeat steps 10 - 11 fo the file `mans_search.json`. 
+	>Notice that even though the `mans_search.json` file has an extra field `foreword`, it is still inserted into the database. This is because mondodb is a `shema less` database. Meaning, the number of field from one entry can differ fron another.
 	
 
 
