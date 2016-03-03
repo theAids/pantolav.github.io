@@ -181,6 +181,7 @@ We are going to use these two files to populate our database.
 
 ####**Analyze how the Object Storage Application works**
 To be able to perform MongoDB operations, the MongoDB API for Java is needed. So it is important to include the the `MongoDB driver` in the `build.gradle` file.
+
 	```text
 	compile 'org.mongodb:mongodb-driver:3.2.2'
 	```
