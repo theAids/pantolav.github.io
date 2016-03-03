@@ -1,0 +1,9 @@
+{
+	"title" : "Gagamba",
+	"isbn"	: "978-971-8845-59-2",
+	"year" : 1991,
+	"author": {
+		"fname" : "f. sionil",
+		"lname" : "jose"
+	}
+}
