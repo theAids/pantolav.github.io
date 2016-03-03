@@ -141,8 +141,8 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 
 8. Open a new tab and go to `http://mongodb-<your name>.mybluemix.net`.
 
-9. Choose any file you want to upload by clicking the `Choose File` button.
-
-10. Click the `Upload File` button.
+9. Download these two files: [gagamba.json](https://github.com/theAids/theAids.github.io/blob/master/gagamba.json?raw=true) and [mans_search.json](https://github.com/theAids/theAids.github.io/blob/master/mans_search.json?raw=true).
+	>These are two json files containing information about two books.
+10. 
 
 
