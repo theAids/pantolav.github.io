@@ -71,7 +71,7 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 	||||
 	|---|---|---|
 	| **Input Type** | SCM Repository |
-	| **Git URL** | https://github.com/<username>/mongodb.git |
+	| **Git URL** | https://github.com/your_username/mongodb.git |
 	| **Branch** | master |
 	| **Stage Trigger** | Run jobs whenever a change is pushed to Git |
 
