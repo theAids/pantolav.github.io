@@ -184,7 +184,7 @@ We are going to use these two files to populate our database.
 
 <br>
 
-####**Analyze how the Object Storage Application works**
+####**Analyze how the MongoDB Application works**
 
 To be able to perform MongoDB operations, the MongoDB API for Java is needed. So it is important to include the the `org.mongodb:mongodb-driver:3.2.2` in the `build.gradle` file.
 
@@ -234,7 +234,7 @@ The service's URI/URL is needed to create a new `MongoDB Client`. Unlike SQL dat
 
 MongoDB provides, high performance, high availability, and easy scalability. It is often used in  Big Data, Content Management Delivery and Data Hub.
 
-####**Delete the Application and Object Storage Service**
+####**Delete the Application and MongoDB Service**
 1. Go to [IBM Bluemix](ibm.biz/bluemixph) Website and click the `Dashboard`.
 2. From the `Applications` section, click the `gear` icon in the widget of the `mongodb-<your_name>` application.
 3. Select the `Delete App` from the list.
