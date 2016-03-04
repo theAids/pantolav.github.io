@@ -246,7 +246,7 @@ One feature of this Web Console is `Replication Management`.
 4. Go back to the CLoudant Web Console tab and refresh the page. We can now see two documents in both the `books` and `books-replica` databases.
 
 
-####**Analyze how the Object Storage Application works**
+####**Analyze how the Cloudant NoSQL DB works**
 
 To connect to the Cloudant service, this application used the `Cloudant Client API` contianed in `com.cloudant:cloudant-client:2.3.0` library. Originally, CLoudant NoSQL uses `HTTP API or RESTful API` to connect to the service. Any language-specific libraries such as this one are just wrappers to easily use the service.
 
@@ -280,7 +280,7 @@ To connect to the Cloudant service, this application used the `Cloudant Client A
 
 Same with MongoDB, Cloudant NoSQl can also use JSON style files to populate the database and it will automatically create the database if it's not yet created.
 
-####**Delete the Application and Object Storage Service**
+####**Delete the Application and Cloudant NoSQL DB Service**
 1. Go to [IBM Bluemix](ibm.biz/bluemixph) Website and click the `Dashboard`.
 2. From the `Applications` section, click the `gear` icon in the widget of the `cloudant-<your_name>` application.
 3. Select the `Delete App` from the list.
