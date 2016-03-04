@@ -216,6 +216,7 @@ We can also use this Console to perform actions such as adding  new `database` o
 
 ####Replication Feature
 One feature of this Web Console is `Replication Management`.
+
 1. Click the `Replication` button at the left side of the window.
 	>We will create a new replication.
 
