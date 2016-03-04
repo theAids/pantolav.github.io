@@ -180,7 +180,7 @@ We are going to use these two files to populate our database.
 11. Click the `Upload` button. The inserted database entry is shown at the bottom.
 
 12. Repeat steps 10 - 11 fo the file `mans_search.json`. 
-	>Notice that even though the `mans_search.json` file has an extra field `foreword`, it is still inserted into the database. This is because mondodb is a `schema less` database. Meaning, the number of field from one entry can differ fron another.
+	>Notice that even though the `mans_search.json` file has an extra field `foreword`, it is still inserted into the database. This is because mondodb is a `schema less` database. Meaning, the number of fields from one entry can differ from another.
 
 <br>
 
