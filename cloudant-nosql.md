@@ -187,7 +187,9 @@ We are going to use these two files to populate our database.
 ####Exploring the Cloudant Web Console
 
 The `Cloudant Web Console` can help you manage your databases, database entries, views, indexes and other Cloudant features such as Replication, which will be discussed later. Looking at the Web Console, we can see that we already have one `database` and one `document`. This database is statically created when we uploaded the `gagamba.json` file.
+
 	>`Document` in NoSQL context is the counterpart of row/field in RDBMS.
+
 Let us now examine the created database.
 
 1. Click the database name `books`.
