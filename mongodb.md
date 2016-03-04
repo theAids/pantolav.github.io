@@ -47,6 +47,7 @@ In this tutorial you will learn how to use the MongoDB driver for Java to connec
 
 1. Click the `Git Repository` icon found on the left side of the screen. It will redirect you to another page.
 
+*Do steps 10 and 11 only if necessary
 1. On the `Working Directory` section (right side of the page) Set the following values:
 
 	||||
