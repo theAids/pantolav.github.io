@@ -248,12 +248,43 @@ One feature of this Web Console is `Replication Management`.
 
 ####**Analyze how the Object Storage Application works**
 
+To connect to the Cloudant service, this application used the `Cloudant Client API` contianed in `com.cloudant:cloudant-client:2.3.0` library. Originally, CLoudant NoSQL uses `HTTP API or RESTful API` to connect to the service. Any language-specific libraries such as this one are just wrappers to easily use the service.
+
+	public int addEntry(String jsonString) throws Exception
+    {
+        try{
+            CloudantClient client = getClientConn();
+
+            Database db = client.database("books", true);
+            JSONParser parser = new JSONParser();
+            
+            try{
+              JSONObject json = (JSONObject)parser.parse(jsonString);
+              
+              Response rs = db.save(json);
+
+              return rs.getStatusCode();
+
+            }catch (ParseException e) {
+              System.out.println("Failed Parsing: " + e.getErrorType() + e.toString());
+              e.printStackTrace();
+            }
+
+        }catch (Exception e) {
+            System.out.println("Failed: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+Same with MongoDB, Cloudant NoSQl can also use JSON style files to populate the database and it will automatically create the database if it's not yet created.
 
 ####**Delete the Application and Object Storage Service**
 1. Go to [IBM Bluemix](ibm.biz/bluemixph) Website and click the `Dashboard`.
-2. From the `Applications` section, click the `gear` icon in the widget of the `mongodb-<your_name>` application.
+2. From the `Applications` section, click the `gear` icon in the widget of the `cloudant-<your_name>` application.
 3. Select the `Delete App` from the list.
-4. In the `Services` tab, select the created `mongodb` service.
+4. In the `Services` tab, select the created `Cloudant NoSQL DB` service.
 5. Click the `Delete` button.
 
 ####End of Tutorial
