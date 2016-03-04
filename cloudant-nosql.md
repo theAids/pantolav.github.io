@@ -187,8 +187,7 @@ We are going to use these two files to populate our database.
 ####Exploring the Cloudant Web Console
 
 The `Cloudant Web Console` can help you manage your databases, database entries, views, indexes and other Cloudant features such as Replication, which will be discussed later. Looking at the Web Console, we can see that we already have one `database` and one `document`. This database is statically created when we uploaded the `gagamba.json` file.
-
-	>`Document` in NoSQL context is the counterpart of row/field in RDBMS.
+	> A 'Document` in NoSQL context is the counterpart of row/field in RDBMS.
 
 Let us now examine the created database.
 
@@ -240,7 +239,7 @@ One feature of this Web Console is `Replication Management`.
 	>We can see now three databases: the `original database(books)`, the replication `database(books-replica)` and the `_replicator` database that contains information about the replication.
 
 ####Test Replication
-1. Open another and go back again to your cloudant application (`cloudant-<yourname>.mybluemix.net`).
+1. Open another tab and go back again to your cloudant application (`cloudant-<yourname>.mybluemix.net`).
 
 2. Click `Choose File` and look for the created file `mans_search.json`. Click Open.
 
