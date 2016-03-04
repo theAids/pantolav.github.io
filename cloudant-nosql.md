@@ -174,10 +174,66 @@ We are going to use these two files to populate our database.
 
 10. Click `Choose File` and locate the saved file `gagamba.json`. Click `Open`. 
 
-11. Click the `Upload` button. The inserted database entry is shown at the bottom.
+11. Click the `Upload` button.
 
-12. 
+12. To see the inserted entry, go back to [IBM Bluemix Dashboard](https://ibm.biz/bluemixph).
+
+13. Under `Services`, click the created `Cloudant NoSQL DB` service. 
+
+14. Click the `Launch button` at the upper right corner. It will redirect you to your `Cloudant Web Console`.
+
 <br>
+
+####Exploring the Cloudant Web Console
+The `Cloudant Web Console` can help you manage your databases, database entries, views, indexes and other Cloudant features such as Replication, which will be discussed later. Looking at the Web Console, we can see that we already have one `database` and one `document`. This database is statically created when we uploaded the `gagamba.json` file.
+	>`Document` in NoSQL context is the counterpart of row/field in RDBMS.
+Let us now examine the created database.
+
+1. Click the database name `books`.
+
+2. At the right side of the screen, we can see an entry in a JSON style format. This is the document that we have uploaded earlier. To see the full document, click the `pencil`(edit) icon at the upper right corner. You can see a file similar to this:
+
+	```text
+	{
+	  "_id": "e66edb37df544ad59b7596ce62a042d0",
+	  "_rev": "1-0f050c951b9430fae0a7ee73f3095fc4",
+	  "year": 1991,
+	  "author": {
+	    "fname": "f. sionil",
+	    "lname": "jose"
+	  },
+	  "isbn": "978-971-8845-59-2",
+	  "title": "Gagamba"
+	}
+	```
+Since we did not provide the `ID(_id)` and `Revision(_rev)` number, it was automatically created for us.
+
+3. Click `Cancel`.
+
+We can also use this Console to perform actions such as adding  new `database` or `document`. Click the `gear` icon to see more options.
+
+<br>
+
+####Replication Feature
+One feature of this Web Console is `Replication Management`.
+1. Click the `Replication` button at the left side of the window.
+	>We will create a new replication.
+
+2.  In the `New Replication` tab, enter `books` as the name of our `Source Database`
+	>Make sure that you are in the `My Databases` tab.
+
+3. For the `Target Database`, click `New Database` and enter `books-replica` as the name of our local replication database.
+
+4. Check the `Make this replication continious`
+	>This means that all subsequent changes to the source database are transmitted to the target database in real-time.
+
+5. Provide your `Cloudant password`. This can be found in the `VCAP_SERVICES` of your cloudant application (`cloudant-<your name>`).
+	>To access this, open another browser then go to your [IBM Bluemix](https://ibm.biz/bluemixph) Dashboard. Click the widget of your `cloudant-<your name>` application and click `Environmental Variables` at the left side of the window. It will show you the `VCAP_SERVICES` content of your application. Look for `clouddantNoSQLDB > credentials > password`.
+
+6. Copy and paste the cloudant password from the VCAP_SERVICES into the password field. Click ` Continue Replication`.
+
+
+
 
 ####**Analyze how the Object Storage Application works**
 
