@@ -57,7 +57,7 @@ In this tutorial you will learn how to use the Cloudant API for Java and the Clo
 	<br>
 
 1. Click the `Commit` button followed by the `Push` button to sync your working directory with the github repository.
-
+	>Do steps 10 and 11 only if necessary
 1. When the process is complete, click the `BUILD & DEPLOY` button. We will now create the `Devops Delivery Pipeline`.
 
 <br>
