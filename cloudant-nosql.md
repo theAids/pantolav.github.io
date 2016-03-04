@@ -232,7 +232,17 @@ One feature of this Web Console is `Replication Management`.
 
 6. Copy and paste the cloudant password from the VCAP_SERVICES into the password field. Click ` Continue Replication`.
 
+7. At the upper left side of the screen click `Databases`.
+	>We can see now three databases: the `original database(books)`, the replication `database(books-replica)` and the `_replicator` database that contains information about the replication.
 
+####Test Replication
+1. Open another and go back again to your cloudant application (`cloudant-<yourname>.mybluemix.net`).
+
+2. Click `Choose File` and look for the created file `mans_search.json`. Click Open.
+
+3. Click `Upload`.
+
+4. Go back to the CLoudant Web Console tab and refresh the page. We can now see two documents in both the `books` and `books-replica` databases.
 
 
 ####**Analyze how the Object Storage Application works**
