@@ -247,6 +247,27 @@ One feature of this Web Console is `Replication Management`.
 
 4. Go back to the CLoudant Web Console tab and refresh the page. We can now see two documents in both the `books` and `books-replica` databases.
 
+<br>
+
+####Warehousing Feature
+The Cloudant Web Console also provides an interace to transform the created NoSQL database to a data warehouse for analytics purposes. The following steps will show how to export the created NoSQL database to DashDB.
+
+1. Click the `Warehousing` menu at the left side of the screen.
+
+2. Under `Warehousing` click `Create a dashDB Warehouse`.
+
+3. You will be prompted to enter a username and password. Enter your IBM Bluemix credentials.
+
+4. Under `Warehouse Name`, enter your desired warehouse name. For this tutorial, we will name this warehouse `Books_Warehouse`.
+	>The warehouse name should not contain spaces.
+
+5. Under `Data Sources`, enter `books` then click the dropdown option `books`.
+	> Clicking the dropdown option for `books` is necessary for it to be recognized by the Cloudant. You will know that it is recognized if a table showing the selected database and its size is shown just below the text box. You can also select as many database sources as you can. For this tutorial, we will only choose the `books` database.
+
+6. We will create a new dashDB instance for our warehouse so leave the `Create new dashDB instance` radio button selected.
+
+7. Click `Create Warehouse`.
+
 
 ####**Analyze how the Cloudant NoSQL DB works**
 
