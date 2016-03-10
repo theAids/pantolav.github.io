@@ -258,7 +258,7 @@ The Cloudant Web Console also provides an interace to transform the created NoSQ
 
 3. You will be prompted to enter a username and password. Enter your IBM Bluemix credentials.
 
-4. Under `Warehouse Name`, enter your desired warehouse name. For this tutorial, we will name this warehouse `Books_Warehouse`.
+4. Under `Warehouse Name`, enter your desired warehouse name. For this tutorial, we will name this warehouse `books-warehouse-<your name>`.
 	>The warehouse name should not contain spaces.
 
 5. Under `Data Sources`, enter `books` then click the dropdown option `books`.
@@ -268,6 +268,20 @@ The Cloudant Web Console also provides an interace to transform the created NoSQ
 
 7. Click `Create Warehouse`.
 
+8. Wait for the process to finish. You will now see the list of warehouses that you have. We will now view the created warehouse in dashDB. In the `books-warehouse-<your name> row, under the `location` column, click `Open in dashDB`.
+	> You will now be redirected to the dashDB web console.
+
+9. Once the page is loaded, click the `Run SQL` menu at the left side of the screen.
+
+10. We will now query the contents of our database using SQL. Remove/delete all the the SQL statements inside the editor.
+
+11. Enter the SQL statement below:
+	```text
+	SELECT * FROM <schema>.books
+	```
+	>The schema name can be found at the upper-right corner of the screen with a name format `dash<some random numbers>`.
+	
+12. Click run. You will now see the contents of your database at the bottom part of the screen if the query is correct.
 
 ####**Analyze how the Cloudant NoSQL DB works**
 
