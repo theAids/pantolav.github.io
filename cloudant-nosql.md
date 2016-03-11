@@ -324,4 +324,6 @@ Same with MongoDB, Cloudant NoSQl can also use JSON style files to populate the 
 4. In the `Services` tab, select the created `Cloudant NoSQL DB` service.
 5. Click the `Delete` button.
 
+<hr>
+Download pptx [here](https://github.com/theAids/theAids.github.io/blob/master/Cloudant%20NoSQL%20DB.pptx?raw=true).
 ####End of Tutorial
