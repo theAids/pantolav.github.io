@@ -242,6 +242,6 @@ MongoDB provides, high performance, high availability, and easy scalability. It 
 5. Click the `Delete` button.
 
 <hr>
-Download [pptx](https://github.com/theAids/theAids.github.io/blob/master/mongodb.pptx).
+Download pptx [here](https://github.com/theAids/theAids.github.io/blob/master/mongodb.pptx?raw=true).
 
 ####End of Tutorial
