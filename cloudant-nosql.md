@@ -317,6 +317,8 @@ To connect to the Cloudant service, this application used the `Cloudant Client A
 
 Same with MongoDB, Cloudant NoSQl can also use JSON style files to populate the database and it will automatically create the database if it's not yet created.
 
+Another Cloudant application and Java API reference could be found in this [repository](https://github.com/cloudant/java-cloudant).
+
 ####**Delete the Application and Cloudant NoSQL DB Service**
 1. Go to [IBM Bluemix](ibm.biz/bluemixph) Website and click the `Dashboard`.
 2. From the `Applications` section, click the `gear` icon in the widget of the `cloudant-<your_name>` application.
