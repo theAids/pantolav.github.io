@@ -1,7 +1,6 @@
 ---
 layout: post
 title: Tutorial List
-permalink: /tutorial-list/
 ---
 
 [MongoDB](/mongodb)
