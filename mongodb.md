@@ -234,6 +234,8 @@ The service's URI/URL is needed to create a new `MongoDB Client`. Unlike SQL dat
 
 MongoDB provides, high performance, high availability, and easy scalability. It is often used in  Big Data, Content Management Delivery and Data Hub.
 
+You can find the documentation of MongoDB java driver in this [link](http://mongodb.github.io/mongo-java-driver/3.0/driver/reference/).
+
 ####**Delete the Application and MongoDB Service**
 1. Go to [IBM Bluemix](ibm.biz/bluemixph) Website and click the `Dashboard`.
 2. From the `Applications` section, click the `gear` icon in the widget of the `mongodb-<your_name>` application.
