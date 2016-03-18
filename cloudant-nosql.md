@@ -287,39 +287,118 @@ The Cloudant Web Console also provides an interace to transform the created NoSQ
 
 To connect to the Cloudant service, this application used the `Cloudant Client API` contianed in `com.cloudant:cloudant-client:2.3.0` library. Originally, CLoudant NoSQL uses `HTTP API or RESTful API` to connect to the service. Any language-specific libraries such as this one are just wrappers to easily use the service.
 
-	```java
-		public int addEntry(String jsonString) throws Exception
-	    {
-	        try{
-	            CloudantClient client = getClientConn();
-	
-	            Database db = client.database("books", true);
-	            JSONParser parser = new JSONParser();
-	            
-	            try{
-	              JSONObject json = (JSONObject)parser.parse(jsonString);
-	              
-	              Response rs = db.save(json);
-	
-	              return rs.getStatusCode();
-	
-	            }catch (ParseException e) {
-	              System.out.println("Failed Parsing: " + e.getErrorType() + e.toString());
-	              e.printStackTrace();
-	            }
-	
-	        }catch (Exception e) {
-	            System.out.println("Failed: " + e.getMessage());
-	            e.printStackTrace();
-	        }
-	
-	        return 0;
-	    }
-    ```
+```java
+public int addEntry(String jsonString) throws Exception, ParseException{
+
+    JSONParser parser = new JSONParser();
+    int result = 0;
+
+    try{
+      //create Cloudant client connection
+      CloudantClient client = getClientConn();
+
+      //get database. it will be autonamitcally created if not existing yet
+      Database db = client.database("books", true);
+
+      Object obj = parser.parse(jsonString);
+
+      //check if json is an array or not
+      if(obj.getClass().getName().matches(".*[JSONArray]")){
+
+        JSONArray objArr = (JSONArray) obj;
+
+        List<Object> entryObj = new ArrayList<Object>();
+
+        for(int i=0; i < objArr.size();i++){
+        
+          entryObj.add(objArr.get(i));
+
+        }
+
+        //perform bulk insert for array of documents
+        List<Response> response = db.bulk(entryObj);
+
+        result = response.get(0).getStatusCode();
+
+
+      }else{
+
+        Response rs = db.save(obj);
+
+        result = rs.getStatusCode();
+
+      }
+
+
+    }catch(ParseException pe){
+
+      pe.printStackTrace();
+
+    }catch(Exception e){
+
+      e.printStackTrace();
+
+    }
+
+    return result;
+
+  }
+```
 
 Same with MongoDB, Cloudant NoSQl can also use JSON style files to populate the database and it will automatically create the database if it's not yet created.
 
+In retrieving the information from the Cloudant database, the `ReSTful API` is used. In here, the application utilizes Java's `HttpURLConnection` to create a `GET` request to the service.
+
+```java
+public String getAll() throws Exception{
+
+    String cred = username+":"+password;
+
+    Base64.Encoder enc = Base64.getEncoder();
+
+    //encode username:password string for authentication
+    String encodedCred = new String(enc.encode(cred.getBytes()));
+    String authorization = "Basic "+encodedCred;
+
+    //accessing all the documents in the books database
+    URL obj = new URL("https://"+urlStr+"/books/_all_docs?include_docs=true");
+    HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+
+    //create a GET request with Authorization header
+    con.setRequestMethod("GET");
+    con.setRequestProperty("Authorization", authorization);
+
+    int responseCode = con.getResponseCode();
+
+    BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+
+    String inputLine;
+    StringBuffer response = new StringBuffer();
+
+    //getting the response from the server in json String format
+    while((inputLine = in.readLine()) != null){
+      response.append(inputLine);
+    }
+
+    in.close();
+
+    return response.toString();
+
+  }
+```
+The code above gets all the entries (`_all_docs`) from the `books` database. the `include_docs` states that the application will query all the fields of an entry. If this argument is not included in the request, it will only return the `_id` and `_rev` fields for each entry. 
+
+The server returns the query result in JSON format that is similar to this:
+```text
+{"total_rows":2,"offset":0,"rows":[
+{"id":"278c984b19b5805cd5e4e29403bdd7a9","key":"278c984b19b5805cd5e4e29403bdd7a9","value":{"rev":"1-0f050c951b9430fae0a7ee73f3095fc4"},"doc":{"_id":"278c984b19b5805cd5e4e29403bdd7a9","_rev":"1-0f050c951b9430fae0a7ee73f3095fc4","year":1991,"author":{"fname":"f. sionil","lname":"jose"},"isbn":"978-971-8845-59-2","title":"Gagamba"}},
+{"id":"278c984b19b5805cd5e4e29403bddddd","key":"278c984b19b5805cd5e4e29403bddddd","value":{"rev":"1-1422d0ea3eb596e58463ddb8034bd898"},"doc":{"_id":"278c984b19b5805cd5e4e29403bddddd","_rev":"1-1422d0ea3eb596e58463ddb8034bd898","year":1992,"author":{"fname":"viktor","lname":"frankl"},"isbn":"978-0-8070-1429-5","title":"Mans Search for Meaning","foreword":"harold kushner"}}
+]}
+```
+
 Another Cloudant application and Java API reference could be found in this [repository](https://github.com/cloudant/java-cloudant).
+
+For Cloudant's ReSTful API, refer to this [link](https://docs.cloudant.com/index.html).
 
 ####**Delete the Application and Cloudant NoSQL DB Service**
 1. Go to [IBM Bluemix](ibm.biz/bluemixph) Website and click the `Dashboard`.
