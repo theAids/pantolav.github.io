@@ -389,6 +389,7 @@ public String getAll() throws Exception{
 The code above gets all the entries (`_all_docs`) from the `books` database. the `include_docs` states that the application will query all the fields of an entry. If this argument is not included in the request, it will only return the `_id` and `_rev` fields for each entry. 
 
 The server returns the query result in JSON format that is similar to this:
+
 ```text
 {"total_rows":2,"offset":0,"rows":[
 {"id":"278c984b19b5805cd5e4e29403bdd7a9","key":"278c984b19b5805cd5e4e29403bdd7a9","value":{"rev":"1-0f050c951b9430fae0a7ee73f3095fc4"},"doc":{"_id":"278c984b19b5805cd5e4e29403bdd7a9","_rev":"1-0f050c951b9430fae0a7ee73f3095fc4","year":1991,"author":{"fname":"f. sionil","lname":"jose"},"isbn":"978-971-8845-59-2","title":"Gagamba"}},
