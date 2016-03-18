@@ -286,34 +286,35 @@ The Cloudant Web Console also provides an interace to transform the created NoSQ
 ####**Analyze how the Cloudant NoSQL DB works**
 
 To connect to the Cloudant service, this application used the `Cloudant Client API` contianed in `com.cloudant:cloudant-client:2.3.0` library. Originally, CLoudant NoSQL uses `HTTP API or RESTful API` to connect to the service. Any language-specific libraries such as this one are just wrappers to easily use the service.
+
 	```java
-	public int addEntry(String jsonString) throws Exception
-    {
-        try{
-            CloudantClient client = getClientConn();
-
-            Database db = client.database("books", true);
-            JSONParser parser = new JSONParser();
-            
-            try{
-              JSONObject json = (JSONObject)parser.parse(jsonString);
-              
-              Response rs = db.save(json);
-
-              return rs.getStatusCode();
-
-            }catch (ParseException e) {
-              System.out.println("Failed Parsing: " + e.getErrorType() + e.toString());
-              e.printStackTrace();
-            }
-
-        }catch (Exception e) {
-            System.out.println("Failed: " + e.getMessage());
-            e.printStackTrace();
-        }
-
-        return 0;
-    }
+		public int addEntry(String jsonString) throws Exception
+	    {
+	        try{
+	            CloudantClient client = getClientConn();
+	
+	            Database db = client.database("books", true);
+	            JSONParser parser = new JSONParser();
+	            
+	            try{
+	              JSONObject json = (JSONObject)parser.parse(jsonString);
+	              
+	              Response rs = db.save(json);
+	
+	              return rs.getStatusCode();
+	
+	            }catch (ParseException e) {
+	              System.out.println("Failed Parsing: " + e.getErrorType() + e.toString());
+	              e.printStackTrace();
+	            }
+	
+	        }catch (Exception e) {
+	            System.out.println("Failed: " + e.getMessage());
+	            e.printStackTrace();
+	        }
+	
+	        return 0;
+	    }
     ```
 
 Same with MongoDB, Cloudant NoSQl can also use JSON style files to populate the database and it will automatically create the database if it's not yet created.
