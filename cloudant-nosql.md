@@ -388,13 +388,13 @@ public String getAll() throws Exception{
 ```
 The code above gets all the entries (`_all_docs`) from the `books` database. the `include_docs` states that the application will query all the fields of an entry. If this argument is not included in the request, it will only return the `_id` and `_rev` fields for each entry. 
 
-The server returns the query result in JSON format that is similar to this:
+The server returns the query result in JSON format that is similar to this
 
 ```text
-{"total_rows":2,"offset":0,"rows":[
-{"id":"278c984b19b5805cd5e4e29403bdd7a9","key":"278c984b19b5805cd5e4e29403bdd7a9","value":{"rev":"1-0f050c951b9430fae0a7ee73f3095fc4"},"doc":{"_id":"278c984b19b5805cd5e4e29403bdd7a9","_rev":"1-0f050c951b9430fae0a7ee73f3095fc4","year":1991,"author":{"fname":"f. sionil","lname":"jose"},"isbn":"978-971-8845-59-2","title":"Gagamba"}},
-{"id":"278c984b19b5805cd5e4e29403bddddd","key":"278c984b19b5805cd5e4e29403bddddd","value":{"rev":"1-1422d0ea3eb596e58463ddb8034bd898"},"doc":{"_id":"278c984b19b5805cd5e4e29403bddddd","_rev":"1-1422d0ea3eb596e58463ddb8034bd898","year":1992,"author":{"fname":"viktor","lname":"frankl"},"isbn":"978-0-8070-1429-5","title":"Mans Search for Meaning","foreword":"harold kushner"}}
-]}
+	{"total_rows":2,"offset":0,"rows":[
+	{"id":"278c984b19b5805cd5e4e29403bdd7a9","key":"278c984b19b5805cd5e4e29403bdd7a9","value":{"rev":"1-0f050c951b9430fae0a7ee73f3095fc4"},"doc":{"_id":"278c984b19b5805cd5e4e29403bdd7a9","_rev":"1-0f050c951b9430fae0a7ee73f3095fc4","year":1991,"author":{"fname":"f. sionil","lname":"jose"},"isbn":"978-971-8845-59-2","title":"Gagamba"}},
+	{"id":"278c984b19b5805cd5e4e29403bddddd","key":"278c984b19b5805cd5e4e29403bddddd","value":{"rev":"1-1422d0ea3eb596e58463ddb8034bd898"},"doc":{"_id":"278c984b19b5805cd5e4e29403bddddd","_rev":"1-1422d0ea3eb596e58463ddb8034bd898","year":1992,"author":{"fname":"viktor","lname":"frankl"},"isbn":"978-0-8070-1429-5","title":"Mans Search for Meaning","foreword":"harold kushner"}}
+	]}
 ```
 
 Another Cloudant application and Java API reference could be found in this [repository](https://github.com/cloudant/java-cloudant).
