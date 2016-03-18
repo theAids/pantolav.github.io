@@ -354,10 +354,8 @@ public String getAll() throws Exception{
 
     String cred = username+":"+password;
 
-    Base64.Encoder enc = Base64.getEncoder();
-
     //encode username:password string for authentication
-    String encodedCred = new String(enc.encode(cred.getBytes()));
+    String encodedCred = new String(Base64.encodeBase64(cred.getBytes()));
     String authorization = "Basic "+encodedCred;
 
     //accessing all the documents in the books database
@@ -383,8 +381,6 @@ public String getAll() throws Exception{
     in.close();
 
     return response.toString();
-
-  }
 ```
 The code above gets all the entries (`_all_docs`) from the `books` database. the `include_docs` states that the application will query all the fields of an entry. If this argument is not included in the request, it will only return the `_id` and `_rev` fields for each entry. 
 
